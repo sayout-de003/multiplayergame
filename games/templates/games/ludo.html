@@ -3,59 +3,569 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ludo Game</title>
+    <title>Ludo Royal - Classic Board Game</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
     <style>
+        :root {
+            --red: #e53935;
+            --blue: #1e88e5;
+            --green: #43a047;
+            --yellow: #fdd835;
+            --red-light: rgba(229, 57, 53, 0.2);
+            --blue-light: rgba(30, 136, 229, 0.2);
+            --green-light: rgba(67, 160, 71, 0.2);
+            --yellow-light: rgba(253, 216, 53, 0.2);
+            --border-radius: 8px;
+            --board-size: 600px;
+            --cell-size: 40px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
         #game-container {
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 24px;
             max-width: 1200px;
-            margin: 20px auto;
+            width: 100%;
         }
+
         #board {
-            width: 600px;
-            height: 600px;
-            background-color: #f0f0f0;
+            width: 100%;
+            height: 100%;
+            display: grid;
+            grid-template: repeat(15, var(--cell-size)) / repeat(15, var(--cell-size));
+            gap: 0;
+            background: #f8f9fa;
             position: relative;
-            border: 2px solid #333;
+            box-sizing: border-box;
         }
+
+        #board-container {
+            position: relative;
+            width: var(--board-size);
+            height: var(--board-size);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            border-radius: var(--border-radius);
+            background: white;
+            overflow: visible;
+        }
+
+        .cell {
+            border: 1px solid #e0e0e0;
+            position: relative;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .home-area {
+            border: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .home-red { background-color: var(--red-light); }
+        .home-blue { background-color: var(--blue-light); }
+        .home-green { background-color: var(--green-light); }
+        .home-yellow { background-color: var(--yellow-light); }
+
+        .home-inner {
+            width: 80%;
+            height: 80%;
+            border-radius: var(--border-radius);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-items: center;
+            padding: 10px;
+        }
+
+        .red-home { background-color: var(--red); }
+        .blue-home { background-color: var(--blue); }
+        .green-home { background-color: var(--green); }
+        .yellow-home { background-color: var(--yellow); }
+
+        .starting-cell {
+            position: relative;
+        }
+
+        .starting-cell::after {
+            content: '';
+            position: absolute;
+            width: 70%;
+            height: 70%;
+            border-radius: 50%;
+            top: 15%;
+            left: 15%;
+        }
+
+        .starting-cell.red::after { background-color: var(--red); }
+        .starting-cell.blue::after { background-color: var(--blue); }
+        .starting-cell.green::after { background-color: var(--green); }
+        .starting-cell.yellow::after { background-color: var(--yellow); }
+
+        .center {
+            background: linear-gradient(135deg, var(--red-light), var(--blue-light), var(--green-light), var(--yellow-light));
+        }
+
         .piece {
-            width: 20px;
-            height: 20px;
+            width: 26px;
+            height: 26px;
             border-radius: 50%;
             position: absolute;
             cursor: pointer;
-        }
-        #controls {
-            width: 300px;
-            padding: 20px;
-        }
-        #chat-box {
-            height: 200px;
-            overflow-y: auto;
-            border: 1px solid #ccc;
-            padding: 10px;
-            margin-top: 20px;
-        }
-        #status {
+            z-index: 10;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
             font-weight: bold;
+            font-size: 14px;
+        }
+
+        .piece:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .piece.selected {
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        .piece.red { background-color: var(--red); }
+        .piece.blue { background-color: var(--blue); }
+        .piece.green { background-color: var(--green); }
+        .piece.yellow { background-color: var(--yellow); }
+
+        .piece.home-piece {
+            position: static;
+            margin: 5px;
+        }
+
+        #game-ui {
+            width: 350px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .panel {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .players-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .player-card {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-radius: var(--border-radius);
+            gap: 12px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .player-card.current {
+            border-color: #333;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .player-card.my-player {
+            background-color: #e0f7fa;
+            border-color: #00796b;
+        }
+
+        .player-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .player-info {
+            flex: 1;
+        }
+
+        .player-name {
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .player-status {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .player-color {
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .dice-panel {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+
+        #dice-container {
+            width: 100px;
+            height: 100px;
+            position: relative;
+            perspective: 1000px;
+            margin: 10px auto;
+        }
+
+        #dice {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            transform-style: preserve-3d;
+            transition: transform 0.2s ease-out;
+        }
+
+        .dice-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(145deg, #ffffff, #e6e6e6);
+            border: 2px solid #333;
+            border-radius: 12px;
+            display: grid;
+            grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+            justify-items: center;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .dice-dot {
+            width: 16px;
+            height: 16px;
+            background: #222;
+            border-radius: 50%;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .dice-face-1 { transform: rotateY(0deg) translateZ(50px); }
+        .dice-face-2 { transform: rotateY(90deg) translateZ(50px); }
+        .dice-face-3 { transform: rotateY(180deg) translateZ(50px); }
+        .dice-face-4 { transform: rotateY(-90deg) translateZ(50px); }
+        .dice-face-5 { transform: rotateX(90deg) translateZ(50px); }
+        .dice-face-6 { transform: rotateX(-90deg) translateZ(50px); }
+
+        .button {
+            padding: 12px 20px;
+            background: #333;
+            color: white;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .button:hover {
+            background: #555;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .button:active {
+            transform: translateY(0);
+        }
+
+        .button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .chat-panel {
+            display: flex;
+            flex-direction: column;
+            height: 250px;
+        }
+
+        #chat-box {
+            flex: 1;
+            overflow-y: auto;
+            border: 1px solid #eee;
+            border-radius: var(--border-radius);
+            padding: 10px;
             margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .chat-message {
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .chat-username {
+            font-weight: bold;
+        }
+
+        .chat-timestamp {
+            font-size: 12px;
+            color: #999;
+        }
+
+        .chat-input-container {
+            display: flex;
+            gap: 8px;
+        }
+
+        #chat-input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-size: 14px;
+        }
+
+        #timer-container {
+            margin-top: 8px;
+            width: 100%;
+            height: 10px;
+            background-color: #eee;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        #timer-bar {
+            height: 100%;
+            background-color: #4caf50;
+            width: 100%;
+            transition: width 1s linear;
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: white;
+            padding: 15px 20px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: all 0.3s ease;
+        }
+
+        .notification.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .notification-icon {
+            font-size: 20px;
+        }
+
+        .notification-text {
+            flex: 1;
+        }
+
+        .notification-close {
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .capture-animation {
+            animation: capture 0.5s ease-in-out;
+        }
+
+        @keyframes capture {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.5) rotate(20deg); }
+            100% { transform: scale(0) rotate(-20deg); }
+        }
+
+        .bounce-animation {
+            animation: bounce 0.5s ease;
+        }
+
+        @keyframes bounce {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0); }
+        }
+
+        @media (max-width: 1000px) {
+            #game-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            #board-container, #game-ui {
+                width: 100%;
+                max-width: 600px;
+            }
+
+            :root {
+                --board-size: min(600px, 100vw - 40px);
+                --cell-size: calc(var(--board-size) / 15);
+            }
         }
     </style>
 </head>
 <body>
+    <div class="header">
+        <h1>Ludo Royal</h1>
+        <p>Classic board game with a modern twist</p>
+    </div>
+
     <div id="game-container">
-        <div id="board">
-            <!-- Pieces will be dynamically added here -->
+        <div id="board-container">
+            <div id="board">
+                <!-- Board cells will be dynamically generated -->
+            </div>
         </div>
-        <div id="controls">
-            <div id="status">Waiting for players...</div>
-            <div id="player-info"></div>
-            <button id="roll-dice" disabled>Roll Dice</button>
-            <div id="dice-result"></div>
-            <div id="chat-box"></div>
-            <input type="text" id="chat-input" placeholder="Type a message...">
-            <button id="send-chat">Send</button>
-            <button id="ready-btn">I'm Ready</button>
+
+        <div id="game-ui">
+            <div class="panel players-panel">
+                <h2>Players</h2>
+                <div id="player-list">
+                    <!-- Player cards will be generated here -->
+                </div>
+            </div>
+
+            <div class="panel dice-panel">
+                <div id="dice-container">
+                    <div id="dice">
+                        <div class="dice-face dice-face-1">
+                            <div class="dice-dot" style="grid-area: 2/2;"></div>
+                        </div>
+                        <div class="dice-face dice-face-2">
+                            <div class="dice-dot" style="grid-area: 1/1;"></div>
+                            <div class="dice-dot" style="grid-area: 3/3;"></div>
+                        </div>
+                        <div class="dice-face dice-face-3">
+                            <div class="dice-dot" style="grid-area: 1/1;"></div>
+                            <div class="dice-dot" style="grid-area: 2/2;"></div>
+                            <div class="dice-dot" style="grid-area: 3/3;"></div>
+                        </div>
+                        <div class="dice-face dice-face-4">
+                            <div class="dice-dot" style="grid-area: 1/1;"></div>
+                            <div class="dice-dot" style="grid-area: 1/3;"></div>
+                            <div class="dice-dot" style="grid-area: 3/1;"></div>
+                            <div class="dice-dot" style="grid-area: 3/3;"></div>
+                        </div>
+                        <div class="dice-face dice-face-5">
+                            <div class="dice-dot" style="grid-area: 1/1;"></div>
+                            <div class="dice-dot" style="grid-area: 1/3;"></div>
+                            <div class="dice-dot" style="grid-area: 2/2;"></div>
+                            <div class="dice-dot" style="grid-area: 3/1;"></div>
+                            <div class="dice-dot" style="grid-area: 3/3;"></div>
+                        </div>
+                        <div class="dice-face dice-face-6">
+                            <div class="dice-dot" style="grid-area: 1/1;"></div>
+                            <div class="dice-dot" style="grid-area: 1/3;"></div>
+                            <div class="dice-dot" style="grid-area: 2/1;"></div>
+                            <div class="dice-dot" style="grid-area: 2/3;"></div>
+                            <div class="dice-dot" style="grid-area: 3/1;"></div>
+                            <div class="dice-dot" style="grid-area: 3/3;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="timer-container">
+                    <div id="timer-bar"></div>
+                </div>
+
+                <div class="action-buttons">
+                    <button id="roll-dice" class="button" disabled>
+                        <i class="fas fa-dice"></i> Roll Dice
+                    </button>
+                    <button id="cancel-move" class="button" disabled>
+                        <i class="fas fa-undo"></i> Undo
+                    </button>
+                </div>
+            </div>
+
+            <div class="panel chat-panel">
+                <h2>Chat</h2>
+                <div id="chat-box">
+                    <!-- Chat messages will be added here -->
+                </div>
+                <div class="chat-input-container">
+                    <input type="text" id="chat-input" placeholder="Type a message...">
+                    <button id="send-chat" class="button">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+
+            <button id="ready-btn" class="button">
+                <i class="fas fa-check"></i> I'm Ready
+            </button>
+        </div>
+    </div>
+
+    <div id="notification" class="notification">
+        <div class="notification-icon">
+            <i class="fas fa-info-circle"></i>
+        </div>
+        <div class="notification-text">Notification message</div>
+        <div class="notification-close">
+            <i class="fas fa-times"></i>
         </div>
     </div>
 
@@ -63,100 +573,781 @@
         const roomCode = "{{ game_room.room_code|escapejs }}";
         const username = "{{ request.user.username }}";
         const socket = new WebSocket(`ws://${window.location.host}/ws/ludo/${roomCode}/`);
-
-        let gameState = {};
-        const boardSize = 600;
-        const pieceSize = 20;
-
-        socket.onopen = function(e) {
-            console.log("WebSocket connection established");
+    
+        let gameState = {
+            status: "waiting",
+            current_turn: null,
+            dice: null,
+            players: {},
+            winner: null,
+            last_move: null
         };
-
-        socket.onmessage = function(e) {
-            const data = JSON.parse(e.data);
-            console.log("Received:", data); // Debug log
-            if (data.type === "game_state") {
-                gameState = data.game_state;
-                updateUI();
-            } else if (data.type === "chat_message") {
-                addChatMessage(data.username, data.message, data.timestamp);
+    
+        let timerInterval = null;
+        let timeLeft = 30;
+        let lastMove = null;
+        let selectedPiece = null;
+        let lastPieceClickWarning = 0;
+        let sounds = {
+            roll: new Audio(),
+            move: new Audio(),
+            capture: new Audio(),
+            win: new Audio(),
+            turn: new Audio()
+        };
+    
+        const boardConfig = {
+            red: {
+                color: "red",
+                homeArea: [0, 1, 2, 3, 15, 16, 17, 18, 30, 31, 32, 33, 45, 46, 47, 48],
+                homePieces: [[1, 1], [1, 3], [3, 1], [3, 3]],
+                startPosition: 40,
+                path: [
+                    40, 41, 42, 43, 44, 30, 15, 0, 1, 2, 3, 4, 5, 20, 35, 50, 51, 52, 53, 54, 68, 82, 96, 95, 94, 93, 92, 106, 120, 135, 150, 151, 152, 153, 154, 139, 124, 109, 108, 107, 106, 105, 104, 119, 134, 149, 148, 147, 146, 145, 144, 143, 142, 141, 140
+                ],
+                homePath: [141, 142, 143, 144, 145, 146],
+                safeSpots: [40, 1, 106, 143, 144, 145, 146]
+            },
+            blue: {
+                color: "blue",
+                homeArea: [0, 1, 2, 3, 15, 16, 17, 18, 30, 31, 32, 33, 45, 46, 47, 48].map(i => i + 11),
+                homePieces: [[1, 12], [1, 14], [3, 12], [3, 14]],
+                startPosition: 5,
+                path: [
+                    5, 20, 35, 50, 51, 52, 53, 54, 68, 82, 96, 95, 94, 93, 92, 106, 120, 135, 150, 151, 152, 153, 154, 139, 124, 109, 108, 107, 106, 105, 104, 119, 134, 149, 148, 147, 146, 145, 144, 143, 142, 141, 140, 125, 110, 95, 80, 65, 50, 51, 52, 53, 54, 55
+                ],
+                homePath: [65, 80, 95, 110, 125, 140],
+                safeSpots: [5, 51, 106, 65, 80, 95, 110, 125, 140]
+            },
+            green: {
+                color: "green",
+                homeArea: [0, 1, 2, 3, 15, 16, 17, 18, 30, 31, 32, 33, 45, 46, 47, 48].map(i => i + (11*15)),
+                homePieces: [[12, 1], [12, 3], [14, 1], [14, 3]],
+                startPosition: 105,
+                path: [
+                    105, 104, 119, 134, 149, 148, 147, 146, 145, 144, 143, 142, 141, 140, 125, 110, 95, 80, 65, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 44, 29, 14, 13, 12, 11, 10, 25, 40, 41, 42, 43, 44, 59, 74, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98
+                ],
+                homePath: [97, 82, 67, 52, 37, 22],
+                safeSpots: [105, 144, 50, 97, 82, 67, 52, 37, 22]
+            },
+            yellow: {
+                color: "yellow",
+                homeArea: [0, 1, 2, 3, 15, 16, 17, 18, 30, 31, 32, 33, 45, 46, 47, 48].map(i => i + (11*15) + 11),
+                homePieces: [[12, 12], [12, 14], [14, 12], [14, 14]],
+                startPosition: 154,
+                path: [
+                    154, 139, 124, 109, 108, 107, 106, 105, 104, 119, 134, 149, 148, 147, 146, 145, 144, 143, 142, 141, 140, 125, 110, 95, 80, 65, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 44, 29, 14, 13, 12, 11, 10, 25, 40, 41, 42, 43, 44, 59, 74, 89, 104
+                ],
+                homePath: [89, 88, 87, 86, 85, 84],
+                safeSpots: [154, 144, 50, 10, 89, 88, 87, 86, 85, 84]
             }
         };
-
-        socket.onclose = function(e) {
-            console.error("WebSocket closed unexpectedly");
-        };
-
-        // UI Updates
-        function updateUI() {
-            document.getElementById("status").textContent = `Status: ${gameState.status}`;
-            const playerInfo = document.getElementById("player-info");
-            playerInfo.innerHTML = "";
-            for (let player in gameState.players) {
-                const p = gameState.players[player];
-                const turn = gameState.current_turn === player ? " (Your Turn)" : "";
-                playerInfo.innerHTML += `<p style="color: ${p.color}">${player}${turn}</p>`;
-                updatePieces(player, p.pieces, p.color);
-            }
-            document.getElementById("dice-result").textContent = gameState.dice ? `Dice: ${gameState.dice}` : "";
-            document.getElementById("roll-dice").disabled = gameState.current_turn !== username || gameState.status !== "playing";
-        }
-
-        function updatePieces(player, pieces, color) {
+    
+        function initBoard() {
             const board = document.getElementById("board");
-            for (let piece in pieces) {
-                const pos = pieces[piece];
-                let pieceEl = document.getElementById(`${player}-${piece}`);
-                if (!pieceEl) {
-                    pieceEl = document.createElement("div");
-                    pieceEl.id = `${player}-${piece}`;
-                    pieceEl.className = "piece";
-                    pieceEl.style.backgroundColor = color;
-                    board.appendChild(pieceEl);
-                    pieceEl.onclick = () => movePiece(piece, pos);
+            if (!board) {
+                console.error("Board element not found");
+                return;
+            }
+            board.innerHTML = "";
+            console.log("Initializing board...");
+    
+            for (let i = 0; i < 15; i++) {
+                for (let j = 0; j < 15; j++) {
+                    const cell = document.createElement("div");
+                    cell.className = "cell";
+                    cell.dataset.row = i;
+                    cell.dataset.col = j;
+                    const idx = i * 15 + j;
+                    cell.dataset.index = idx;
+    
+                    if (i < 6 && j < 6) {
+                        cell.classList.add("home-area", "home-red");
+                        if (i === 0 && j === 0) {
+                            const homeInner = document.createElement("div");
+                            homeInner.className = "home-inner red-home";
+                            cell.append(homeInner);
+                            cell.style.gridArea = "1 / 1 / 7 / 7";
+                            cell.dataset.home = "red";
+                        } else {
+                            cell.style.display = "none";
+                        }
+                    } else if (i < 6 && j > 8) {
+                        cell.classList.add("home-area", "home-blue");
+                        if (i === 0 && j === 9) {
+                            const homeInner = document.createElement("div");
+                            homeInner.className = "home-inner blue-home";
+                            cell.append(homeInner);
+                            cell.style.gridArea = "1 / 10 / 7 / 16";
+                            cell.dataset.home = "blue";
+                        } else {
+                            cell.style.display = "none";
+                        }
+                    } else if (i > 8 && j < 6) {
+                        cell.classList.add("home-area", "home-green");
+                        if (i === 9 && j === 0) {
+                            const homeInner = document.createElement("div");
+                            homeInner.className = "home-inner green-home";
+                            cell.append(homeInner);
+                            cell.style.gridArea = "10 / 1 / 16 / 7";
+                            cell.dataset.home = "green";
+                        } else {
+                            cell.style.display = "none";
+                        }
+                    } else if (i > 8 && j > 8) {
+                        cell.classList.add("home-area", "home-yellow");
+                        if (i === 9 && j === 9) {
+                            const homeInner = document.createElement("div");
+                            homeInner.className = "home-inner yellow-home";
+                            cell.append(homeInner);
+                            cell.style.gridArea = "10 / 10 / 16 / 16";
+                            cell.dataset.home = "yellow";
+                        } else {
+                            cell.style.display = "none";
+                        }
+                    } else if (i >= 6 && i <= 8 && j >= 6 && j <= 8) {
+                        cell.classList.add("center");
+                        if (i === 7 && j === 7) {
+                            cell.style.gridArea = "7 / 7 / 10 / 10";
+                        } else {
+                            cell.style.display = "none";
+                        }
+                    } else {
+                        if (i === 7 && j < 6) cell.classList.add("path-red");
+                        else if (i < 6 && j === 7) cell.classList.add("path-blue");
+                        else if (i === 7 && j > 8) cell.classList.add("path-green");
+                        else if (i > 8 && j === 7) cell.classList.add("path-yellow");
+    
+                        if (idx === boardConfig.red.startPosition) {
+                            cell.classList.add("starting-cell", "red");
+                        } else if (idx === boardConfig.blue.startPosition) {
+                            cell.classList.add("starting-cell", "blue");
+                        } else if (idx === boardConfig.green.startPosition) {
+                            cell.classList.add("starting-cell", "green");
+                        } else if (idx === boardConfig.yellow.startPosition) {
+                            cell.classList.add("starting-cell", "yellow");
+                        }
+    
+                        for (let color in boardConfig) {
+                            if (boardConfig[color].homePath.includes(idx)) {
+                                cell.classList.add(`path-${color}`);
+                            }
+                        }
+                    }
+    
+                    board.appendChild(cell);
                 }
-                pieceEl.style.left = `${(pos % 15) * (boardSize / 15)}px`;
-                pieceEl.style.top = `${Math.floor(pos / 15) * (boardSize / 15)}px`;
+            }
+    
+            console.log("Board cells created:", board.children.length);
+            createHomePieces();
+        }
+    
+        function createHomePieces() {
+            for (let color in boardConfig) {
+                const homeCell = document.querySelector(`[data-home="${color}"] .home-inner`);
+                if (homeCell) {
+                    homeCell.innerHTML = "";
+                    for (let i = 1; i <= 4; i++) {
+                        const piece = document.createElement("div");
+                        piece.className = `piece ${color} home-piece`;
+                        piece.dataset.color = color;
+                        piece.dataset.id = i;
+                        piece.textContent = i;
+                        piece.addEventListener("click", () => handlePieceClick(color, i));
+                        homeCell.appendChild(piece);
+                    }
+                } else {
+                    console.error(`Home cell for ${color} not found`);
+                }
+            }
+            console.log("Home pieces created for all colors");
+        }
+    
+        function handlePieceClick(color, id) {
+            if (gameState.status !== "playing" || gameState.current_turn !== username) {
+                console.warn(`Piece click ignored: not player's turn or game not playing`, {
+                    status: gameState.status,
+                    current_turn: gameState.current_turn,
+                    username
+                });
+                showNotification("Not your turn!");
+                return;
+            }
+            if (!gameState.dice || gameState.players[username]?.color !== color) {
+                const now = Date.now();
+                if (now - lastPieceClickWarning > 1000) {
+                    console.warn(`Piece click ignored: no dice roll or wrong color`, {
+                        dice: gameState.dice,
+                        player_color: gameState.players[username]?.color,
+                        clicked_color: color
+                    });
+                    showNotification(gameState.dice ? "Select a piece of your color!" : "Roll the dice first!");
+                    lastPieceClickWarning = now;
+                }
+                return;
+            }
+    
+            const piece = document.querySelector(`.piece.${color}[data-id="${id}"]`);
+            if (!piece) {
+                console.error(`Piece not found: ${color}, id: ${id}`);
+                return;
+            }
+    
+            if (selectedPiece && selectedPiece.color === color && selectedPiece.id === id) {
+                piece.classList.remove("selected");
+                selectedPiece = null;
+                return;
+            }
+    
+            document.querySelectorAll(".piece.selected").forEach(p => p.classList.remove("selected"));
+            piece.classList.add("selected");
+            selectedPiece = { color, id };
+    
+            validateAndSendMove(color, id);
+        }
+    
+        function validateAndSendMove(color, id) {
+            const player = gameState.players[username];
+            if (!player || player.color !== color) {
+                console.warn(`Invalid move: player or color mismatch`, { player, color });
+                showNotification("Invalid piece!");
+                return;
+            }
+    
+            const pieceId = `piece${id}`;
+            const currentPos = player.pieces[pieceId];
+            const diceValue = gameState.dice;
+    
+            let newPos;
+            if (currentPos === -1 && diceValue === 6) {
+                newPos = boardConfig[color].startPosition;
+                showNotification(`Moving piece ${id} out of home to start position!`);
+            } else if (currentPos !== -1) {
+                const path = boardConfig[color].path;
+                const currentIndex = path.indexOf(currentPos);
+                if (currentIndex === -1) {
+                    console.warn(`Invalid move: piece not on path`, { currentPos, pieceId });
+                    showNotification("Invalid move!");
+                    return;
+                }
+    
+                const newIndex = currentIndex + diceValue;
+                if (newIndex < path.length) {
+                    newPos = path[newIndex];
+                } else {
+                    console.warn(`Invalid move: move beyond path`, { newIndex, pathLength: path.length });
+                    showNotification("Invalid move!");
+                    return;
+                }
+            } else {
+                console.warn(`Invalid move: piece not movable`, { currentPos, diceValue });
+                showNotification("Roll a 6 to move this piece out of home!");
+                return;
+            }
+    
+            console.log(`Sending move: ${color} piece ${id} to position ${newPos}`);
+            socket.send(JSON.stringify({
+                type: "move",
+                username,
+                piece: { color, id },
+                new_position: newPos
+            }));
+            selectedPiece = null;
+            document.querySelectorAll(".piece.selected").forEach(p => p.classList.remove("selected"));
+        }
+    
+        function movePiece(color, id, newPosition) {
+            const piece = document.querySelector(`.piece.${color}[data-id="${id}"]`);
+            if (!piece) {
+                console.warn(`Piece not found for ${color}, id: ${id}`);
+                return;
+            }
+    
+            piece.classList.remove("home-piece", "selected");
+            piece.style.position = "absolute";
+            piece.style.transform = "translate(-50%, -50%)";
+    
+            if (newPosition === -1) {
+                const homeInner = document.querySelector(`[data-home="${color}"] .home-inner`);
+                if (homeInner) {
+                    piece.classList.add("home-piece");
+                    piece.style.position = "static";
+                    piece.style.transform = "none";
+                    homeInner.appendChild(piece);
+                } else {
+                    console.error(`Home inner not found for ${color}`);
+                }
+            } else {
+                const cell = document.querySelector(`[data-index="${newPosition}"]`);
+                if (cell) {
+                    cell.appendChild(piece);
+                    piece.classList.add("bounce-animation");
+                    setTimeout(() => piece.classList.remove("bounce-animation"), 500);
+                } else {
+                    console.warn(`Cell not found for position ${newPosition}`);
+                }
+            }
+    
+            try {
+                sounds.move.play();
+            } catch (e) {
+                console.warn("Failed to play move sound:", e);
             }
         }
-
-        // Game Actions
-        document.getElementById("roll-dice").onclick = function() {
-            socket.send(JSON.stringify({ type: "roll_dice" }));
-        };
-
-        function movePiece(piece, currentPos) {
-            if (gameState.current_turn === username && gameState.dice) {
-                const newPos = currentPos + gameState.dice;
-                socket.send(JSON.stringify({
-                    type: "move_piece",
-                    piece: piece,
-                    new_position: newPos
-                }));
+    
+        function rollDice(value) {
+            const dice = document.getElementById("dice");
+            if (!dice) {
+                console.error("Dice element not found");
+                return;
+            }
+    
+            const rollDiceBtn = document.getElementById("roll-dice");
+            if (rollDiceBtn) rollDiceBtn.disabled = true;
+    
+            const rotations = [
+                { face: 1, transform: "rotateX(0deg) rotateY(0deg)" },
+                { face: 2, transform: "rotateX(0deg) rotateY(90deg)" },
+                { face: 3, transform: "rotateX(0deg) rotateY(180deg)" },
+                { face: 4, transform: "rotateX(0deg) rotateY(-90deg)" },
+                { face: 5, transform: "rotateX(90deg) rotateY(0deg)" },
+                { face: 6, transform: "rotateX(-90deg) rotateY(0deg)" }
+            ];
+    
+            let rollCount = 15;
+            let currentRoll = 0;
+            const rollInterval = 100;
+    
+            const rollAnimation = setInterval(() => {
+                if (currentRoll < rollCount) {
+                    const randomFace = Math.floor(Math.random() * 6);
+                    dice.style.transform = rotations[randomFace].transform;
+                    currentRoll++;
+                } else {
+                    const finalRotation = rotations.find(r => r.face === value);
+                    if (finalRotation) {
+                        dice.style.transform = finalRotation.transform;
+                    }
+                    clearInterval(rollAnimation);
+                    updateUIControls();
+                }
+            }, rollInterval);
+    
+            try {
+                sounds.roll.play();
+            } catch (e) {
+                console.warn("Failed to play roll sound:", e);
             }
         }
-
-        document.getElementById("send-chat").onclick = function() {
-            const input = document.getElementById("chat-input");
-            if (input.value) {
-                socket.send(JSON.stringify({
-                    type: "chat_message",
-                    message: input.value
-                }));
-                input.value = "";
+    
+        function startTimer() {
+            if (gameState.current_turn !== username) {
+                console.warn("Timer not started: not player's turn", { current_turn: gameState.current_turn, username });
+                return;
             }
-        };
-
-        document.getElementById("ready-btn").onclick = function() {
-            socket.send(JSON.stringify({ type: "player_ready" }));
-            this.disabled = true;
-        };
-
-        function addChatMessage(username, message, timestamp) {
+            timeLeft = 30;
+            const timerBar = document.getElementById("timer-bar");
+            if (!timerBar) {
+                console.error("Timer bar element not found");
+                return;
+            }
+            timerBar.style.width = "100%";
+    
+            clearInterval(timerInterval);
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                timerBar.style.width = `${(timeLeft / 30) * 100}%`;
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    socket.send(JSON.stringify({
+                        type: "timeout",
+                        username
+                    }));
+                }
+            }, 1000);
+        }
+    
+        function showNotification(message) {
+            const notification = document.getElementById("notification");
+            if (!notification) {
+                console.error("Notification element not found");
+                return;
+            }
+            const text = notification.querySelector(".notification-text");
+            if (text) {
+                text.textContent = message;
+                notification.classList.add("show");
+                setTimeout(() => notification.classList.remove("show"), 3000);
+            }
+        }
+    
+        function updatePlayerUI() {
+            const playerList = document.getElementById("player-list");
+            if (!playerList) {
+                console.error("Player list element not found");
+                return;
+            }
+            playerList.innerHTML = "";
+    
+            for (let playerName in gameState.players) {
+                const player = gameState.players[playerName];
+                const card = document.createElement("div");
+                card.className = "player-card";
+                if (playerName === gameState.current_turn) {
+                    card.classList.add("current");
+                }
+                if (playerName === username) {
+                    card.classList.add("my-player");
+                }
+    
+                const avatar = document.createElement("div");
+                avatar.className = "player-avatar";
+                avatar.style.backgroundColor = getColorHex(player.color);
+                avatar.textContent = playerName[0].toUpperCase();
+    
+                const info = document.createElement("div");
+                info.className = "player-info";
+                const name = document.createElement("div");
+                name.className = "player-name";
+                name.textContent = playerName;
+                const status = document.createElement("div");
+                status.className = "player-status";
+                status.textContent = player.ready ? "Ready" : "Not Ready";
+                const colorInfo = document.createElement("div");
+                colorInfo.className = "player-color";
+                colorInfo.textContent = `Color: ${player.color.charAt(0).toUpperCase() + player.color.slice(1)}`;
+                colorInfo.style.color = getColorHex(player.color);
+    
+                info.append(name, status, colorInfo);
+                card.append(avatar, info);
+                playerList.append(card);
+    
+                if (playerName === username && gameState.status === "playing") {
+                    showNotification(`You are playing as ${player.color}!`);
+                }
+            }
+        }
+    
+        function getColorHex(color) {
+            const colors = {
+                red: "#e53935",
+                blue: "#1e88e5",
+                green: "#43a047",
+                yellow: "#fdd835"
+            };
+            return colors[color] || "#333";
+        }
+    
+        function handleChatMessage(data) {
             const chatBox = document.getElementById("chat-box");
-            chatBox.innerHTML += `<p><strong>${username}</strong> (${timestamp}): ${message}</p>`;
+            if (!chatBox) {
+                console.error("Chat box element not found");
+                return;
+            }
+            const messageDiv = document.createElement("div");
+            messageDiv.className = "chat-message";
+            const usernameSpan = document.createElement("span");
+            usernameSpan.className = "chat-username";
+            usernameSpan.textContent = data.username;
+            const timestampSpan = document.createElement("span");
+            timestampSpan.className = "chat-timestamp";
+            timestampSpan.textContent = ` (${new Date(data.timestamp).toLocaleTimeString()}) `;
+            const messageText = document.createTextNode(`: ${data.message}`);
+    
+            messageDiv.append(usernameSpan, timestampSpan, messageText);
+            chatBox.appendChild(messageDiv);
             chatBox.scrollTop = chatBox.scrollHeight;
         }
+    
+        function updateBoard() {
+            document.querySelectorAll(".piece:not(.home-piece)").forEach(piece => piece.remove());
+    
+            for (let playerName in gameState.players) {
+                const player = gameState.players[playerName];
+                Object.entries(player.pieces).forEach(([pieceId, position]) => {
+                    const id = parseInt(pieceId.replace("piece", ""));
+                    if (position !== -1) {
+                        const pieceElement = document.querySelector(`.piece.${player.color}[data-id="${id}"]`);
+                        if (pieceElement) {
+                            movePiece(player.color, id, position);
+                        } else {
+                            console.warn(`Piece element not found for ${player.color}, id: ${id}`);
+                        }
+                    }
+                });
+            }
+            console.log("Board updated with game state:", gameState);
+        }
+    
+        function updateUIControls() {
+            const rollDiceBtn = document.getElementById("roll-dice");
+            const cancelMoveBtn = document.getElementById("cancel-move");
+            const readyBtn = document.getElementById("ready-btn");
+    
+            if (!rollDiceBtn || !cancelMoveBtn || !readyBtn) {
+                console.error("UI control elements missing:", {
+                    rollDiceBtn: !!rollDiceBtn,
+                    cancelMoveBtn: !!cancelMoveBtn,
+                    readyBtn: !!readyBtn
+                });
+                return;
+            }
+    
+            const isMyTurn = gameState.status === "playing" && gameState.current_turn === username;
+            rollDiceBtn.disabled = !(isMyTurn && gameState.dice === null && gameState.status === "playing");
+            cancelMoveBtn.disabled = !lastMove || !isMyTurn;
+            readyBtn.style.display = gameState.status === "waiting" ? "block" : "none";
+    
+            if (isMyTurn && gameState.dice === null) {
+                showNotification("Roll the dice to move your pieces!");
+            }
+    
+            console.log("UI Controls Updated:", {
+                status: gameState.status,
+                current_turn: gameState.current_turn,
+                username,
+                isMyTurn,
+                dice: gameState.dice,
+                rollDiceDisabled: rollDiceBtn.disabled,
+                playerCount: Object.keys(gameState.players).length
+            });
+        }
+    
+        function initSounds() {
+            const soundFiles = {
+                roll: "/static/sounds/roll.mp3",
+                move: "/static/sounds/move.mp3",
+                capture: "/static/sounds/capture.mp3",
+                win: "/static/sounds/win.mp3",
+                turn: "/static/sounds/turn.mp3"
+            };
+            for (let sound in sounds) {
+                if (soundFiles[sound]) {
+                    sounds[sound].src = soundFiles[sound];
+                    sounds[sound].preload = "auto";
+                    sounds[sound].onerror = () => console.warn(`Failed to load sound: ${soundFiles[sound]}`);
+                }
+            }
+            console.log("Sounds initialized:", Object.keys(sounds));
+        }
+    
+        function setupEventListeners() {
+            const rollDiceBtn = document.getElementById("roll-dice");
+            const cancelMoveBtn = document.getElementById("cancel-move");
+            const readyBtn = document.getElementById("ready-btn");
+            const sendChatBtn = document.getElementById("send-chat");
+            const chatInput = document.getElementById("chat-input");
+            const notificationClose = document.getElementById("notification-close");
+    
+            if (rollDiceBtn) {
+                rollDiceBtn.addEventListener("click", () => {
+                    if (gameState.current_turn === username && gameState.dice === null) {
+                        console.log(`Rolling dice for ${username}`);
+                        socket.send(JSON.stringify({
+                            type: "roll_dice",
+                            username
+                        }));
+                        rollDiceBtn.disabled = true;
+                    } else {
+                        console.warn("Roll dice ignored: not player's turn or dice already rolled", {
+                            current_turn: gameState.current_turn,
+                            username,
+                            dice: gameState.dice
+                        });
+                    }
+                });
+            } else {
+                console.error("Element #roll-dice not found");
+            }
+    
+            if (cancelMoveBtn) {
+                cancelMoveBtn.addEventListener("click", () => {
+                    if (lastMove && gameState.current_turn === username) {
+                        console.log(`Canceling move for ${username}`);
+                        socket.send(JSON.stringify({
+                            type: "cancel_move",
+                            username
+                        }));
+                    }
+                });
+            } else {
+                console.error("Element #cancel-move not found");
+            }
+    
+            if (readyBtn) {
+                readyBtn.addEventListener("click", () => {
+                    console.log(`Player ${username} marked as ready`);
+                    socket.send(JSON.stringify({
+                        type: "ready",
+                        username
+                    }));
+                    readyBtn.disabled = true;
+                });
+            } else {
+                console.error("Element #ready-btn not found");
+            }
+    
+            if (sendChatBtn) {
+                sendChatBtn.addEventListener("click", () => {
+                    if (chatInput?.value.trim()) {
+                        socket.send(JSON.stringify({
+                            type: "chat",
+                            username,
+                            message: chatInput.value.trim()
+                        }));
+                        chatInput.value = "";
+                    }
+                });
+            } else {
+                console.error("Element #send-chat not found");
+            }
+    
+            if (chatInput) {
+                chatInput.addEventListener("keypress", (e) => {
+                    if (e.key === "Enter" && e.target.value.trim()) {
+                        socket.send(JSON.stringify({
+                            type: "chat",
+                            username,
+                            message: e.target.value.trim()
+                        }));
+                        e.target.value = "";
+                    }
+                });
+            } else {
+                console.error("Element #chat-input not found");
+            }
+    
+            if (notificationClose) {
+                notificationClose.addEventListener("click", () => {
+                    const notification = document.getElementById("notification");
+                    if (notification) notification.classList.remove("show");
+                });
+            } else {
+                console.error("Element #notification-close not found");
+            }
+        }
+    
+        socket.onopen = function () {
+            console.log("WebSocket connected");
+            socket.send(JSON.stringify({
+                type: "join",
+                username
+            }));
+            setTimeout(() => {
+                socket.send(JSON.stringify({
+                    type: "ready",
+                    username
+                }));
+                const readyBtn = document.getElementById("ready-btn");
+                if (readyBtn) readyBtn.disabled = true;
+            }, 1000);
+        };
+    
+        socket.onerror = function (error) {
+            console.error("WebSocket error:", error);
+            showNotification("Connection error. Please refresh the page.");
+        };
+    
+        socket.onclose = function () {
+            console.log("WebSocket closed");
+            showNotification("Disconnected from server. Please reconnect.");
+            setTimeout(() => window.location.reload(), 3000);
+        };
+    
+        socket.onmessage = function (e) {
+            const data = JSON.parse(e.data);
+            console.log("Received WebSocket message:", data);
+    
+            switch (data.type) {
+                case "game_state":
+                    gameState = data.state;
+                    console.log("Updated gameState:", {
+                        status: gameState.status,
+                        current_turn: gameState.current_turn,
+                        players: Object.keys(gameState.players),
+                        dice: gameState.dice
+                    });
+                    updatePlayerUI();
+                    updateBoard();
+                    updateUIControls();
+    
+                    if (gameState.status === "playing" && gameState.current_turn === username) {
+                        showNotification("Your turn!");
+                        startTimer();
+                        try {
+                            sounds.turn.play();
+                        } catch (e) {
+                            console.warn("Failed to play turn sound:", e);
+                        }
+                    } else {
+                        clearInterval(timerInterval);
+                    }
+    
+                    if (gameState.winner) {
+                        showNotification(`${gameState.winner} wins!`);
+                        clearInterval(timerInterval);
+                        try {
+                            sounds.win.play();
+                        } catch (e) {
+                            console.warn("Failed to play win sound:", e);
+                        }
+                    }
+                    break;
+    
+                case "dice_result":
+                    gameState.dice = data.value;
+                    rollDice(data.value);
+                    updateUIControls();
+                    if (gameState.current_turn === username) {
+                        if (data.has_valid_moves === false) {
+                            showNotification(`You rolled a ${data.value} but have no valid moves. Turn passed.`);
+                        } else {
+                            showNotification(`You rolled a ${data.value}!${data.value === 6 ? " Click a piece to move it out of home or move another piece." : ""}`);
+                            startTimer();
+                            try {
+                                sounds.turn.play();
+                            } catch (e) {
+                                console.warn("Failed to play turn sound:", e);
+                            }
+                        }
+                    }
+                    break;
+    
+                case "move":
+                    movePiece(data.piece.color, data.piece.id, data.new_position);
+                    lastMove = data;
+                    if (data.captured) {
+                        movePiece(data.captured.color, data.captured.id, -1);
+                        const capturedPiece = document.querySelector(`.piece.${data.captured.color}[data-id="${data.captured.id}"]`);
+                        if (capturedPiece) {
+                            capturedPiece.classList.add("capture-animation");
+                            setTimeout(() => capturedPiece.classList.remove("capture-animation"), 500);
+                        }
+                        try {
+                            sounds.capture.play();
+                        } catch (e) {
+                            console.warn("Failed to play capture sound:", e);
+                        }
+                    }
+                    gameState.dice = null;
+                    updateUIControls();
+                    break;
+    
+                case "chat":
+                    handleChatMessage(data);
+                    break;
+    
+                case "notification":
+                    showNotification(data.message);
+                    break;
+            }
+        };
+    
+        // Initialize the game
+        initBoard();
+        // initSounds();
+        setupEventListeners();
     </script>
 </body>
 </html>

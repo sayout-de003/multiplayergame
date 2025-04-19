@@ -725,10 +725,43 @@ class FootballGameConsumer(AsyncWebsocketConsumer):
 
 import json
 import random
+import logging
 from datetime import datetime
 from channels.generic.websocket import AsyncWebsocketConsumer
-from .models import GameRoom, PlayerStatus
 from channels.db import database_sync_to_async
+from .models import GameRoom, PlayerStatus
+from django.core.exceptions import ObjectDoesNotExist
+import asyncio
+
+logger = logging.getLogger(__name__)
+
+# Board configuration (same as client-side)
+board_config = {
+    "red": {
+        "startPosition": 40,
+        "path": [40, 41, 42, 43, 44, 30, 15, 0, 1, 2, 3, 4, 5, 20, 35, 50, 51, 52, 53, 54, 68, 82, 96, 95, 94, 93, 92, 106, 120, 135, 150, 151, 152, 153, 154, 139, 124, 109, 108, 107, 106, 105, 104, 119, 134, 149, 148, 147, 146, 145, 144, 143, 142, 141, 140],
+        "homePath": [141, 142, 143, 144, 145, 146],
+        "safeSpots": [40, 1, 106, 143, 144, 145, 146]
+    },
+    "blue": {
+        "startPosition": 5,
+        "path": [5, 20, 35, 50, 51, 52, 53, 54, 68, 82, 96, 95, 94, 93, 92, 106, 120, 135, 150, 151, 152, 153, 154, 139, 124, 109, 108, 107, 106, 105, 104, 119, 134, 149, 148, 147, 146, 145, 144, 143, 142, 141, 140, 125, 110, 95, 80, 65, 50, 51, 52, 53, 54, 55],
+        "homePath": [65, 80, 95, 110, 125, 140],
+        "safeSpots": [5, 51, 106, 65, 80, 95, 110, 125, 140]
+    },
+    "green": {
+        "startPosition": 105,
+        "path": [105, 104, 119, 134, 149, 148, 147, 146, 145, 144, 143, 142, 141, 140, 125, 110, 95, 80, 65, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 44, 29, 14, 13, 12, 11, 10, 25, 40, 41, 42, 43, 44, 59, 74, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98],
+        "homePath": [97, 82, 67, 52, 37, 22],
+        "safeSpots": [105, 144, 50, 97, 82, 67, 52, 37, 22]
+    },
+    "yellow": {
+        "startPosition": 154,
+        "path": [154, 139, 124, 109, 108, 107, 106, 105, 104, 119, 134, 149, 148, 147, 146, 145, 144, 143, 142, 141, 140, 125, 110, 95, 80, 65, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 44, 29, 14, 13, 12, 11, 10, 25, 40, 41, 42, 43, 44, 59, 74, 89, 104],
+        "homePath": [89, 88, 87, 86, 85, 84],
+        "safeSpots": [154, 144, 50, 10, 89, 88, 87, 86, 85, 84]
+    }
+}
 
 class LudoGameConsumer(AsyncWebsocketConsumer):
     def __init__(self, *args, **kwargs):
@@ -740,6 +773,8 @@ class LudoGameConsumer(AsyncWebsocketConsumer):
             "current_turn": None,
             "dice": None,
             "status": "waiting",
+            "winner": None,
+            "last_move": None
         }
         self.colors = ["red", "blue", "green", "yellow"]
 
@@ -748,33 +783,58 @@ class LudoGameConsumer(AsyncWebsocketConsumer):
         self.room_group_name = f"ludo_{self.game_id}"
         self.user = self.scope["user"]
 
+        logger.info(f"User {self.user.username} connecting to room {self.game_id}")
         await self.channel_layer.group_add(self.room_group_name, self.channel_name)
         await self.accept()
 
-        await self.initialize_player()
-        await self.send_game_state()
-        await self.check_game_start()
+        try:
+            await self.initialize_player()
+            await self.send_game_state()
+            await self.check_game_start()
+        except Exception as e:
+            logger.error(f"Error initializing player {self.user.username}: {str(e)}")
+            await self.close()
 
     async def disconnect(self, close_code):
+        logger.info(f"User {self.user.username} disconnected from room {self.game_id}")
         if self.user.username in self.game_state["players"]:
             del self.game_state["players"][self.user.username]
+            if self.game_state["current_turn"] == self.user.username:
+                await self.switch_turn()
+            player_count = len(self.game_state["players"])
+            if player_count < 2:
+                self.game_state["status"] = "waiting"
+            await self.broadcast_game_state()
         await self.channel_layer.group_discard(self.room_group_name, self.channel_name)
-        await self.broadcast_game_state()
 
     async def receive(self, text_data):
-        data = json.loads(text_data)
-        action = data.get("type")
+        try:
+            data = json.loads(text_data)
+            action = data.get("type")
+            logger.debug(f"Received message from {self.user.username}: {data}")
 
-        if action == "roll_dice":
-            await self.handle_dice_roll()
-        elif action == "move_piece":
-            await self.handle_piece_move(data["piece"], data["new_position"])
-        elif action == "chat_message":
-            await self.handle_chat_message(data["message"])
-        elif action == "player_ready":
-            await self.handle_player_ready()
+            if action == "join":
+                await self.initialize_player()
+                await self.broadcast_game_state()
+            elif action == "ready":
+                await self.handle_player_ready()
+            elif action == "roll_dice":
+                await self.handle_dice_roll()
+            elif action == "move":
+                await self.handle_piece_move(data["piece"], data["new_position"])
+            elif action == "chat":
+                await self.handle_chat_message(data["message"])
+            elif action == "cancel_move":
+                await self.handle_cancel_move()
+            elif action == "timeout":
+                await self.handle_timeout()
+        except Exception as e:
+            logger.error(f"Error processing message from {self.user.username}: {str(e)}")
+            await self.send(text_data=json.dumps({
+                "type": "notification",
+                "message": f"Error: {str(e)}"
+            }))
 
-    # Game Logic Handlers
     async def initialize_player(self):
         room = await self.get_game_room()
         player_status = await self.get_or_create_player_status(room)
@@ -783,31 +843,172 @@ class LudoGameConsumer(AsyncWebsocketConsumer):
             color = await self.assign_color(room)
             self.game_state["players"][self.user.username] = {
                 "color": color,
-                "pieces": {"piece1": 0, "piece2": 0, "piece3": 0, "piece4": 0},
+                "pieces": player_status.current_position or {"piece1": -1, "piece2": -1, "piece3": -1, "piece4": -1},
+                "ready": player_status.is_ready
             }
-            if not self.game_state["current_turn"]:
+            if not self.game_state["current_turn"] and len(self.game_state["players"]) == 1:
                 self.game_state["current_turn"] = self.user.username
-
-    async def handle_dice_roll(self):
-        if self.game_state["current_turn"] == self.user.username:
-            dice = random.randint(1, 6)
-            self.game_state["dice"] = dice
+            logger.info(f"Initialized player {self.user.username} with color {color}")
             await self.broadcast_game_state()
 
+    async def handle_dice_roll(self):
+        if self.game_state["current_turn"] != self.user.username or self.game_state["dice"] is not None:
+            logger.warning(f"Invalid dice roll attempt by {self.user.username}")
+            return
+        
+        dice = random.randint(1, 6)
+        self.game_state["dice"] = dice
+        
+        # Check if player has valid moves before sending dice result
+        player = self.game_state["players"][self.user.username]
+        has_valid_moves = await self.has_valid_moves(player, dice)
+        
+        if not has_valid_moves:
+            logger.info(f"No valid moves for {self.user.username} after rolling {dice}")
+            self.game_state["dice"] = None
+            await self.switch_turn()
+            await self.channel_layer.group_send(
+                self.room_group_name,
+                {
+                    "type": "dice_result",
+                    "value": dice,
+                    "has_valid_moves": has_valid_moves
+                }
+            )
+            await self.broadcast_game_state()
+            return
+        
+        # Simulate roll animation delay
+        await asyncio.sleep(1.5)
+        await self.channel_layer.group_send(
+            self.room_group_name,
+            {
+                "type": "dice_result",
+                "value": dice,
+                "has_valid_moves": has_valid_moves
+            }
+        )
+        logger.info(f"User {self.user.username} rolled a {dice}")
+
     async def handle_piece_move(self, piece, new_position):
-        if self.game_state["current_turn"] == self.user.username:
-            player = self.game_state["players"][self.user.username]
-            if piece in player["pieces"]:
-                player["pieces"][piece] = new_position
-                self.game_state["dice"] = None  # Reset dice after move
-                await self.switch_turn()
-                await self.broadcast_game_state()
+        if self.game_state["current_turn"] != self.user.username:
+            logger.warning(f"Invalid move attempt by {self.user.username}: not their turn")
+            await self.send(text_data=json.dumps({
+                "type": "notification",
+                "message": "Not your turn!"
+            }))
+            return
+        player = self.game_state["players"].get(self.user.username)
+        if not player or player["color"] != piece["color"]:
+            logger.warning(f"Invalid move attempt by {self.user.username}: wrong color or player not found")
+            await self.send(text_data=json.dumps({
+                "type": "notification",
+                "message": "Invalid piece!"
+            }))
+            return
+
+        piece_id = f"piece{piece['id']}"
+        current_pos = player["pieces"].get(piece_id, -1)
+        dice_value = self.game_state["dice"]
+        valid_move = False
+
+        if current_pos == -1 and dice_value == 6:
+            if new_position == board_config[piece["color"]]["startPosition"]:
+                valid_move = True
+        elif current_pos != -1:
+            path = board_config[piece["color"]]["path"]
+            current_index = path.index(current_pos) if current_pos in path else -1
+            if current_index != -1 and current_index + dice_value < len(path):
+                if new_position == path[current_index + dice_value]:
+                    valid_move = True
+
+        if valid_move:
+            captured = None
+            for opponent_name, opponent in self.game_state["players"].items():
+                if opponent_name != self.user.username:
+                    for opp_piece_id, opp_pos in opponent["pieces"].items():
+                        if opp_pos == new_position and new_position not in board_config[piece["color"]]["safeSpots"]:
+                            captured = {"color": opponent["color"], "id": int(opp_piece_id.replace("piece", "")), "username": opponent_name}
+                            break
+                    if captured:
+                        break
+
+            old_position = player["pieces"][piece_id]
+            player["pieces"][piece_id] = new_position
+            player_status = await self.get_or_create_player_status(await self.get_game_room())
+            player_status.current_position = player["pieces"]
+            await database_sync_to_async(player_status.save)()
+
+            move_data = {
+                "type": "move",
+                "piece": piece,
+                "new_position": new_position
+            }
+            if captured:
+                opponent = self.game_state["players"][captured["username"]]
+                opponent["pieces"][f"piece{captured['id']}"] = -1
+                player_status = await self.get_or_create_player_status(await self.get_game_room())
+                player_status.current_position = opponent["pieces"]
+                await database_sync_to_async(player_status.save)()
+                move_data["captured"] = captured
+
+            self.game_state["last_move"] = {
+                "piece": piece,
+                "old_position": old_position,
+                "new_position": new_position,
+                "dice_value": dice_value,
+                "captured": captured
+            }
+            self.game_state["dice"] = None
+
+            await self.channel_layer.group_send(self.room_group_name, move_data)
+
+            if await self.check_win_condition(player, piece["color"]):
+                self.game_state["status"] = "finished"
+                self.game_state["winner"] = self.user.username
+            else:
+                # Only keep turn if player rolled a 6 AND has another valid move
+                if dice_value == 6 and await self.has_valid_moves(player, 6):
+                    logger.info(f"{self.user.username} rolled a 6 and has valid moves, keeping turn")
+                    self.game_state["current_turn"] = self.user.username
+                else:
+                    await self.switch_turn()
+
+            await self.broadcast_game_state()
+        else:
+            logger.warning(f"Invalid move by {self.user.username}: piece {piece_id} from {current_pos} to {new_position}")
+            await self.send(text_data=json.dumps({
+                "type": "notification",
+                "message": "Invalid move!"
+            }))
+
+    async def has_valid_moves(self, player, dice_value):
+        color = player["color"]
+        path = board_config[color]["path"]
+        
+        # Check if any piece can be moved out of home
+        if dice_value == 6:
+            for piece_id, pos in player["pieces"].items():
+                if pos == -1:  # Piece is in home
+                    return True
+        
+        # Check if any piece can be moved along the path
+        for piece_id, pos in player["pieces"].items():
+            if pos == -1:
+                continue  # Piece is in home and we already checked for 6
+                
+            if pos in path:
+                current_index = path.index(pos)
+                if current_index + dice_value < len(path):
+                    return True
+        
+        return False
 
     async def handle_chat_message(self, message):
         await self.channel_layer.group_send(
             self.room_group_name,
             {
-                "type": "chat_message",
+                "type": "chat",
                 "username": self.user.username,
                 "message": message,
                 "timestamp": datetime.now().isoformat(),
@@ -817,39 +1018,90 @@ class LudoGameConsumer(AsyncWebsocketConsumer):
     async def handle_player_ready(self):
         player_status = await self.get_or_create_player_status(await self.get_game_room())
         await self.set_player_ready(player_status)
+        self.game_state["players"][self.user.username]["ready"] = True
         await self.check_game_start()
+        await self.broadcast_game_state()
+
+    async def handle_cancel_move(self):
+        if self.game_state["current_turn"] != self.user.username or not self.game_state.get("last_move"):
+            return
+        last_move = self.game_state["last_move"]
+        player = self.game_state["players"][self.user.username]
+        piece_id = f"piece{last_move['piece']['id']}"
+        player["pieces"][piece_id] = last_move["old_position"]
+        self.game_state["dice"] = last_move["dice_value"]
+        if last_move.get("captured"):
+            captured_player = self.game_state["players"][last_move["captured"]["username"]]
+            captured_piece_id = f"piece{last_move['captured']['id']}"
+            captured_player["pieces"][captured_piece_id] = last_move["new_position"]
+        self.game_state["last_move"] = None
+        player_status = await self.get_or_create_player_status(await self.get_game_room())
+        player_status.current_position = player["pieces"]
+        await database_sync_to_async(player_status.save)()
+        await self.broadcast_game_state()
+
+    async def handle_timeout(self):
+        if self.game_state["current_turn"] == self.user.username:
+            self.game_state["dice"] = None
+            await self.switch_turn()
+            await self.broadcast_game_state()
+            logger.info(f"Timeout for {self.user.username}, turn switched")
 
     async def switch_turn(self):
         players = list(self.game_state["players"].keys())
         if not players:
+            self.game_state["current_turn"] = None
             return
-        current_idx = players.index(self.game_state["current_turn"])
+        current_idx = players.index(self.game_state["current_turn"]) if self.game_state["current_turn"] in players else -1
         next_idx = (current_idx + 1) % len(players)
         self.game_state["current_turn"] = players[next_idx]
+        self.game_state["dice"] = None
+        logger.info(f"Switched turn to {self.game_state['current_turn']}")
+        await self.broadcast_game_state()
 
     async def check_game_start(self):
         room = await self.get_game_room()
-        if await self.get_player_count(room) >= 2 and await self.all_players_ready(room):  # Adjusted to >= 2 for testing
+        player_count = await self.get_player_count(room)
+        if 2 <= player_count <= 4 and await self.all_players_ready(room):
             self.game_state["status"] = "playing"
+            if not self.game_state["current_turn"] or self.game_state["current_turn"] not in self.game_state["players"]:
+                self.game_state["current_turn"] = list(self.game_state["players"].keys())[0]
             await self.broadcast_game_state()
+            logger.info(f"Game started in room {self.game_id} with {player_count} players")
 
-    # Database Operations (unchanged)
+    async def check_win_condition(self, player, color):
+        home_path_end = board_config[color]["homePath"][-1]
+        return all(pos == home_path_end for pos in player["pieces"].values())
+
     @database_sync_to_async
     def get_game_room(self):
-        return GameRoom.objects.get(room_code=self.game_id)
+        try:
+            return GameRoom.objects.get(room_code=self.game_id)
+        except GameRoom.DoesNotExist:
+            logger.error(f"Game room {self.game_id} not found")
+            raise
 
     @database_sync_to_async
     def get_or_create_player_status(self, room):
         status, created = PlayerStatus.objects.get_or_create(
             user=self.user, game_room=room,
-            defaults={"current_position": {"piece1": 0, "piece2": 0, "piece3": 0, "piece4": 0}}
+            defaults={
+                "current_position": {"piece1": -1, "piece2": -1, "piece3": -1, "piece4": -1},
+                "score": 0,
+                "is_ready": False,
+                "last_active": datetime.now()
+            }
         )
+        if created:
+            logger.info(f"Created PlayerStatus for {self.user.username} in room {room.room_code}")
         return status
 
     @database_sync_to_async
     def set_player_ready(self, player_status):
         player_status.is_ready = True
+        player_status.last_active = datetime.now()
         player_status.save()
+        logger.info(f"Player {self.user.username} marked as ready")
 
     @database_sync_to_async
     def get_player_count(self, room):
@@ -866,14 +1118,15 @@ class LudoGameConsumer(AsyncWebsocketConsumer):
         color = available_colors[0] if available_colors else "red"
         status = PlayerStatus.objects.get(user=self.user, game_room=room)
         status.color = color
+        status.last_active = datetime.now()
         status.save()
+        logger.info(f"Assigned color {color} to {self.user.username}")
         return color
 
-    # Broadcasting
     async def send_game_state(self):
         await self.send(text_data=json.dumps({
             "type": "game_state",
-            "game_state": self.game_state,
+            "state": self.game_state,
             "username": self.user.username,
         }))
 
@@ -883,22 +1136,35 @@ class LudoGameConsumer(AsyncWebsocketConsumer):
             {"type": "game_state_update", "game_state": self.game_state}
         )
 
-    # WebSocket Event Handlers
     async def game_state_update(self, event):
         await self.send(text_data=json.dumps({
             "type": "game_state",
-            "game_state": event["game_state"],
+            "state": event["game_state"],
             "username": self.user.username,
         }))
 
-    async def chat_message(self, event):
+    async def dice_result(self, event):
         await self.send(text_data=json.dumps({
-            "type": "chat_message",
+            "type": "dice_result",
+            "value": event["value"],
+            "has_valid_moves": event["has_valid_moves"]
+        }))
+
+    async def move(self, event):
+        await self.send(text_data=json.dumps({
+            "type": "move",
+            "piece": event["piece"],
+            "new_position": event["new_position"],
+            "captured": event.get("captured")
+        }))
+
+    async def chat(self, event):
+        await self.send(text_data=json.dumps({
+            "type": "chat",
             "username": event["username"],
             "message": event["message"],
             "timestamp": event["timestamp"],
-        }))        
-
+        }))
 
 from channels.generic.websocket import AsyncWebsocketConsumer
 from channels.db import database_sync_to_async

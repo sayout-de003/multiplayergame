@@ -250,11 +250,15 @@ def game_room_views(request, game_id):
 
                 if room:
                     room.players.add(request.user)
-                    if room.players.count() == 4:
-                        room.is_started = True  # Start game when 4 players join
+                    # Check if game can start (2 to 4 players and all ready)
+                    player_statuses = PlayerStatus.objects.filter(game_room=room)
+                    if 2 <= room.players.count() <= 4 and all(status.is_ready for status in player_statuses):
+                        room.is_started = True
+                        room.is_starting = True
+                        room.start_time = timezone.now() + timedelta(seconds=5)
                     room.save()
                 else:
-                    # Create a new room if no available room exists
+                    # Create a new room
                     room = GameRoom.objects.create(
                         game=game,
                         created_by=request.user,
@@ -263,6 +267,9 @@ def game_room_views(request, game_id):
                     )
                     room.players.add(request.user)
                     room.save()
+
+                return JsonResponse({'room_code': room.room_code, 'game_id': game_id})
+            # ... (other game types remain unchanged)
             
 
         elif action == 'create_private_room':
@@ -435,7 +442,7 @@ def start_game(request, room_code, game_id):
                     game_room=game_room,
                     defaults={
                         'score': 0,
-                        'current_position': {"piece1": 0, "piece2": 0, "piece3": 0, "piece4": 0}
+                        'current_position': {"piece1": -1, "piece2": -1, "piece3": -1, "piece4": -1}
                     }
                 )
                 players_with_positions.append({
