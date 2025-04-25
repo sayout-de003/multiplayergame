@@ -81,9 +81,9 @@ class PlayerStatus(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     game_room = models.ForeignKey(GameRoom, on_delete=models.CASCADE)
     score = models.IntegerField(default=0)
-    current_position = models.JSONField(default=dict)  # For Ludo: {"piece1": 0, "piece2": 0, "piece3": 0, "piece4": 0}
+    current_position = models.JSONField(default=dict)  
     is_ready = models.BooleanField(default=False)  # Track if player is ready to start
-    color = models.CharField(max_length=20, blank=True, null=True)  # Ludo player color (e.g., red, blue, green, yellow)
+    color = models.CharField(max_length=20, blank=True, null=True)  
     last_active = models.DateTimeField(auto_now=True)  # Automatically updates on save
 
     class Meta:
@@ -272,3 +272,33 @@ from django.db import models
 
 class NewModel(models.Model):  # ← This must inherit from models.Model
     name = models.CharField(max_length=100)
+
+# games/models.py
+
+from django.db import models
+from django.conf import settings
+from django.utils import timezone
+import uuid
+import random
+import string
+
+# Existing models (Game, GameRoom, PlayerStatus, etc.) remain unchanged
+
+# Ludo-specific Player Status Extension
+class LudoPlayerStatus(models.Model):
+    player_status = models.OneToOneField('PlayerStatus', on_delete=models.CASCADE, related_name='ludo_status')
+    color = models.CharField(max_length=10, choices=[
+        ('red', 'Red'),
+        ('blue', 'Blue'),
+        ('green', 'Green'),
+        ('yellow', 'Yellow')
+    ])  # Assigned color
+    pieces = models.JSONField(default=dict)  # e.g., {"p1": {"pos": 0, "is_home": true}, ...}
+    is_active = models.BooleanField(default=True)  # Whether player is still in game
+
+    def __str__(self):
+        return f"{self.player_status.user.username} - {self.color} in {self.player_status.game_room.room_code}"
+
+    class Meta:
+        verbose_name = "Ludo Player Status"
+        verbose_name_plural = "Ludo Player Statuses"    

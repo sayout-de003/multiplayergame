@@ -18,7 +18,7 @@ urlpatterns = [
     path('get_players/<str:room_code>/', views.get_players, name='get_players'),
     path('check_game_starting/<str:room_code>/', views.check_game_starting, name='check_game_starting'),
     path('start_game_countdown/<str:room_code>/<str:game_id>/', views.start_game_countdown, name='start_game_countdown'),
-    path('ludo/<str:room_code>',views.tic_tac_toe, name='tic_tac_toe'),
+    path('tictactoe/<str:room_code>',views.tic_tac_toe, name='tic_tac_toe'),
     # ... your other URL patterns ...
 
 ]

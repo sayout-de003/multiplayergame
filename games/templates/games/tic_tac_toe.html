@@ -5,64 +5,89 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Multiplayer Tic-Tac-Toe</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: Arial, sans-serif;
+            background-color: #548687;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             min-height: 100vh;
-            margin: 0;
-            background-color: #f4f4f4;
+            padding: 10px;
         }
+
         h1 {
-            color: #333;
-            margin-bottom: 20px;
+            color: #191913;
+            margin-bottom: 10px;
+            font-size: 3rem;
+            text-align: center;
         }
+
         .game-container {
             display: flex;
-            gap: 20px;
+            flex-direction: row;
+            justify-content: center;
+            gap: 40px;
+            padding: 20px;
+            flex-wrap: wrap;
         }
+
         .board {
             display: grid;
-            grid-template-columns: repeat(3, 100px);
-            grid-template-rows: repeat(3, 100px);
-            border: 2px solid #333;
-            background-color: #fff;
+            grid-template-columns: repeat(3, 18vmin);
+            grid-template-rows: repeat(3, 18vmin);
+            gap: 1.5vmin;
+            background-color: transparent;
         }
+
         .square {
-            width: 100px;
-            height: 100px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 60px;
+            font-size: 8vmin;
+            color: #b0413e;
+            background-color: #ffffc7;
+            border-radius: 1rem;
+            border: none;
+            box-shadow: 0 0 1rem rgba(0, 0, 0, 0.3);
             cursor: pointer;
             user-select: none;
-            border: 1px solid #ccc;
             transition: background-color 0.2s;
         }
+
         .square:hover {
             background-color: #f0f0f0;
         }
+
         .square.x {
             color: #e74c3c;
         }
+
         .square.o {
             color: #3498db;
         }
+
         .sidebar {
             width: 300px;
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 20px;
+            max-width: 100%;
         }
+
         .chat {
             background-color: #fff;
-            border-radius: 5px;
-            padding: 10px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border-radius: 1rem;
+            padding: 15px;
+            box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
         }
+
         .messages {
             height: 150px;
             overflow-y: auto;
@@ -70,42 +95,118 @@
             padding: 10px;
             margin-bottom: 10px;
         }
+
         .message-input {
             display: flex;
             gap: 10px;
         }
+
         .message-input input {
             flex: 1;
-            padding: 5px;
+            padding: 8px;
             border: 1px solid #ccc;
-            border-radius: 4px;
+            border-radius: 0.5rem;
         }
+
         .message-input button {
-            padding: 5px 15px;
-            background-color: #007bff;
+            padding: 0.5rem 1rem;
+            background-color: #191913;
             color: white;
             border: none;
-            border-radius: 4px;
+            border-radius: 0.5rem;
             cursor: pointer;
         }
+
         .message-input button:hover {
-            background-color: #0056b3;
+            background-color: #333;
         }
+
         .clock {
             text-align: center;
-            padding: 10px;
-            background-color: #fff;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 15px;
+            background-color: #ffffc7;
+            border-radius: 1rem;
+            box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
+            font-size: 1.2rem;
+            color: #191913;
+            font-weight: bold;
+            line-height: 1.8;
+            border: 2px solid #b0413e;
         }
+
         .game-over {
-            font-size: 24px;
-            color: #e74c3c;
+            font-size: 2rem;
+            color: #ffffc7;
             margin-top: 20px;
         }
+
         #turn-indicator {
-            font-size: 18px;
+            font-size: 1.25rem;
             margin-bottom: 10px;
+            color: #191913;
+        }
+
+        .hide {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .game-container {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .board {
+                grid-template-columns: repeat(3, 25vmin);
+                grid-template-rows: repeat(3, 25vmin);
+                gap: 2vmin;
+            }
+
+            .square {
+                font-size: 10vmin;
+            }
+
+            .sidebar {
+                width: 100%;
+                max-width: none;
+            }
+
+            .clock {
+                font-size: 1rem;
+                padding: 12px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .board {
+                grid-template-columns: repeat(3, 30vmin);
+                grid-template-rows: repeat(3, 30vmin);
+            }
+
+            .square {
+                font-size: 12vmin;
+            }
+
+            .message-input input {
+                font-size: 0.8rem;
+            }
+
+            .message-input button {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.8rem;
+            }
+
+            .clock {
+                font-size: 0.9rem;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
         }
     </style>
 </head>
@@ -142,11 +243,7 @@
                 this.turnIndicator = document.getElementById('turn-indicator');
                 this.gameOverEl = document.getElementById('game-over');
 
-                this.initialBoard = [
-                    ['', '', ''],
-                    ['', '', ''],
-                    ['', '', '']
-                ];
+                this.initialBoard = [['', '', ''], ['', '', ''], ['', '', '']];
 
                 this.state = {
                     board: JSON.parse(JSON.stringify(this.initialBoard)),
@@ -194,14 +291,12 @@
                 this.socket = new WebSocket(`ws://${window.location.host}/ws/tic-tac-toe/${roomCode}/`);
                 this.socket.onopen = () => {
                     this.addMessage('Connected to server');
-                    console.log('Sending join message');
                     this.socket.send(JSON.stringify({ type: 'join' }));
                 };
 
                 this.socket.onmessage = (event) => this.handleWebSocketMessage(event);
                 this.socket.onclose = () => {
                     this.addMessage('Disconnected from server');
-                    console.log('WebSocket disconnected');
                     this.stopClock();
                 };
                 this.socket.onerror = (error) => {
@@ -218,7 +313,7 @@
                     this.turnIndicator.textContent = "Game Over";
                     this.boardEl.style.pointerEvents = 'none';
                 } else {
-                    this.turnIndicator.textContent = `${this.state.currentPlayer}'s Turn` + 
+                    this.turnIndicator.textContent = `${this.state.currentPlayer}'s Turn` +
                         (this.state.playerSymbol === this.state.currentPlayer ? " (Your Turn)" : " (Opponent's Turn)");
                     this.boardEl.style.pointerEvents = this.state.playerSymbol === this.state.currentPlayer ? 'auto' : 'none';
                 }
@@ -242,35 +337,14 @@
             }
 
             handleSquareClick(row, col) {
-                if (this.state.gameOver) {
-                    this.addMessage("Game is over!");
+                if (this.state.gameOver || !this.state.gameStarted || !this.state.playerSymbol || this.state.board[row][col] || this.state.playerSymbol !== this.state.currentPlayer) {
                     return;
                 }
-                if (!this.state.gameStarted) {
-                    this.addMessage("Game hasn't started yet!");
-                    return;
-                }
-                if (!this.state.playerSymbol) {
-                    this.addMessage("Waiting for player assignment...");
-                    return;
-                }
-                if (this.state.playerSymbol !== this.state.currentPlayer) {
-                    this.addMessage(`It's ${this.state.currentPlayer}'s turn`);
-                    return;
-                }
-                if (this.state.board[row][col]) {
-                    this.addMessage("Square already taken!");
-                    return;
-                }
-
                 this.makeMove(row, col);
             }
 
             makeMove(row, col) {
-                if (this.state.playerSymbol !== this.state.currentPlayer) return;
-
                 this.state.board[row][col] = this.state.currentPlayer;
-                console.log(`Sending move: row=${row}, col=${col}, player=${this.state.playerSymbol}`);
                 this.sendMove(row, col);
                 this.state.currentPlayer = this.state.currentPlayer === 'X' ? 'O' : 'X';
                 this.resetTimer();
@@ -280,29 +354,22 @@
 
             sendMove(row, col) {
                 if (this.socket?.readyState === WebSocket.OPEN) {
-                    const message = {
+                    this.socket.send(JSON.stringify({
                         type: 'move',
                         move: { row, col },
                         board: this.state.board,
                         player: this.state.playerSymbol
-                    };
-                    console.log('Sending WebSocket message:', message);
-                    this.socket.send(JSON.stringify(message));
-                } else {
-                    this.addMessage("Cannot send move: Not connected");
-                    console.error('WebSocket not open');
+                    }));
                 }
             }
 
             sendChatMessage() {
                 const message = this.chatInput.value.trim();
                 if (message && this.socket?.readyState === WebSocket.OPEN) {
-                    const chatMessage = {
+                    this.socket.send(JSON.stringify({
                         type: 'chat_message',
                         message: `${this.state.playerSymbol || 'Player'}: ${message}`
-                    };
-                    console.log('Sending chat message:', chatMessage);
-                    this.socket.send(JSON.stringify(chatMessage));
+                    }));
                     this.addMessage(`${this.state.playerSymbol || 'Player'}: ${message}`);
                     this.chatInput.value = '';
                 }
@@ -310,7 +377,6 @@
 
             handleWebSocketMessage(event) {
                 const data = JSON.parse(event.data);
-                console.log('Received WebSocket message:', data);
                 switch (data.type) {
                     case 'player_assignment':
                         this.state.playerSymbol = data.symbol;
@@ -358,30 +424,21 @@
                 this.stopClock();
                 this.resetTimer();
                 this.clockInterval = setInterval(() => {
-                    if (this.state.gameOver) {
-                        this.stopClock();
-                        return;
-                    }
+                    if (this.state.gameOver) return this.stopClock();
                     if (this.state.currentPlayer === 'X') {
                         this.state.xTime--;
-                        if (this.state.xTime <= 0) {
-                            this.handleTimeout('X', 'O');
-                        }
+                        if (this.state.xTime <= 0) this.handleTimeout('X', 'O');
                     } else {
                         this.state.oTime--;
-                        if (this.state.oTime <= 0) {
-                            this.handleTimeout('O', 'X');
-                        }
+                        if (this.state.oTime <= 0) this.handleTimeout('O', 'X');
                     }
                     this.updateClock();
                 }, 1000);
             }
 
             stopClock() {
-                if (this.clockInterval) {
-                    clearInterval(this.clockInterval);
-                    this.clockInterval = null;
-                }
+                clearInterval(this.clockInterval);
+                this.clockInterval = null;
             }
 
             resetTimer() {
@@ -395,51 +452,31 @@
             }
 
             handleTimeout(player, nextPlayer) {
-                if (this.socket?.readyState === WebSocket.OPEN) {
-                    const message = {
-                        type: 'timeout',
-                        player,
-                        next_player: nextPlayer
-                    };
-                    console.log('Sending timeout message:', message);
-                    this.socket.send(JSON.stringify(message));
-                }
+                this.socket?.send(JSON.stringify({ type: 'timeout', player, next_player: nextPlayer }));
                 this.state.currentPlayer = nextPlayer;
                 this.resetTimer();
                 this.renderBoard();
             }
 
             checkGameState() {
-                if (this.state.gameOver) return;
-
                 const winner = this.checkWinner();
-                if (winner) {
-                    this.endGame(`${winner} wins!`);
-                    return;
-                }
-                if (this.isBoardFull()) {
-                    this.endGame("Draw!");
-                }
+                if (winner) return this.endGame(`${winner} wins!`);
+                if (this.isBoardFull()) this.endGame("Draw!");
             }
 
             checkWinner() {
                 const b = this.state.board;
-                // Check rows
                 for (let i = 0; i < 3; i++) {
                     if (b[i][0] && b[i][0] === b[i][1] && b[i][1] === b[i][2]) return b[i][0];
-                }
-                // Check columns
-                for (let i = 0; i < 3; i++) {
                     if (b[0][i] && b[0][i] === b[1][i] && b[1][i] === b[2][i]) return b[0][i];
                 }
-                // Check diagonals
                 if (b[0][0] && b[0][0] === b[1][1] && b[1][1] === b[2][2]) return b[0][0];
                 if (b[0][2] && b[0][2] === b[1][1] && b[1][1] === b[2][0]) return b[0][2];
                 return null;
             }
 
             isBoardFull() {
-                return this.state.board.every(row => row.every(cell => cell));
+                return this.state.board.flat().every(cell => cell);
             }
 
             endGame(message) {
