@@ -269,6 +269,53 @@ def game_room_views(request, game_id):
                     room.save()
 
                 return JsonResponse({'room_code': room.room_code, 'game_id': game_id})
+            
+
+            if game.slug == "zombsroyale":
+                activity_threshold = timezone.now() - timedelta(minutes=5)
+                GameRoom.objects.filter(
+                    is_active=True,
+                    is_private=False,
+                    playerstatus__last_active__lt=activity_threshold
+                ).update(is_active=False)
+
+                room = GameRoom.objects.filter(
+                    game=game,
+                    is_active=True,
+                    is_private=False
+                ).annotate(
+                    player_count=Count('players')
+                ).filter(
+                    player_count__lt=50,
+                    playerstatus__last_active__gte=activity_threshold
+                ).first()
+
+                if not room:
+                    room = GameRoom.objects.create(
+                        game=game,
+                        created_by=request.user,
+                        room_code=str(uuid.uuid4())[:8].upper(),
+                        is_private=False
+                    )
+
+                room.players.add(request.user)
+                player_status, created = PlayerStatus.objects.get_or_create(
+                    user=request.user,
+                    game_room=room,
+                    defaults={
+                        'score': 0,
+                        'last_active': timezone.now()
+                    }
+                )
+                if not created:
+                    player_status.last_active = timezone.now()
+                    player_status.save()
+
+                room.save()
+                return JsonResponse({
+                    'room_code': room.room_code,
+                    'game_id': game_id
+                })
             # ... (other game types remain unchanged)
             
 
@@ -465,6 +512,19 @@ def start_game(request, room_code, game_id):
                 'game_room': game_room,
                 'players': players
             })
+        
+        elif game.slug == "zombsroyale":
+            players_with_scores = []
+            for player in game_room.players.all():
+                player_status = PlayerStatus.objects.filter(user=player, game_room=game_room).first()
+                players_with_scores.append({
+                    'username': player.username,
+                    'score': player_status.score if player_status else 0,
+                })
+            return render(request, 'games/zombsroyale.html', {
+                'game_room': game_room,
+                'players_with_scores': players_with_scores
+            })
         # Add other game cases (chess, snake, etc.) as needed
         else:
             return HttpResponseNotFound("Game not found.")
@@ -555,3 +615,25 @@ def get_players(request, room_code):
     except GameRoom.DoesNotExist:
         return JsonResponse({'players': []})
     
+
+login_required(login_url='login')
+@csrf_exempt
+def zombsroyale(request, room_code):
+    try:
+        game_room = GameRoom.objects.get(room_code=room_code)
+        if not game_room.is_active or game_room.game.slug != "zombsroyale":
+            return redirect('game_lobby', room_code=room_code, game_id=game_room.game.game_id)
+        
+        players_with_scores = []
+        for player in game_room.players.all():
+            player_status = PlayerStatus.objects.filter(user=player, game_room=game_room).first()
+            players_with_scores.append({
+                'username': player.username,
+                'score': player_status.score if player_status else 0,
+            })
+        return render(request, 'games/zombsroyale.html', {
+            'game_room': game_room,
+            'players_with_scores': players_with_scores
+        })
+    except GameRoom.DoesNotExist:
+        return HttpResponseNotFound("Game room not found.")

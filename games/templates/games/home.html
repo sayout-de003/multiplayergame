@@ -128,7 +128,7 @@
                         <div class="card-body text-center">
                             <h5 class="card-title">{{ game.name }}</h5>
                             <p class="card-text">Active Rooms: {{ game.rooms }}</p>
-                            {% if game.slug in 'snake,football,chess,ludo,tic-tac-toe' %}
+                            {% if game.slug in 'snake,football,chess,ludo,tic-tac-toe,zombsroyale' %}
                                 <a href="{% url 'game_room_views' game.game_id %}" class="btn btn-primary">Play Now</a>
                             {% elif game.playcanvas_project_id %}
                                 <a href="https://playcanv.as/p/{{ game.playcanvas_project_id }}" class="btn btn-success">Play Now</a>

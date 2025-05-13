@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>3D Snake Game</title>
     <style>
       body {
@@ -11,6 +12,7 @@
         height: 100vh;
         overflow: hidden;
         position: relative;
+        touch-action: none;
       }
       #scoreboard {
         color: white;
@@ -33,7 +35,7 @@
         padding: 12px 25px;
         border-radius: 12px;
         position: fixed;
-        top: 80px; /* Below scoreboard */
+        top: 80px;
         left: 50%;
         transform: translateX(-50%);
         z-index: 1000;
@@ -77,6 +79,34 @@
         border-radius: 10px;
         transition: transform 0.3s ease;
       }
+      #joystick {
+        position: fixed;
+        bottom: 50px;
+        right: 50px;
+        width: 100px;
+        height: 100px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
+        display: none;
+        z-index: 1000;
+        touch-action: none;
+      }
+      #joystick-knob {
+        width: 50px;
+        height: 50px;
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 50%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+      }
+      @media (max-width: 768px) {
+        #joystick {
+          display: block;
+        }
+      }
     </style>
   </head>
   <body>
@@ -88,6 +118,9 @@
     </div>
     <div id="boost-meter"><div id="boost-bar"></div></div>
     <canvas id="gameCanvas"></canvas>
+    <div id="joystick">
+      <div id="joystick-knob"></div>
+    </div>
 
     <script>
       const canvas = document.getElementById("gameCanvas");
@@ -95,7 +128,7 @@
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
       let lastMoveTime = 0;
-      const moveInterval = 40;
+      const baseMoveInterval = 40;
 
       const SQUARE_SIZE = 20;
       const SEGMENT_RADIUS = 12;
@@ -114,9 +147,19 @@
       const boostMultiplier = 1.8;
       let otherSnakes = {};
       let socket = null;
+      let mouseX = canvas.width / 2;
+      let mouseY = canvas.height / 2;
 
-      // WebSocket connection with reconnection
-      const roomCode = "{{ game_room.room_code|escapejs }}"; // Replace with dynamic room code
+      // Joystick variables
+      const joystick = document.getElementById("joystick");
+      const joystickKnob = document.getElementById("joystick-knob");
+      let joystickActive = false;
+      let joystickCenterX = 0;
+      let joystickCenterY = 0;
+      let joystickAngle = 0;
+
+      // WebSocket connection
+      const roomCode = "{{ game_room.room_code|escapejs }}";
       let reconnectAttempts = 0;
       const maxReconnectAttempts = 5;
 
@@ -146,7 +189,6 @@
                 snake = data.snake_data[socket.channel_name].snake;
                 document.getElementById("score").innerText = score;
               }
-              // Update leaderboard
               if (data.leaderboard) {
                 updateLeaderboard(data.leaderboard, socket.channel_name);
               }
@@ -176,21 +218,27 @@
 
       connectWebSocket();
 
-      // Request food periodically to ensure food is available
+      // Ensure food is always visible
       setInterval(() => {
         if (socket && socket.readyState === WebSocket.OPEN) {
-          socket.send(JSON.stringify({ 
-            type: "request_food",
-            snake_head: snake[0] // Send snake's head position
-          }));
+          const visibleFoods = foods.filter(food => {
+            const dx = food.x - cameraX;
+            const dy = food.y - cameraY;
+            return dx >= 0 && dx <= canvas.width && dy >= 0 && dy <= canvas.height;
+          });
+          if (visibleFoods.length < 3 && snake[0]) {
+            socket.send(JSON.stringify({
+              type: "request_food",
+              snake_head: snake[0],
+              camera: { x: cameraX, y: cameraY, width: canvas.width, height: canvas.height }
+            }));
+          }
         }
-      }, 2000);
+      }, 1000);
 
       function updateLeaderboard(leaderboard, channel_name) {
         const topPlayers = leaderboard.top_3;
         const myRank = leaderboard.ranks[channel_name] || "-";
-
-        // Update top 3 players
         const topPlayersList = document.getElementById("top-players");
         topPlayersList.innerHTML = "";
         topPlayers.forEach((player, index) => {
@@ -198,29 +246,59 @@
           li.textContent = `${index + 1}. Player ${player.id.slice(-4)} - ${player.score}`;
           topPlayersList.appendChild(li);
         });
-
-        // Update user's rank
         document.getElementById("your-rank").textContent = `Your Rank: ${myRank}`;
       }
 
+      // Mouse follow
+      window.addEventListener("mousemove", (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+      });
+
+      // Joystick controls
+      function handleTouchStart(e) {
+        e.preventDefault();
+        joystickActive = true;
+        const touch = e.touches[0];
+        joystickCenterX = touch.clientX;
+        joystickCenterY = touch.clientY;
+        joystick.style.left = `${joystickCenterX - 50}px`;
+        joystick.style.top = `${joystickCenterY - 50}px`;
+      }
+
+      function handleTouchMove(e) {
+        e.preventDefault();
+        if (!joystickActive) return;
+        const touch = e.touches[0];
+        const dx = touch.clientX - joystickCenterX;
+        const dy = touch.clientY - joystickCenterY;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        const maxDistance = 50;
+        let knobX = dx;
+        let knobY = dy;
+        if (distance > maxDistance) {
+          const scale = maxDistance / distance;
+          knobX = dx * scale;
+          knobY = dy * scale;
+        }
+        joystickKnob.style.left = `calc(50% + ${knobX}px)`;
+        joystickKnob.style.top = `calc(50% + ${knobY}px)`;
+        joystickAngle = Math.atan2(dy, dx);
+      }
+
+      function handleTouchEnd() {
+        joystickActive = false;
+        joystickKnob.style.left = "50%";
+        joystickKnob.style.top = "50%";
+        joystick.style.display = "none";
+      }
+
+      canvas.addEventListener("touchstart", handleTouchStart);
+      canvas.addEventListener("touchmove", handleTouchMove);
+      canvas.addEventListener("touchend", handleTouchEnd);
+
       window.addEventListener("keydown", (e) => {
         if (e.key === "Shift" || e.key === " ") boosting = true;
-        if (e.key === "ArrowUp" && velocity.y === 0) {
-          velocity = { x: 0, y: -SQUARE_SIZE };
-          direction = "UP";
-        }
-        if (e.key === "ArrowDown" && velocity.y === 0) {
-          velocity = { x: 0, y: SQUARE_SIZE };
-          direction = "DOWN";
-        }
-        if (e.key === "ArrowLeft" && velocity.x === 0) {
-          velocity = { x: -SQUARE_SIZE, y: 0 };
-          direction = "LEFT";
-        }
-        if (e.key === "ArrowRight" && velocity.x === 0) {
-          velocity = { x: SQUARE_SIZE, y: 0 };
-          direction = "RIGHT";
-        }
       });
 
       window.addEventListener("keyup", (e) => {
@@ -438,8 +516,38 @@
         });
       }
 
+      function updateDirection() {
+        if (!snake[0]) return;
+        let targetAngle;
+        if (joystickActive) {
+          targetAngle = joystickAngle;
+        } else {
+          const headScreenX = snake[0].x - cameraX;
+          const headScreenY = snake[0].y - cameraY;
+          const dx = mouseX - headScreenX;
+          const dy = mouseY - headScreenY;
+          targetAngle = Math.atan2(dy, dx);
+        }
+
+        const angleThreshold = Math.PI / 4;
+        if (Math.abs(targetAngle) < angleThreshold && velocity.x === 0) {
+          velocity = { x: SQUARE_SIZE, y: 0 };
+          direction = "RIGHT";
+        } else if (Math.abs(targetAngle - Math.PI) < angleThreshold && velocity.x === 0) {
+          velocity = { x: -SQUARE_SIZE, y: 0 };
+          direction = "LEFT";
+        } else if (Math.abs(targetAngle - Math.PI / 2) < angleThreshold && velocity.y === 0) {
+          velocity = { x: 0, y: SQUARE_SIZE };
+          direction = "DOWN";
+        } else if (Math.abs(targetAngle + Math.PI / 2) < angleThreshold && velocity.y === 0) {
+          velocity = { x: 0, y: -SQUARE_SIZE };
+          direction = "UP";
+        }
+      }
+
       function moveSnake() {
         if (!snake[0]) return;
+        updateDirection();
         const head = {
           x: snake[0].x + velocity.x,
           y: snake[0].y + velocity.y,
@@ -470,7 +578,6 @@
             console.warn("Audio file eat.mp3 not found");
           }
 
-          // Notify server of eaten food
           if (socket && socket.readyState === WebSocket.OPEN) {
             socket.send(JSON.stringify({
               type: "food_eaten",
@@ -496,6 +603,10 @@
 
       function gameLoop(timestamp) {
         try {
+          // Adjust speed based on snake length
+          const speedFactor = 1 + snake.length * 0.02;
+          const moveInterval = baseMoveInterval * speedFactor;
+
           ctx.clearRect(0, 0, canvas.width, canvas.height);
           drawStars();
           drawFood();

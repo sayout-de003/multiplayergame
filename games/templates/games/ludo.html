@@ -342,70 +342,9 @@
         this.gameOverEl = document.getElementById('game-over');
         this.playerListEl = document.getElementById('playerList');
 
-        this.boardConfig = {
-          red: {
-            homeBase: { x: 0, y: 0, width: 6, height: 6 },
-            homeSquares: [[2, 2], [2, 4], [4, 2], [4, 4]],
-            startPosition: [1,6],
-            path: [
-              [6,1],[6,2],[6,3],[6,4],[6,5],[7,5],[8,5],[8,4],[8,3],[8,2],[8,1],
-              [9,1],[10,1],[10,2],[10,3],[10,4],[10,5],[11,5],[12,5],[12,6],[12,7],
-              [11,7],[10,7],[10,8],[10,9],[10,10],[10,11],[9,11],[8,11],[8,10],[8,9],
-              [8,8],[7,8],[6,8],[6,9],[6,10],[6,11],[5,11],[4,11],[4,10],[4,9],[4,8],
-              [4,7],[3,7],[2,7],[1,7],[1,8],[2,8],[3,8],[4,8],[5,8]
-            ],
-            homePath: [[6,6]], // From [6,5] to [6,6]
-            safeSpots: [[6,1],[8,1],[10,5],[12,7],[10,11],[8,13],[1,8],[4,7]],
-            finish: [6,6]
-          },
-          green: {
-            homeBase: { x: 0, y: 9, width: 6, height: 6 },
-            homeSquares: [[2, 10], [2, 12], [4, 10], [4, 12]],
-            startPosition: [6,13],
-            path: [
-              [1,8],[2,8],[3,8],[4,8],[5,8],[5,7],[5,6],[4,6],[3,6],[2,6],[1,6],
-              [1,5],[1,4],[2,4],[3,4],[4,4],[5,4],[5,3],[5,2],[6,2],[7,2],[7,1],
-              [8,1],[8,2],[8,3],[8,4],[8,5],[9,5],[10,5],[11,5],[12,5],[12,6],
-              [12,7],[12,8],[11,8],[10,8],[9,8],[8,8],[8,9],[8,10],[8,11],[7,11],
-              [6,11],[6,12],[6,13],[7,13],[8,13]
-            ],
-            homePath: [[8,8]], // From [8,9] to [8,8]
-            safeSpots: [[1,8],[1,6],[5,4],[7,1],[8,5],[12,6],[6,13],[7,11]],
-            finish: [8,8]
-          },
-          yellow: {
-            homeBase: { x: 9, y: 9, width: 6, height: 6 },
-            homeSquares: [[10, 10], [10, 12], [12, 10], [12, 12]],
-            startPosition: [13,6],
-            path: [
-              [8,13],[8,12],[8,11],[8,10],[8,9],[7,9],[6,9],[6,10],[6,11],[6,12],
-              [6,13],[5,13],[4,13],[4,12],[4,11],[4,10],[4,9],[3,9],[2,9],[2,8],
-              [1,8],[1,7],[1,6],[2,6],[3,6],[4,6],[5,6],[5,5],[5,4],[5,3],[5,2],
-              [6,2],[7,2],[8,2],[8,3],[8,4],[8,5],[9,5],[10,5],[11,5],[12,5],
-              [12,6],[12,7],[11,7],[10,7],[9,7]
-            ],
-            homePath: [[8,8]], // From [9,8] to [8,8]
-            safeSpots: [[8,13],[6,13],[4,9],[1,6],[5,2],[12,6],[9,7],[10,5]],
-            finish: [8,8]
-          },
-          blue: {
-            homeBase: { x: 9, y: 0, width: 6, height: 6 },
-            homeSquares: [[10, 1], [10, 3], [12, 1], [12, 3]],
-            startPosition: [8,1],
-            path: [
-              [12,7],[11,7],[10,7],[9,7],[8,7],[8,8],[8,9],[8,10],[8,11],[7,11],
-              [6,11],[6,12],[6,13],[7,13],[8,13],[8,12],[8,11],[8,10],[8,9],[7,9],
-              [6,9],[6,8],[6,7],[5,7],[4,7],[3,7],[2,7],[1,7],[1,6],[1,5],[1,4],
-              [2,4],[3,4],[4,4],[5,4],[6,4],[7,4],[8,4],[9,4],[10,4],[11,4],[12,4],
-              [12,5],[12,6],[11,6],[10,6],[9,6],[8,6],[7,6],[6,6],[6,5],[6,4]
-            ],
-            homePath: [[6,6]], // From [6,7] to [6,6]
-            safeSpots: [[12,7],[6,11],[1,6],[8,4],[9,7],[6,2],[7,11],[1,8]],
-            finish: [6,6]
-          }
-        };
+        this.colors = ['red', 'blue', 'yellow', 'green'];
 
-        this.colors = ['red', 'green', 'yellow', 'blue'];
+        // Initialize game state
         this.state = {
           players: {},
           currentPlayer: null,
@@ -415,7 +354,59 @@
           playerColor: null,
           gameStarted: false,
           gameOver: false,
-          isSpectator: false
+          isSpectator: false,
+          recentRolls: [] // Track recent dice rolls for fairness
+        };
+        
+        this.mainPath = [
+            [1,6],[2,6],[3,6],[4,6],[5,6],[6,5],[6,4],[6,3],[6,2],[6,1],[6,0],
+            [7,0],[8,0],[8,1],[8,2],[8,3],[8,4],[8,5],[9,6],[10,6],[11,6],[12,6],[13,6],[14,6],
+            [14,7],[14,8],[13,8],[12,8],[11,8],[10,8],[9,8],[8,9],[8,10],[8,11],[8,12],[8,13],[8,14],
+            [7,14],[6,14],[6,13],[6,12],[6,11],[6,10],[6,9],[5,8],[4,8],[3,8],[2,8],[1,8],[0,8],
+            [0,7]
+        ];
+
+        this.boardConfig = {
+            red: {
+                homeBase: { x: 0, y: 0, width: 6, height: 6 },
+                homeSquares: [[2, 2], [2, 4], [4, 2], [4, 4]],
+                startIndex: 0,
+                startPosition: [1,6],
+                path: [...this.mainPath],
+                homePath: [[0,7],[1,7],[2,7],[3,7],[4,7],[5,7],[6,7]],
+                finish: [6,7],
+                safeSpots: [[1,6],[6,1],[8,1],[12,6],[13,8],[8,13],[6,12],[1,8]]
+            },
+            blue: {
+                homeBase: { x: 9, y: 0, width: 6, height: 6 },
+                homeSquares: [[10, 2], [10, 4], [12, 2], [12, 4]],
+                startIndex: 12,
+                startPosition: [8,1],
+                path: [...this.mainPath.slice(12), ...this.mainPath.slice(0, 12)],
+                homePath: [[7,0],[7,1],[7,2],[7,3],[7,4],[7,5],[7,6]],
+                finish: [7,6],
+                safeSpots: [[8,1],[7,6],[14,7],[6,13],[1,8],[8,13],[12,6],[6,1]]
+            },
+            yellow: {
+                homeBase: { x: 9, y: 9, width: 6, height: 6 },
+                homeSquares: [[10, 10], [10, 12], [12, 10], [12, 12]],
+                startIndex: 24,
+                startPosition: [13,8],
+                path: [...this.mainPath.slice(24), ...this.mainPath.slice(0, 24)],
+                homePath: [[14,7],[13,7],[12,7],[11,7],[10,7],[9,7],[8,7]],
+                finish: [8,7],
+                safeSpots: [[13,8],[8,7],[6,1],[1,8],[8,13],[6,12],[12,6],[1,6]]
+            },
+            green: {
+                homeBase: { x: 0, y: 9, width: 6, height: 6 },
+                homeSquares: [[2, 10], [2, 12], [4, 10], [4, 12]],
+                startIndex: 36,
+                startPosition: [6,13],
+                path: [...this.mainPath.slice(36), ...this.mainPath.slice(0, 36)],
+                homePath: [[7,14],[7,13],[7,12],[7,11],[7,10],[7,9],[7,8]],
+                finish: [7,8],
+                safeSpots: [[6,13],[7,8],[1,6],[8,1],[12,6],[13,8],[6,12],[1,8]]
+            }
         };
 
         this.socket = null;
@@ -574,7 +565,9 @@
         Object.entries(this.state.players).forEach(([player, data]) => {
           const li = document.createElement('li');
           li.textContent = `${player} (${data.color.charAt(0).toUpperCase() + data.color.slice(1)}${data.active ? '' : ' [Disconnected]'})`;
-          if (data.color === this.state.playerColor) {
+          if (data
+
+.color === this.state.playerColor) {
             li.classList.add('font-bold');
           }
           this.playerListEl.appendChild(li);
@@ -661,11 +654,15 @@
           return;
         }
 
+        // Check if piece is already at finish
+        if (pos[0] === config.finish[0] && pos[1] === config.finish[1]) {
+          return;
+        }
+
         // Find current position index
         let currentIndex = config.path.findIndex(p => p[0] === pos[0] && p[1] === pos[1]);
         let isOnHomePath = false;
 
-        // Check if piece is on home path
         if (currentIndex === -1) {
           currentIndex = config.homePath.findIndex(p => p[0] === pos[0] && p[1] === pos[1]);
           isOnHomePath = true;
@@ -673,31 +670,31 @@
 
         if (currentIndex === -1) return; // Invalid position
 
-        const totalPathLength = config.path.length + config.homePath.length;
+        // Calculate new position
         const newIndex = currentIndex + dice;
 
         if (isOnHomePath) {
-          // On home path, check if move is within home path
+          // On home path: check if move stays within home path
           if (newIndex < config.homePath.length) {
             this.state.possibleMoves.push(config.homePath[newIndex]);
           }
         } else {
-          // On main path, check if move stays on main path or enters home path
+          // On main path: check if move enters home path
           if (newIndex < config.path.length) {
             this.state.possibleMoves.push(config.path[newIndex]);
-          } else if (newIndex < totalPathLength) {
-            const homeIndex = newIndex - config.path.length;
-            this.state.possibleMoves.push(config.homePath[homeIndex]);
+          } else if (newIndex <= config.path.length + config.homePath.length - 1) {
+            const homePathIndex = newIndex - config.path.length;
+            if (homePathIndex < config.homePath.length) {
+              this.state.possibleMoves.push(config.homePath[homePathIndex]);
+            }
           }
         }
       }
 
       highlightPossibleMoves() {
-        // Clear previous highlights
         document.querySelectorAll('.possible-move').forEach(cell => 
           cell.classList.remove('possible-move'));
         
-        // Highlight valid move positions
         this.state.possibleMoves.forEach(([col, row]) => {
           const cell = this.getCellAt(col, row);
           if (cell) {
@@ -770,6 +767,11 @@
           return dice === 6;
         }
 
+        // Check if piece is at finish
+        if (pos[0] === config.finish[0] && pos[1] === config.finish[1]) {
+          return false;
+        }
+
         // Find current position
         let currentIndex = config.path.findIndex(p => p[0] === pos[0] && p[1] === pos[1]);
         let isOnHomePath = false;
@@ -781,11 +783,10 @@
 
         if (currentIndex === -1) return false; // Invalid position
 
-        const totalPathLength = config.path.length + config.homePath.length;
         const newIndex = currentIndex + dice;
 
         // Check if move is within valid path
-        return newIndex < totalPathLength;
+        return newIndex < (isOnHomePath ? config.homePath.length : config.path.length + config.homePath.length);
       }
 
       isValidMove(player, pieceId, newPos) {
@@ -799,6 +800,11 @@
           return dice === 6 && 
                  newPos[0] === config.startPosition[0] && 
                  newPos[1] === config.startPosition[1];
+        }
+
+        // Check if piece is at finish
+        if (pos[0] === config.finish[0] && pos[1] === config.finish[1]) {
+          return false;
         }
 
         // Find current position
@@ -816,16 +822,19 @@
         let expectedPos;
 
         if (isOnHomePath) {
+          // On home path: check if new position is within home path
           if (newIndex < config.homePath.length) {
             expectedPos = config.homePath[newIndex];
           } else {
             return false; // Cannot move beyond home path
           }
         } else {
+          // On main path: check if move stays on main path or enters home path
           if (newIndex < config.path.length) {
             expectedPos = config.path[newIndex];
           } else if (newIndex < config.path.length + config.homePath.length) {
-            expectedPos = config.homePath[newIndex - config.path.length];
+            const homePathIndex = newIndex - config.path.length;
+            expectedPos = config.homePath[homePathIndex];
           } else {
             return false; // Cannot move beyond total path
           }
@@ -844,7 +853,8 @@
           if (oppPlayer !== player && !captured) {
             Object.entries(oppData.pieces).forEach(([oppPieceId, oppPos]) => {
               if (oppPos[0] === newPos[0] && oppPos[1] === newPos[1] && 
-                  !config.safeSpots.some(s => s[0] === newPos[0] && s[1] === newPos[1])) {
+                  !config.safeSpots.some(s => s[0] === newPos[0] && s[1] === newPos[1]) &&
+                  !(oppPos[0] === config.finish[0] && oppPos[1] === config.finish[1])) {
                 captured = { player: oppPlayer, id: oppPieceId.replace('piece', '') };
                 this.state.players[oppPlayer].pieces[oppPieceId] = [-1, -1];
               }
@@ -875,6 +885,8 @@
           this.endGame(`${player} wins!`);
         } else if (wasSix || captured) {
           this.addMessage(`${player} gets another turn!`);
+          this.state.currentPlayer = player; // Ensure same player continues
+          this.renderBoard();
         } else {
           this.switchTurn();
         }
@@ -914,6 +926,7 @@
         const nextIdx = (currentIdx + 1) % activePlayers.length;
         const nextPlayer = activePlayers[nextIdx];
         this.state.currentPlayer = nextPlayer;
+        this.state.recentRolls = []; // Reset rolls for new player
         this.sendSwitchTurn(nextPlayer);
         this.renderBoard();
         this.addMessage(`Turn switched to ${nextPlayer}`);
@@ -934,6 +947,14 @@
         }
         if (this.state.diceValue) {
           this.addMessage("You already rolled the dice!");
+          return;
+        }
+
+        // Prevent too many sixes in a row (client-side fairness check)
+        const recentSixes = this.state.recentRolls.filter(roll => roll === 6).length;
+        if (recentSixes >= 3) {
+          this.addMessage("Too many sixes! Turn passed.");
+          this.switchTurn();
           return;
         }
 
@@ -1059,6 +1080,12 @@
             this.renderBoard();
             break;
           case 'dice_result':
+            // Track dice roll for fairness
+            this.state.recentRolls.push(data.value);
+            if (this.state.recentRolls.length > 10) {
+              this.state.recentRolls.shift();
+            }
+            
             this.state.diceValue = data.value;
             this.diceEl.classList.remove('dice-rolling');
             this.diceValueEl.textContent = data.value;
@@ -1084,6 +1111,7 @@
             this.diceValueEl.textContent = '';
             this.state.selectedPiece = null;
             this.state.possibleMoves = [];
+            this.state.recentRolls = []; // Reset rolls for new player
             this.addMessage(`Turn switched to ${data.next_player}`);
             this.renderBoard();
             break;

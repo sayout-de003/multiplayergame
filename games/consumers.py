@@ -1270,3 +1270,197 @@ class LudoGameConsumer(AsyncWebsocketConsumer):
             'current_player': event['current_player'],
             'players': event['players']
         }))    
+
+
+import json
+import random
+from channels.generic.websocket import AsyncWebsocketConsumer
+from channels.db import database_sync_to_async
+from django.utils import timezone
+from datetime import timedelta
+
+class ZombsRoyaleConsumer(AsyncWebsocketConsumer):
+    async def connect(self):
+        self.room_code = self.scope['url_route']['kwargs']['room_code']
+        self.room_group_name = f"zombsroyale_{self.room_code}"
+
+        # Initialize game data storage per room
+        if not hasattr(self.channel_layer, "game_data"):
+            self.channel_layer.game_data = {}
+        if self.room_group_name not in self.channel_layer.game_data:
+            self.channel_layer.game_data[self.room_group_name] = {
+                "players": {},
+                "bullets": {},
+                "items": {},
+                "zone": {
+                    "center": {"x": 0, "z": 0},
+                    "radius": 1000,
+                    "next_shrink_time": (timezone.now() + timedelta(seconds=30)).timestamp(),
+                    "shrink_duration": 10
+                }
+            }
+
+        # Add player with initial position and stats
+        self.channel_layer.game_data[self.room_group_name]["players"][self.channel_name] = {
+            "position": {"x": random.uniform(-500, 500), "y": 10, "z": random.uniform(-500, 500)},
+            "rotation": 0,
+            "health": 100,
+            "score": 0,
+            "weapon": "pistol",
+            "ammo": 30,
+            "alive": True
+        }
+
+        # Spawn initial items
+        await self.spawn_items()
+
+        await self.channel_layer.group_add(self.room_group_name, self.channel_name)
+        await self.accept()
+
+    async def disconnect(self, close_code):
+        if self.room_group_name in self.channel_layer.game_data:
+            if self.channel_name in self.channel_layer.game_data[self.room_group_name]["players"]:
+                del self.channel_layer.game_data[self.room_group_name]["players"][self.channel_name]
+            # Clean up empty rooms
+            if not self.channel_layer.game_data[self.room_group_name]["players"]:
+                del self.channel_layer.game_data[self.room_group_name]
+            else:
+                # Broadcast updated state after disconnection
+                await self.channel_layer.group_send(
+                    self.room_group_name,
+                    {
+                        "type": "game_update",
+                        "players": self.channel_layer.game_data[self.room_group_name]["players"],
+                        "bullets": self.channel_layer.game_data[self.room_group_name]["bullets"],
+                        "items": self.channel_layer.game_data[self.room_group_name]["items"],
+                        "zone": self.channel_layer.game_data[self.room_group_name]["zone"],
+                        "leaderboard": self.compute_leaderboard()
+                    }
+                )
+        await self.channel_layer.group_discard(self.room_group_name, self.channel_name)
+
+    def compute_leaderboard(self):
+        game_data = self.channel_layer.game_data[self.room_group_name]
+        players = [
+            {"id": channel, "score": data["score"]}
+            for channel, data in game_data["players"].items() if data["alive"]
+        ]
+        players.sort(key=lambda x: x["score"], reverse=True)
+        top_5 = players[:5]
+        ranks = {player["id"]: i + 1 for i, player in enumerate(players)}
+        return {
+            "top_5": top_5,
+            "ranks": ranks
+        }
+
+    async def receive(self, text_data):
+        data = json.loads(text_data)
+        game_data = self.channel_layer.game_data[self.room_group_name]
+
+        if data.get("type") == "player_update":
+            if self.channel_name in game_data["players"] and game_data["players"][self.channel_name]["alive"]:
+                game_data["players"][self.channel_name].update({
+                    "position": data["position"],
+                    "rotation": data["rotation"],
+                    "score": data.get("score", game_data["players"][self.channel_name]["score"]),
+                    "health": data.get("health", game_data["players"][self.channel_name]["health"]),
+                    "ammo": data.get("ammo", game_data["players"][self.channel_name]["ammo"]),
+                    "alive": data.get("alive", True)
+                })
+
+        elif data.get("type") == "shoot":
+            bullet_id = f"bullet_{random.randint(0, 1000000)}"
+            game_data["bullets"][bullet_id] = {
+                "position": data["position"],
+                "direction": data["direction"],
+                "speed": 50,
+                "damage": 20,
+                "shooter": self.channel_name,
+                "time": timezone.now().timestamp()
+            }
+            game_data["players"][self.channel_name]["ammo"] -= 1
+
+        elif data.get("type") == "item_pickup":
+            item_id = data.get("item_id")
+            if item_id in game_data["items"]:
+                item = game_data["items"][item_id]
+                if item["type"] == "health":
+                    game_data["players"][self.channel_name]["health"] = min(
+                        100, game_data["players"][self.channel_name]["health"] + 50
+                    )
+                elif item["type"] == "ammo":
+                    game_data["players"][self.channel_name]["ammo"] += 30
+                del game_data["items"][item_id]
+                await self.spawn_items()
+
+        # Update zone
+        current_time = timezone.now().timestamp()
+        zone = game_data["zone"]
+        if current_time >= zone["next_shrink_time"]:
+            zone["radius"] = max(100, zone["radius"] * 0.8)
+            zone["next_shrink_time"] = (timezone.now() + timedelta(seconds=30)).timestamp()
+
+        # Check for bullet collisions
+        bullets_to_remove = []
+        for bullet_id, bullet in list(game_data["bullets"].items()):
+            if current_time - bullet["time"] > 5:  # Remove bullets after 5 seconds
+                bullets_to_remove.append(bullet_id)
+                continue
+            for channel, player in game_data["players"].items():
+                if channel != bullet["shooter"] and player["alive"]:
+                    dx = player["position"]["x"] - bullet["position"]["x"]
+                    dz = player["position"]["z"] - bullet["position"]["z"]
+                    if (dx ** 2 + dz ** 2) ** 0.5 < 10:
+                        player["health"] = max(0, player["health"] - bullet["damage"])
+                        if player["health"] <= 0:
+                            player["alive"] = False
+                            game_data["players"][bullet["shooter"]]["score"] += 100
+                        bullets_to_remove.append(bullet_id)
+                        break
+
+        for bullet_id in bullets_to_remove:
+            if bullet_id in game_data["bullets"]:
+                del game_data["bullets"][bullet_id]
+
+        # Broadcast game state
+        await self.channel_layer.group_send(
+            self.room_group_name,
+            {
+                "type": "game_update",
+                "players": game_data["players"],
+                "bullets": game_data["bullets"],
+                "items": game_data["items"],
+                "zone": game_data["zone"],
+                "leaderboard": self.compute_leaderboard()
+            }
+        )
+
+    async def spawn_items(self):
+        game_data = self.channel_layer.game_data[self.room_group_name]
+        item_types = [
+            {"type": "health", "color": "red", "size": 5},
+            {"type": "ammo", "color": "yellow", "size": 5}
+        ]
+        while len(game_data["items"]) < 20:
+            item_type = random.choice(item_types)
+            item_id = f"item_{random.randint(0, 1000000)}"
+            game_data["items"][item_id] = {
+                "position": {
+                    "x": random.uniform(-800, 800),
+                    "y": 5,
+                    "z": random.uniform(-800, 800)
+                },
+                "type": item_type["type"],
+                "color": item_type["color"],
+                "size": item_type["size"]
+            }
+
+    async def game_update(self, event):
+        await self.send(text_data=json.dumps({
+            "type": "game_update",
+            "players": event["players"],
+            "bullets": event["bullets"],
+            "items": event["items"],
+            "zone": event["zone"],
+            "leaderboard": event["leaderboard"]
+        }))        

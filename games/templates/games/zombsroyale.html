@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ZombsRoyale.io</title>
+    <style>
+        body { margin: 0; overflow: hidden; }
+        canvas { display: block; }
+        #ui {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: white;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+        }
+        #leaderboard {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: white;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="ui"></div>
+    <div id="leaderboard"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/th 확인ree.js/r134/three.min.js"></script>
+    <script>
+        const roomCode = "{{ game_room.room_code }}";
+        const ws = new WebSocket(`ws://${window.location.host}/ws/zombsroyale/${roomCode}/`);
+
+        let scene, camera, renderer, player, players = {}, bullets = {}, items = {}, zoneMesh;
+        let moveForward = false, moveBackward = false, moveLeft = false, moveRight = false;
+        let playerData = { position: { x: 0, y: 10, z: 0 }, rotation: 0, health: 100, score: 0, ammo: 30, alive: true };
+
+        function init() {
+            scene = new THREE.Scene();
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 2000);
+            renderer = new THREE.WebGLRenderer();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            document.body.appendChild(renderer.domElement);
+
+            // Ground
+            const groundGeometry = new THREE.PlaneGeometry(2000, 2000);
+            const groundMaterial = new THREE.MeshBasicMaterial({ color: 0x228B22 });
+            const ground = new THREE.Mesh(groundGeometry, groundMaterial);
+            ground.rotation.x = -Math.PI / 2;
+            scene.add(ground);
+
+            // Player
+            const playerGeometry = new THREE.CylinderGeometry(5, 5, 10, 32);
+            const playerMaterial = new THREE.MeshBasicMaterial({ color: 0x0000ff });
+            player = new THREE.Mesh(playerGeometry, playerMaterial);
+            scene.add(player);
+
+            // Zone
+            const zoneGeometry = new THREE.CircleGeometry(1000, 32);
+            const zoneMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000, wireframe: true });
+            zoneMesh = new THREE.Mesh(zoneGeometry, zoneMaterial);
+            zoneMesh.rotation.x = -Math.PI / 2;
+            scene.add(zoneMesh);
+
+            camera.position.set(0, 200, 0);
+            camera.lookAt(0, 0, 0);
+
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+
+            document.addEventListener('keydown', (e) => {
+                switch (e.code) {
+                    case 'KeyW': moveForward = true; break;
+                    case 'KeyS': moveBackward = true; break;
+                    case 'KeyA': moveLeft = true; break;
+                    case 'KeyD': moveRight = true; break;
+                }
+            });
+
+            document.addEventListener('keyup', (e) => {
+                switch (e.code) {
+                    case 'KeyW': moveForward = false; break;
+                    case 'KeyS': moveBackward = false; break;
+                    case 'KeyA': moveLeft = false; break;
+                    case 'KeyD': moveRight = false; break;
+                }
+            });
+
+            document.addEventListener('click', () => {
+                if (playerData.ammo > 0 && playerData.alive) {
+                    const direction = new THREE.Vector3();
+                    player.getWorldDirection(direction);
+                    ws.send(JSON.stringify({
+                        type: "shoot",
+                        position: { x: player.position.x, y: 5, z: player.position.z },
+                        direction: { x: direction.x, y: 0, z: direction.z }
+                    }));
+                }
+            });
+
+            animate();
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+
+            if (playerData.alive) {
+                const speed = 5;
+                const direction = new THREE.Vector3();
+                if (moveForward) direction.z -= 1;
+                if (moveBackward) direction.z += 1;
+                if (moveLeft) direction.x -= 1;
+                if (moveRight) direction.x += 1;
+
+                if (direction.length() > 0) {
+                    direction.normalize();
+                    player.position.x += direction.x * speed;
+                    player.position.z += direction.z * speed;
+
+                    const mousePos = new THREE.Vector3();
+                    const mouse = new THREE.Vector2();
+                    mouse.x = (event ? event.clientX / window.innerWidth : 0) * 2 - 1;
+                    mouse.y = -(event ? event.clientY / window.innerHeight : 0) * 2 + 1;
+                    const raycaster = new THREE.Raycaster();
+                    raycaster.setFromCamera(mouse, camera);
+                    const intersects = raycaster.intersectObject(scene.children[0]);
+                    if (intersects.length > 0) {
+                        mousePos.copy(intersects[0].point);
+                        player.lookAt(mousePos.x, player.position.y, mousePos.z);
+                    }
+
+                    playerData.position = { x: player.position.x, y: player.position.y, z: player.position.z };
+                    playerData.rotation = player.rotation.y;
+                    ws.send(JSON.stringify({ type: "player_update", position: playerData.position, rotation: playerData.rotation }));
+                }
+            }
+
+            renderer.render(scene, camera);
+        }
+
+        ws.onmessage = (event) => {
+            const data = JSON.parse(event.data);
+            if (data.type === "game_update") {
+                // Update players
+                Object.keys(players).forEach(id => {
+                    if (!data.players[id]) {
+                        scene.remove(players[id]);
+                        delete players[id];
+                    }
+                });
+                Object.entries(data.players).forEach(([id, playerData]) => {
+                    if (!players[id]) {
+                        const geometry = new THREE.CylinderGeometry(5, 5, 10, 32);
+                        const material = new THREE.MeshBasicMaterial({ color: id === ws.channel_name ? 0x0000ff : 0xff0000 });
+                        players[id] = new THREE.Mesh(geometry, material);
+                        scene.add(players[id]);
+                    }
+                    players[id].position.set(playerData.position.x, playerData.position.y, playerData.position.z);
+                    players[id].rotation.y = playerData.rotation;
+                });
+
+                // Update bullets
+                Object.keys(bullets).forEach(id => {
+                    if (!data.bullets[id]) {
+                        scene.remove(bullets[id]);
+                        delete bullets[id];
+                    }
+                });
+                Object.entries(data.bullets).forEach(([id, bullet]) => {
+                    if (!bullets[id]) {
+                        const geometry = new THREE.SphereGeometry(2, 16, 16);
+                        const material = new THREE.MeshBasicMaterial({ color: 0xffff00 });
+                        bullets[id] = new THREE.Mesh(geometry, material);
+                        scene.add(bullets[id]);
+                    }
+                    bullets[id].position.set(bullet.position.x, bullet.position.y, bullet.position.z);
+                });
+
+                // Update items
+                Object.keys(items).forEach(id => {
+                    if (!data.items[id]) {
+                        scene.remove(items[id]);
+                        delete items[id];
+                    }
+                });
+                Object.entries(data.items).forEach(([id, item]) => {
+                    if (!items[id]) {
+                        const geometry = new THREE.BoxGeometry(item.size, item.size, item.size);
+                        const material = new THREE.MeshBasicMaterial({ color: item.color });
+                        items[id] = new THREE.Mesh(geometry, material);
+                        scene.add(items[id]);
+                    }
+                    items[id].position.set(item.position.x, item.position.y, item.position.z);
+
+                    // Check for item pickup
+                    if (playerData.alive) {
+                        const dx = player.position.x - item.position.x;
+                        const dz = player.position.z - item.position.z;
+                        if ((dx ** 2 + dz ** 2) ** 0.5 < 10) {
+                            ws.send(JSON.stringify({
+                                type: "item_pickup",
+                                item_id: id
+                            }));
+                        }
+                    }
+                });
+
+                // Update zone
+                zoneMesh.scale.set(data.zone.radius / 1000, data.zone.radius / 1000, 1);
+                zoneMesh.position.set(data.zone.center.x, 0, data.zone.center.z);
+
+                // Update UI
+                playerData = data.players[ws.channel_name] || playerData;
+                document.getElementById('ui').innerHTML = `
+                    Health: ${playerData.health}<br>
+                    Ammo: ${playerData.ammo}<br>
+                    Score: ${playerData.score}
+                `;
+
+                // Update leaderboard
+                let leaderboardHtml = '<h3>Leaderboard</h3><ol>';
+                data.leaderboard.top_5.forEach(player => {
+                    leaderboardHtml += `<li>${player.id.slice(0, 8)}: ${player.score}</li>`;
+                });
+                leaderboardHtml += '</ol>';
+                document.getElementById('leaderboard').innerHTML = leaderboardHtml;
+
+                // Check if outside zone
+                if (playerData.alive) {
+                    const dx = player.position.x - data.zone.center.x;
+                    const dz = player.position.z - data.zone.center.z;
+                    const distance = (dx ** 2 + dz ** 2) ** 0.5;
+                    if (distance > data.zone.radius) {
+                        playerData.health -= 0.1;
+                        if (playerData.health <= 0) {
+                            playerData.alive = false;
+                            ws.send(JSON.stringify({ type: "player_update", position: playerData.position, rotation: playerData.rotation, health: playerData.health, alive: false }));
+                        }
+                    }
+                }
+            }
+        };
+
+        ws.onopen = () => {
+            ws.channel_name = Math.random().toString(36).substring(2);
+            init();
+        };
+    </script>
+</body>
+</html>
