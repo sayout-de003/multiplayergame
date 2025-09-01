@@ -1,0 +1,4860 @@
+[
+{
+    "model": "contenttypes.contenttype",
+    "fields": {
+        "app_label": "admin",
+        "model": "logentry"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "fields": {
+        "app_label": "auth",
+        "model": "permission"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "fields": {
+        "app_label": "auth",
+        "model": "group"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "fields": {
+        "app_label": "contenttypes",
+        "model": "contenttype"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "fields": {
+        "app_label": "sessions",
+        "model": "session"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "fields": {
+        "app_label": "accounts",
+        "model": "customuser"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "fields": {
+        "app_label": "games",
+        "model": "game"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "fields": {
+        "app_label": "games",
+        "model": "gameroom"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "fields": {
+        "app_label": "games",
+        "model": "playerstatus"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "fields": {
+        "app_label": "games",
+        "model": "activitylog"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "fields": {
+        "app_label": "games",
+        "model": "snake"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "fields": {
+        "app_label": "games",
+        "model": "footballroom"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "fields": {
+        "app_label": "games",
+        "model": "footballplayer"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "fields": {
+        "app_label": "games",
+        "model": "footballball"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "fields": {
+        "app_label": "games",
+        "model": "footballmatchscore"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "fields": {
+        "app_label": "games",
+        "model": "playeractivitylog"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "fields": {
+        "app_label": "games",
+        "model": "newmodel"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "fields": {
+        "app_label": "games",
+        "model": "gamestate"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "fields": {
+        "app_label": "games",
+        "model": "ludoplayerstatus"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "bmoop3gjlb1t36hpb70rdiuh8diq9cuy",
+    "fields": {
+        "session_data": ".eJxVjDsOwjAQRO_iGlmO_6GkzxmstdeLA8iW4qRC3J1ESgFTznszbxZgW0vYel7CjOzKJLv8dhHSM9cD4APqvfHU6rrMkR8KP2nnU8P8up3u30GBXva1d5QcGmXtoCKoBMkRiHGP1kmISM5bjJA1mdGBIZ8RkISRUaqBBLHPF_WUOJ4:1uWwW8:TYkxJgx7-gKKtAjP2mSxyxctN5NRLwsApYM7mVnvxr8",
+        "expire_date": "2025-07-16T12:24:48.969Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "fuzdx53k0k3cf32nr1mgvq610i8bodim",
+    "fields": {
+        "session_data": ".eJxVjDsOwjAQRO_iGlmO_6GkzxmstdeLA8iW4qRC3J1ESgFTznszbxZgW0vYel7CjOzKJLv8dhHSM9cD4APqvfHU6rrMkR8KP2nnU8P8up3u30GBXva1d5QcGmXtoCKoBMkRiHGP1kmISM5bjJA1mdGBIZ8RkISRUaqBBLHPF_WUOJ4:1u9hAB:zA2XlBGKTkN7CYHWM69q5IN6k_3p0XvmRxpYdaHMJzo",
+        "expire_date": "2025-05-13T09:22:03.696Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "jfsyytkexn3t7dgdfgb960x18bvr4k0j",
+    "fields": {
+        "session_data": ".eJxVjEEOwiAQRe_C2pAOjBRcuvcMZGCmUjU0Ke3KeHdD0oVu_3vvv1WkfStxb7LGmdVFgTr9bonyU2oH_KB6X3Re6rbOSXdFH7Tp28Lyuh7u30GhVnpNCPbMQ0jOGDICExFmaxEQAo9kxRlBj0Z4QkfENnvHA5jRZ4GQ1ecL4Dw36g:1u4Iej:ZhKs0bemix-tZwVyz5uRM3qdZ9XB4iM1hCXEUt1T8ZA",
+        "expire_date": "2025-04-28T12:11:17.094Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "kidk1rtmb4q8c217i6pk4ll0l9e1h1kr",
+    "fields": {
+        "session_data": ".eJxVjEEOwiAQRe_C2pAOjBRcuvcMZGCmUjU0Ke3KeHdD0oVu_3vvv1WkfStxb7LGmdVFgTr9bonyU2oH_KB6X3Re6rbOSXdFH7Tp28Lyuh7u30GhVnpNCPbMQ0jOGDICExFmaxEQAo9kxRlBj0Z4QkfENnvHA5jRZ4GQ1ecL4Dw36g:1uWx1Q:fzjByN2uYQnKFP54xDyQsWbhDEzVetmxSkKbIF5jpFQ",
+        "expire_date": "2025-07-16T12:57:08.831Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "krxuin7x7etxhdaxqmhsap8zbj0iexwd",
+    "fields": {
+        "session_data": ".eJxVjDsOwjAQRO_iGlmO_6GkzxmstdeLA8iW4qRC3J1ESgFTznszbxZgW0vYel7CjOzKJLv8dhHSM9cD4APqvfHU6rrMkR8KP2nnU8P8up3u30GBXva1d5QcGmXtoCKoBMkRiHGP1kmISM5bjJA1mdGBIZ8RkISRUaqBBLHPF_WUOJ4:1uEsBc:sUO3oVbCpEg1Qv7iJCeIo0ND5T1zt8LORb7IpswSpDA",
+        "expire_date": "2025-05-27T16:08:56.311Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "p93snzr9csm23z9zw51s4maqapw3jite",
+    "fields": {
+        "session_data": ".eJxVjEEOwiAQRe_C2pAOjBRcuvcMZGCmUjU0Ke3KeHdD0oVu_3vvv1WkfStxb7LGmdVFgTr9bonyU2oH_KB6X3Re6rbOSXdFH7Tp28Lyuh7u30GhVnpNCPbMQ0jOGDICExFmaxEQAo9kxRlBj0Z4QkfENnvHA5jRZ4GQ1ecL4Dw36g:1uWwXF:yURHnX-Vwy86ZRoGTNVVxzNCBTPlKYstIA40Jtd1TQs",
+        "expire_date": "2025-07-16T12:25:57.036Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "qalxhebm4vm5g0707ufuktazweg7buq1",
+    "fields": {
+        "session_data": ".eJxVjDsOwjAQRO_iGlmO_6GkzxmstdeLA8iW4qRC3J1ESgFTznszbxZgW0vYel7CjOzKJLv8dhHSM9cD4APqvfHU6rrMkR8KP2nnU8P8up3u30GBXva1d5QcGmXtoCKoBMkRiHGP1kmISM5bjJA1mdGBIZ8RkISRUaqBBLHPF_WUOJ4:1u3twd:af3IlXbwhPLxq3W6AaINIOAQbkxmJWQUUcHnb6E1xIM",
+        "expire_date": "2025-04-27T09:48:07.330Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "t8pen8kkk91c9bs0y1r956hzm5v5v38q",
+    "fields": {
+        "session_data": ".eJxVjDsOwjAQBe_iGlnrv6GkzxmsXXuFA8iW4qRC3B0ipYD2zcx7iYTbWtM2eElzERfhxOl3I8wPbjsod2y3LnNv6zKT3BV50CGnXvh5Pdy_g4qjfmuDxnLM9gzBBle0xRit0YWAY3RggAANMWbvtAKV0XvAQOy0UxzRivcHw443JQ:1uEsbt:9Tyu8Ky3wOIMQQmrw2pbVJe5gky422iNmHTUAY7Ax7E",
+        "expire_date": "2025-05-27T16:36:05.792Z"
+    }
+},
+{
+    "model": "games.game",
+    "pk": "1",
+    "fields": {
+        "name": "Chess",
+        "description": "Play chess",
+        "image": "game_images/chess_RdJZGt1.webp",
+        "slug": "chess",
+        "max_players": 2,
+        "created_at": "2025-04-13T09:38:15.610Z",
+        "is_active": true,
+        "playcanvas_project_id": null,
+        "url": null
+    }
+},
+{
+    "model": "games.game",
+    "pk": "3",
+    "fields": {
+        "name": "Snake",
+        "description": "Play Snake",
+        "image": "game_images/snake_CeBRCC7.webp",
+        "slug": "snake",
+        "max_players": 99,
+        "created_at": "2025-04-13T09:39:59.609Z",
+        "is_active": true,
+        "playcanvas_project_id": null,
+        "url": null
+    }
+},
+{
+    "model": "games.game",
+    "pk": "4",
+    "fields": {
+        "name": "Football",
+        "description": "Play football",
+        "image": "game_images/Football_Pallo_valmiina-cropped.jpg",
+        "slug": "football",
+        "max_players": 2,
+        "created_at": "2025-04-13T09:40:38.968Z",
+        "is_active": true,
+        "playcanvas_project_id": null,
+        "url": null
+    }
+},
+{
+    "model": "games.game",
+    "pk": "5",
+    "fields": {
+        "name": "Scribble",
+        "description": "Play scribble",
+        "image": "game_images/scribble_iF0wroF.webp",
+        "slug": "scribble",
+        "max_players": 100,
+        "created_at": "2025-04-13T09:43:05.364Z",
+        "is_active": true,
+        "playcanvas_project_id": null,
+        "url": "https://skribbl.io"
+    }
+},
+{
+    "model": "games.game",
+    "pk": "6",
+    "fields": {
+        "name": "Smash Cars",
+        "description": "play cars",
+        "image": "game_images/SmashKart_3Ry1XiX.webp",
+        "slug": "smash-cars",
+        "max_players": 99,
+        "created_at": "2025-04-13T09:44:32.231Z",
+        "is_active": true,
+        "playcanvas_project_id": null,
+        "url": "https://smashkarts.io"
+    }
+},
+{
+    "model": "games.game",
+    "pk": "7",
+    "fields": {
+        "name": "Ludo",
+        "description": "Play Ludo",
+        "image": "game_images/ludo_xmHvnpQ.jpg",
+        "slug": "ludo",
+        "max_players": 4,
+        "created_at": "2025-04-13T10:13:03.555Z",
+        "is_active": true,
+        "playcanvas_project_id": null,
+        "url": null
+    }
+},
+{
+    "model": "games.game",
+    "pk": "8",
+    "fields": {
+        "name": "Tic Tac Toe",
+        "description": "Play tac toe",
+        "image": "game_images/TicTacToe.jpeg",
+        "slug": "tic-tac-toe",
+        "max_players": 2,
+        "created_at": "2025-04-17T10:59:35.821Z",
+        "is_active": true,
+        "playcanvas_project_id": null,
+        "url": null
+    }
+},
+{
+    "model": "games.game",
+    "pk": "9",
+    "fields": {
+        "name": "ZombsRoyale",
+        "description": "play game",
+        "image": "game_images/ChatGPT_Image_Mar_31_2025_at_10_54_50_AM.png",
+        "slug": "zombsroyale",
+        "max_players": 99,
+        "created_at": "2025-05-02T14:15:19.722Z",
+        "is_active": true,
+        "playcanvas_project_id": null,
+        "url": null
+    }
+},
+{
+    "model": "games.ludoplayerstatus",
+    "pk": 2,
+    "fields": {
+        "player_status": 56,
+        "color": "blue",
+        "pieces": {
+            "p1": {
+                "pos": 0,
+                "is_home": true,
+                "is_finished": false
+            },
+            "p2": {
+                "pos": 0,
+                "is_home": true,
+                "is_finished": false
+            },
+            "p3": {
+                "pos": 0,
+                "is_home": true,
+                "is_finished": false
+            },
+            "p4": {
+                "pos": 0,
+                "is_home": true,
+                "is_finished": false
+            }
+        },
+        "is_active": true
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add log entry",
+        "content_type": [
+            "admin",
+            "logentry"
+        ],
+        "codename": "add_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change log entry",
+        "content_type": [
+            "admin",
+            "logentry"
+        ],
+        "codename": "change_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete log entry",
+        "content_type": [
+            "admin",
+            "logentry"
+        ],
+        "codename": "delete_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view log entry",
+        "content_type": [
+            "admin",
+            "logentry"
+        ],
+        "codename": "view_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add permission",
+        "content_type": [
+            "auth",
+            "permission"
+        ],
+        "codename": "add_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change permission",
+        "content_type": [
+            "auth",
+            "permission"
+        ],
+        "codename": "change_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete permission",
+        "content_type": [
+            "auth",
+            "permission"
+        ],
+        "codename": "delete_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view permission",
+        "content_type": [
+            "auth",
+            "permission"
+        ],
+        "codename": "view_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add group",
+        "content_type": [
+            "auth",
+            "group"
+        ],
+        "codename": "add_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change group",
+        "content_type": [
+            "auth",
+            "group"
+        ],
+        "codename": "change_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete group",
+        "content_type": [
+            "auth",
+            "group"
+        ],
+        "codename": "delete_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view group",
+        "content_type": [
+            "auth",
+            "group"
+        ],
+        "codename": "view_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add content type",
+        "content_type": [
+            "contenttypes",
+            "contenttype"
+        ],
+        "codename": "add_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change content type",
+        "content_type": [
+            "contenttypes",
+            "contenttype"
+        ],
+        "codename": "change_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete content type",
+        "content_type": [
+            "contenttypes",
+            "contenttype"
+        ],
+        "codename": "delete_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view content type",
+        "content_type": [
+            "contenttypes",
+            "contenttype"
+        ],
+        "codename": "view_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add session",
+        "content_type": [
+            "sessions",
+            "session"
+        ],
+        "codename": "add_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change session",
+        "content_type": [
+            "sessions",
+            "session"
+        ],
+        "codename": "change_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete session",
+        "content_type": [
+            "sessions",
+            "session"
+        ],
+        "codename": "delete_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view session",
+        "content_type": [
+            "sessions",
+            "session"
+        ],
+        "codename": "view_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add user",
+        "content_type": [
+            "accounts",
+            "customuser"
+        ],
+        "codename": "add_customuser"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change user",
+        "content_type": [
+            "accounts",
+            "customuser"
+        ],
+        "codename": "change_customuser"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete user",
+        "content_type": [
+            "accounts",
+            "customuser"
+        ],
+        "codename": "delete_customuser"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view user",
+        "content_type": [
+            "accounts",
+            "customuser"
+        ],
+        "codename": "view_customuser"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add game",
+        "content_type": [
+            "games",
+            "game"
+        ],
+        "codename": "add_game"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change game",
+        "content_type": [
+            "games",
+            "game"
+        ],
+        "codename": "change_game"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete game",
+        "content_type": [
+            "games",
+            "game"
+        ],
+        "codename": "delete_game"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view game",
+        "content_type": [
+            "games",
+            "game"
+        ],
+        "codename": "view_game"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add game room",
+        "content_type": [
+            "games",
+            "gameroom"
+        ],
+        "codename": "add_gameroom"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change game room",
+        "content_type": [
+            "games",
+            "gameroom"
+        ],
+        "codename": "change_gameroom"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete game room",
+        "content_type": [
+            "games",
+            "gameroom"
+        ],
+        "codename": "delete_gameroom"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view game room",
+        "content_type": [
+            "games",
+            "gameroom"
+        ],
+        "codename": "view_gameroom"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add player status",
+        "content_type": [
+            "games",
+            "playerstatus"
+        ],
+        "codename": "add_playerstatus"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change player status",
+        "content_type": [
+            "games",
+            "playerstatus"
+        ],
+        "codename": "change_playerstatus"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete player status",
+        "content_type": [
+            "games",
+            "playerstatus"
+        ],
+        "codename": "delete_playerstatus"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view player status",
+        "content_type": [
+            "games",
+            "playerstatus"
+        ],
+        "codename": "view_playerstatus"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add activity log",
+        "content_type": [
+            "games",
+            "activitylog"
+        ],
+        "codename": "add_activitylog"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change activity log",
+        "content_type": [
+            "games",
+            "activitylog"
+        ],
+        "codename": "change_activitylog"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete activity log",
+        "content_type": [
+            "games",
+            "activitylog"
+        ],
+        "codename": "delete_activitylog"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view activity log",
+        "content_type": [
+            "games",
+            "activitylog"
+        ],
+        "codename": "view_activitylog"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add snake",
+        "content_type": [
+            "games",
+            "snake"
+        ],
+        "codename": "add_snake"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change snake",
+        "content_type": [
+            "games",
+            "snake"
+        ],
+        "codename": "change_snake"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete snake",
+        "content_type": [
+            "games",
+            "snake"
+        ],
+        "codename": "delete_snake"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view snake",
+        "content_type": [
+            "games",
+            "snake"
+        ],
+        "codename": "view_snake"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add football room",
+        "content_type": [
+            "games",
+            "footballroom"
+        ],
+        "codename": "add_footballroom"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change football room",
+        "content_type": [
+            "games",
+            "footballroom"
+        ],
+        "codename": "change_footballroom"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete football room",
+        "content_type": [
+            "games",
+            "footballroom"
+        ],
+        "codename": "delete_footballroom"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view football room",
+        "content_type": [
+            "games",
+            "footballroom"
+        ],
+        "codename": "view_footballroom"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add football player",
+        "content_type": [
+            "games",
+            "footballplayer"
+        ],
+        "codename": "add_footballplayer"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change football player",
+        "content_type": [
+            "games",
+            "footballplayer"
+        ],
+        "codename": "change_footballplayer"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete football player",
+        "content_type": [
+            "games",
+            "footballplayer"
+        ],
+        "codename": "delete_footballplayer"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view football player",
+        "content_type": [
+            "games",
+            "footballplayer"
+        ],
+        "codename": "view_footballplayer"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add football ball",
+        "content_type": [
+            "games",
+            "footballball"
+        ],
+        "codename": "add_footballball"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change football ball",
+        "content_type": [
+            "games",
+            "footballball"
+        ],
+        "codename": "change_footballball"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete football ball",
+        "content_type": [
+            "games",
+            "footballball"
+        ],
+        "codename": "delete_footballball"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view football ball",
+        "content_type": [
+            "games",
+            "footballball"
+        ],
+        "codename": "view_footballball"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add football match score",
+        "content_type": [
+            "games",
+            "footballmatchscore"
+        ],
+        "codename": "add_footballmatchscore"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change football match score",
+        "content_type": [
+            "games",
+            "footballmatchscore"
+        ],
+        "codename": "change_footballmatchscore"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete football match score",
+        "content_type": [
+            "games",
+            "footballmatchscore"
+        ],
+        "codename": "delete_footballmatchscore"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view football match score",
+        "content_type": [
+            "games",
+            "footballmatchscore"
+        ],
+        "codename": "view_footballmatchscore"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add player activity log",
+        "content_type": [
+            "games",
+            "playeractivitylog"
+        ],
+        "codename": "add_playeractivitylog"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change player activity log",
+        "content_type": [
+            "games",
+            "playeractivitylog"
+        ],
+        "codename": "change_playeractivitylog"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete player activity log",
+        "content_type": [
+            "games",
+            "playeractivitylog"
+        ],
+        "codename": "delete_playeractivitylog"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view player activity log",
+        "content_type": [
+            "games",
+            "playeractivitylog"
+        ],
+        "codename": "view_playeractivitylog"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add new model",
+        "content_type": [
+            "games",
+            "newmodel"
+        ],
+        "codename": "add_newmodel"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change new model",
+        "content_type": [
+            "games",
+            "newmodel"
+        ],
+        "codename": "change_newmodel"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete new model",
+        "content_type": [
+            "games",
+            "newmodel"
+        ],
+        "codename": "delete_newmodel"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view new model",
+        "content_type": [
+            "games",
+            "newmodel"
+        ],
+        "codename": "view_newmodel"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add game state",
+        "content_type": [
+            "games",
+            "gamestate"
+        ],
+        "codename": "add_gamestate"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change game state",
+        "content_type": [
+            "games",
+            "gamestate"
+        ],
+        "codename": "change_gamestate"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete game state",
+        "content_type": [
+            "games",
+            "gamestate"
+        ],
+        "codename": "delete_gamestate"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view game state",
+        "content_type": [
+            "games",
+            "gamestate"
+        ],
+        "codename": "view_gamestate"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add Ludo Player Status",
+        "content_type": [
+            "games",
+            "ludoplayerstatus"
+        ],
+        "codename": "add_ludoplayerstatus"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change Ludo Player Status",
+        "content_type": [
+            "games",
+            "ludoplayerstatus"
+        ],
+        "codename": "change_ludoplayerstatus"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete Ludo Player Status",
+        "content_type": [
+            "games",
+            "ludoplayerstatus"
+        ],
+        "codename": "delete_ludoplayerstatus"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view Ludo Player Status",
+        "content_type": [
+            "games",
+            "ludoplayerstatus"
+        ],
+        "codename": "view_ludoplayerstatus"
+    }
+},
+{
+    "model": "accounts.customuser",
+    "fields": {
+        "password": "pbkdf2_sha256$870000$wS7RPwY0FeoVFuWRixe2Sl$45DiJYzTnk0LS/R1tOLAHT7bOM1HitogFWyNkXYlP2s=",
+        "last_login": "2025-07-02T12:57:08.830Z",
+        "is_superuser": true,
+        "username": "sanu001",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2025-04-13T09:32:47.223Z",
+        "first_name": "",
+        "last_name": "",
+        "email": "desayantan1947@gmail.com",
+        "phone_number": null,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "accounts.customuser",
+    "fields": {
+        "password": "pbkdf2_sha256$870000$ORuwLutZWFujzcmauiIYBy$zUUJ+nBvNw+ugynTOv2mEMIO/gjWs7P5JIlhZhj5yvg=",
+        "last_login": "2025-07-02T12:24:48.968Z",
+        "is_superuser": false,
+        "username": "sanu002",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2025-04-13T09:48:07.122Z",
+        "first_name": "Sayantan",
+        "last_name": "De",
+        "email": "desayantan1948@gmail.com",
+        "phone_number": null,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "accounts.customuser",
+    "fields": {
+        "password": "pbkdf2_sha256$870000$86pf0LANx1rCSdqRPzSsHj$SI5g7jT7ztaKZX2ddFAQhZ3q+RRK/fAx+snL8zuCgOI=",
+        "last_login": "2025-04-19T05:34:35.968Z",
+        "is_superuser": false,
+        "username": "test123",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2025-04-19T05:34:35.736Z",
+        "first_name": "test",
+        "last_name": "test",
+        "email": "test123@test.com",
+        "phone_number": null,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "accounts.customuser",
+    "fields": {
+        "password": "pbkdf2_sha256$870000$lXdo4IG58hLMe5uX9ffCDz$vvVwyc5PLFR8PqUKscEEo4Jwcfvx2XvsLRsK3QxPId0=",
+        "last_login": "2025-05-13T16:35:26.771Z",
+        "is_superuser": false,
+        "username": "allien12",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2025-05-13T16:35:26.538Z",
+        "first_name": "allien1",
+        "last_name": "allien",
+        "email": "allien@allien.com",
+        "phone_number": null,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "accounts.customuser",
+    "fields": {
+        "password": "pbkdf2_sha256$870000$RmMtZaEih3vI6BQXnN1VGD$aKhJRTY6ofHX3jxqpRFYbe6WZ6GrrXhvXSQANfMWhgk=",
+        "last_login": "2025-05-13T16:36:05.790Z",
+        "is_superuser": false,
+        "username": "allien21",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2025-05-13T16:36:05.562Z",
+        "first_name": "allien2",
+        "last_name": "allien",
+        "email": "allien1@allien.com",
+        "phone_number": null,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "games.gameroom",
+    "pk": 1,
+    "fields": {
+        "game": "1",
+        "room_code": "B08C1D23",
+        "is_private": false,
+        "created_by": [
+            "sanu001"
+        ],
+        "is_started": "True",
+        "max_players": 4,
+        "is_active": true,
+        "is_starting": false,
+        "start_time": null,
+        "players": [
+            [
+                "sanu001"
+            ],
+            [
+                "sanu002"
+            ]
+        ]
+    }
+},
+{
+    "model": "games.gameroom",
+    "pk": 2,
+    "fields": {
+        "game": "1",
+        "room_code": "93CFCDA6",
+        "is_private": true,
+        "created_by": [
+            "sanu001"
+        ],
+        "is_started": "Not Started",
+        "max_players": 4,
+        "is_active": true,
+        "is_starting": false,
+        "start_time": null,
+        "players": [
+            [
+                "sanu001"
+            ]
+        ]
+    }
+},
+{
+    "model": "games.gameroom",
+    "pk": 3,
+    "fields": {
+        "game": "1",
+        "room_code": "979816B0",
+        "is_private": false,
+        "created_by": [
+            "sanu001"
+        ],
+        "is_started": "Not Started",
+        "max_players": 4,
+        "is_active": true,
+        "is_starting": true,
+        "start_time": "2025-04-13T09:52:04.582Z",
+        "players": [
+            [
+                "sanu001"
+            ],
+            [
+                "sanu002"
+            ]
+        ]
+    }
+},
+{
+    "model": "games.gameroom",
+    "pk": 4,
+    "fields": {
+        "game": "1",
+        "room_code": "AAFCBDA2",
+        "is_private": false,
+        "created_by": [
+            "sanu002"
+        ],
+        "is_started": "True",
+        "max_players": 4,
+        "is_active": true,
+        "is_starting": false,
+        "start_time": null,
+        "players": [
+            [
+                "sanu001"
+            ],
+            [
+                "sanu002"
+            ]
+        ]
+    }
+},
+{
+    "model": "games.gameroom",
+    "pk": 5,
+    "fields": {
+        "game": "3",
+        "room_code": "0CC54261",
+        "is_private": false,
+        "created_by": [
+            "sanu001"
+        ],
+        "is_started": "Not Started",
+        "max_players": 4,
+        "is_active": true,
+        "is_starting": true,
+        "start_time": "2025-04-13T09:55:21.671Z",
+        "players": [
+            [
+                "sanu001"
+            ]
+        ]
+    }
+},
+{
+    "model": "games.gameroom",
+    "pk": 6,
+    "fields": {
+        "game": "3",
+        "room_code": "4870F666",
+        "is_private": true,
+        "created_by": [
+            "sanu001"
+        ],
+        "is_started": "Not Started",
+        "max_players": 4,
+        "is_active": true,
+        "is_starting": true,
+        "start_time": "2025-04-13T10:00:50.672Z",
+        "players": [
+            [
+                "sanu001"
+            ]
+        ]
+    }
+},
+{
+    "model": "games.gameroom",
+    "pk": 7,
+    "fields": {
+        "game": "3",
+        "room_code": "4EC0E662",
+        "is_private": true,
+        "created_by": [
+            "sanu001"
+        ],
+        "is_started": "Not Started",
+        "max_players": 4,
+        "is_active": true,
+        "is_starting": false,
+        "start_time": null,
+        "players": [
+            [
+                "sanu001"
+            ]
+        ]
+    }
+},
+{
+    "model": "games.gameroom",
+    "pk": 8,
+    "fields": {
+        "game": "3",
+        "room_code": "0D7375EC",
+        "is_private": true,
+        "created_by": [
+            "sanu001"
+        ],
+        "is_started": "Not Started",
+        "max_players": 4,
+        "is_active": true,
+        "is_starting": false,
+        "start_time": null,
+        "players": [
+            [
+                "sanu001"
+            ]
+        ]
+    }
+},
+{
+    "model": "games.gameroom",
+    "pk": 9,
+    "fields": {
+        "game": "3",
+        "room_code": "5D7A0593",
+        "is_private": false,
+        "created_by": [
+            "sanu001"
+        ],
+        "is_started": "Not Started",
+        "max_players": 4,
+        "is_active": false,
+        "is_starting": true,
+        "start_time": "2025-04-14T12:31:16.744Z",
+        "players": [
+            [
+                "sanu001"
+            ],
+            [
+                "sanu002"
+            ]
+        ]
+    }
+},
+{
+    "model": "games.gameroom",
+    "pk": 10,
+    "fields": {
+        "game": "1",
+        "room_code": "C915E25E",
+        "is_private": true,
+        "created_by": [
+            "sanu002"
+        ],
+        "is_started": "Not Started",
+        "max_players": 4,
+        "is_active": true,
+        "is_starting": false,
+        "start_time": null,
+        "players": [
+            [
+                "sanu002"
+            ]
+        ]
+    }
+},
+{
+    "model": "games.gameroom",
+    "pk": 11,
+    "fields": {
+        "game": "1",
+        "room_code": "31A5DA63",
+        "is_private": false,
+        "created_by": [
+            "sanu002"
+        ],
+        "is_started": "True",
+        "max_players": 4,
+        "is_active": false,
+        "is_starting": true,
+        "start_time": "2025-04-17T10:43:50.730Z",
+        "players": [
+            [
+                "sanu001"
+            ],
+            [
+                "sanu002"
+            ]
+        ]
+    }
+},
+{
+    "model": "games.gameroom",
+    "pk": 12,
+    "fields": {
+        "game": "8",
+        "room_code": "967ECBD0",
+        "is_private": true,
+        "created_by": [
+            "sanu001"
+        ],
+        "is_started": "Not Started",
+        "max_players": 4,
+        "is_active": true,
+        "is_starting": false,
+        "start_time": null,
+        "players": [
+            [
+                "sanu001"
+            ]
+        ]
+    }
+},
+{
+    "model": "games.gameroom",
+    "pk": 13,
+    "fields": {
+        "game": "8",
+        "room_code": "9B0C8753",
+        "is_private": false,
+        "created_by": [
+            "sanu001"
+        ],
+        "is_started": "True",
+        "max_players": 4,
+        "is_active": false,
+        "is_starting": true,
+        "start_time": "2025-04-17T11:02:53.319Z",
+        "players": [
+            [
+                "sanu001"
+            ],
+            [
+                "sanu002"
+            ]
+        ]
+    }
+},
+{
+    "model": "games.gameroom",
+    "pk": 14,
+    "fields": {
+        "game": "8",
+        "room_code": "5899A97E",
+        "is_private": false,
+        "created_by": [
+            "sanu002"
+        ],
+        "is_started": "True",
+        "max_players": 4,
+        "is_active": false,
+        "is_starting": true,
+        "start_time": "2025-04-17T11:04:29.657Z",
+        "players": [
+            [
+                "sanu001"
+            ],
+            [
+                "sanu002"
+            ]
+        ]
+    }
+},
+{
+    "model": "games.gameroom",
+    "pk": 15,
+    "fields": {
+        "game": "8",
+        "room_code": "D6FAC912",
+        "is_private": false,
+        "created_by": [
+            "sanu002"
+        ],
+        "is_started": "True",
+        "max_players": 4,
+        "is_active": false,
+        "is_starting": true,
+        "start_time": "2025-04-17T11:10:54.644Z",
+        "players": [
+            [
+                "sanu001"
+            ],
+            [
+                "sanu002"
+            ]
+        ]
+    }
+},
+{
+    "model": "games.gameroom",
+    "pk": 16,
+    "fields": {
+        "game": "8",
+        "room_code": "798196CA",
+        "is_private": false,
+        "created_by": [
+            "sanu002"
+        ],
+        "is_started": "True",
+        "max_players": 4,
+        "is_active": false,
+        "is_starting": true,
+        "start_time": "2025-04-17T11:19:51.902Z",
+        "players": [
+            [
+                "sanu001"
+            ],
+            [
+                "sanu002"
+            ]
+        ]
+    }
+},
+{
+    "model": "games.gameroom",
+    "pk": 17,
+    "fields": {
+        "game": "1",
+        "room_code": "0E6E1289",
+        "is_private": false,
+        "created_by": [
+            "sanu001"
+        ],
+        "is_started": "True",
+        "max_players": 4,
+        "is_active": false,
+        "is_starting": true,
+        "start_time": "2025-04-17T13:31:09.886Z",
+        "players": [
+            [
+                "sanu001"
+            ],
+            [
+                "sanu002"
+            ]
+        ]
+    }
+},
+{
+    "model": "games.gameroom",
+    "pk": 18,
+    "fields": {
+        "game": "8",
+        "room_code": "457E0AEC",
+        "is_private": false,
+        "created_by": [
+            "sanu002"
+        ],
+        "is_started": "Not Started",
+        "max_players": 4,
+        "is_active": false,
+        "is_starting": true,
+        "start_time": "2025-04-17T15:43:01.205Z",
+        "players": [
+            [
+                "sanu002"
+            ]
+        ]
+    }
+},
+{
+    "model": "games.gameroom",
+    "pk": 19,
+    "fields": {
+        "game": "1",
+        "room_code": "2B209CB9",
+        "is_private": false,
+        "created_by": [
+            "sanu002"
+        ],
+        "is_started": "True",
+        "max_players": 4,
+        "is_active": false,
+        "is_starting": true,
+        "start_time": "2025-04-18T06:44:47.272Z",
+        "players": [
+            [
+                "sanu001"
+            ],
+            [
+                "sanu002"
+            ]
+        ]
+    }
+},
+{
+    "model": "games.gameroom",
+    "pk": 20,
+    "fields": {
+        "game": "1",
+        "room_code": "B9DB3F9B",
+        "is_private": false,
+        "created_by": [
+            "sanu002"
+        ],
+        "is_started": "True",
+        "max_players": 4,
+        "is_active": false,
+        "is_starting": true,
+        "start_time": "2025-04-18T06:48:46.563Z",
+        "players": [
+            [
+                "sanu001"
+            ],
+            [
+                "sanu002"
+            ]
+        ]
+    }
+},
+{
+    "model": "games.gameroom",
+    "pk": 21,
+    "fields": {
+        "game": "1",
+        "room_code": "F892F32B",
+        "is_private": false,
+        "created_by": [
+            "sanu002"
+        ],
+        "is_started": "True",
+        "max_players": 4,
+        "is_active": false,
+        "is_starting": true,
+        "start_time": "2025-04-18T06:49:48.106Z",
+        "players": [
+            [
+                "sanu001"
+            ],
+            [
+                "sanu002"
+            ]
+        ]
+    }
+},
+{
+    "model": "games.gameroom",
+    "pk": 22,
+    "fields": {
+        "game": "7",
+        "room_code": "9F7C66EF",
+        "is_private": false,
+        "created_by": [
+            "sanu001"
+        ],
+        "is_started": "True",
+        "max_players": 4,
+        "is_active": false,
+        "is_starting": true,
+        "start_time": "2025-04-25T06:35:40.939Z",
+        "players": [
+            [
+                "sanu001"
+            ],
+            [
+                "sanu002"
+            ],
+            [
+                "test123"
+            ]
+        ]
+    }
+},
+{
+    "model": "games.gameroom",
+    "pk": 23,
+    "fields": {
+        "game": "7",
+        "room_code": "8BA7174F",
+        "is_private": true,
+        "created_by": [
+            "sanu001"
+        ],
+        "is_started": "Not Started",
+        "max_players": 4,
+        "is_active": true,
+        "is_starting": true,
+        "start_time": "2025-04-18T07:09:42.313Z",
+        "players": [
+            [
+                "sanu001"
+            ]
+        ]
+    }
+},
+{
+    "model": "games.gameroom",
+    "pk": 24,
+    "fields": {
+        "game": "1",
+        "room_code": "B8AEA7B8",
+        "is_private": false,
+        "created_by": [
+            "sanu001"
+        ],
+        "is_started": "True",
+        "max_players": 4,
+        "is_active": false,
+        "is_starting": true,
+        "start_time": "2025-04-18T09:35:13.182Z",
+        "players": [
+            [
+                "sanu001"
+            ],
+            [
+                "sanu002"
+            ]
+        ]
+    }
+},
+{
+    "model": "games.gameroom",
+    "pk": 25,
+    "fields": {
+        "game": "3",
+        "room_code": "E21FCD23",
+        "is_private": false,
+        "created_by": [
+            "sanu001"
+        ],
+        "is_started": "Not Started",
+        "max_players": 4,
+        "is_active": false,
+        "is_starting": false,
+        "start_time": null,
+        "players": [
+            [
+                "sanu001"
+            ]
+        ]
+    }
+},
+{
+    "model": "games.gameroom",
+    "pk": 26,
+    "fields": {
+        "game": "7",
+        "room_code": "77A90A91",
+        "is_private": true,
+        "created_by": [
+            "sanu001"
+        ],
+        "is_started": "Not Started",
+        "max_players": 4,
+        "is_active": true,
+        "is_starting": true,
+        "start_time": "2025-04-18T07:28:24.631Z",
+        "players": [
+            [
+                "sanu001"
+            ]
+        ]
+    }
+},
+{
+    "model": "games.gameroom",
+    "pk": 27,
+    "fields": {
+        "game": "7",
+        "room_code": "F7571936",
+        "is_private": true,
+        "created_by": [
+            "sanu001"
+        ],
+        "is_started": "Not Started",
+        "max_players": 4,
+        "is_active": true,
+        "is_starting": true,
+        "start_time": "2025-04-18T08:37:30.841Z",
+        "players": [
+            [
+                "sanu001"
+            ],
+            [
+                "sanu002"
+            ]
+        ]
+    }
+},
+{
+    "model": "games.gameroom",
+    "pk": 28,
+    "fields": {
+        "game": "7",
+        "room_code": "A10F0622",
+        "is_private": true,
+        "created_by": [
+            "sanu002"
+        ],
+        "is_started": "Not Started",
+        "max_players": 4,
+        "is_active": true,
+        "is_starting": true,
+        "start_time": "2025-04-18T09:32:35.758Z",
+        "players": [
+            [
+                "sanu001"
+            ],
+            [
+                "sanu002"
+            ]
+        ]
+    }
+},
+{
+    "model": "games.gameroom",
+    "pk": 29,
+    "fields": {
+        "game": "7",
+        "room_code": "9282D9F0",
+        "is_private": true,
+        "created_by": [
+            "sanu002"
+        ],
+        "is_started": "Not Started",
+        "max_players": 4,
+        "is_active": true,
+        "is_starting": true,
+        "start_time": "2025-04-18T09:39:09.055Z",
+        "players": [
+            [
+                "sanu001"
+            ],
+            [
+                "sanu002"
+            ]
+        ]
+    }
+},
+{
+    "model": "games.gameroom",
+    "pk": 30,
+    "fields": {
+        "game": "7",
+        "room_code": "C86325A2",
+        "is_private": true,
+        "created_by": [
+            "sanu001"
+        ],
+        "is_started": "Not Started",
+        "max_players": 4,
+        "is_active": true,
+        "is_starting": true,
+        "start_time": "2025-04-18T16:30:47.063Z",
+        "players": [
+            [
+                "sanu001"
+            ],
+            [
+                "sanu002"
+            ]
+        ]
+    }
+},
+{
+    "model": "games.gameroom",
+    "pk": 31,
+    "fields": {
+        "game": "7",
+        "room_code": "E777448D",
+        "is_private": true,
+        "created_by": [
+            "sanu002"
+        ],
+        "is_started": "Not Started",
+        "max_players": 4,
+        "is_active": true,
+        "is_starting": true,
+        "start_time": "2025-04-19T05:42:36.014Z",
+        "players": [
+            [
+                "sanu002"
+            ],
+            [
+                "test123"
+            ]
+        ]
+    }
+},
+{
+    "model": "games.gameroom",
+    "pk": 32,
+    "fields": {
+        "game": "8",
+        "room_code": "37AD89B3",
+        "is_private": false,
+        "created_by": [
+            "sanu002"
+        ],
+        "is_started": "True",
+        "max_players": 4,
+        "is_active": false,
+        "is_starting": true,
+        "start_time": "2025-04-19T05:45:46.192Z",
+        "players": [
+            [
+                "sanu002"
+            ],
+            [
+                "test123"
+            ]
+        ]
+    }
+},
+{
+    "model": "games.gameroom",
+    "pk": 33,
+    "fields": {
+        "game": "7",
+        "room_code": "C79A3EAB",
+        "is_private": true,
+        "created_by": [
+            "test123"
+        ],
+        "is_started": "Not Started",
+        "max_players": 4,
+        "is_active": true,
+        "is_starting": true,
+        "start_time": "2025-04-19T05:48:50.323Z",
+        "players": [
+            [
+                "sanu002"
+            ],
+            [
+                "test123"
+            ]
+        ]
+    }
+},
+{
+    "model": "games.gameroom",
+    "pk": 34,
+    "fields": {
+        "game": "7",
+        "room_code": "EFB5B5B4",
+        "is_private": true,
+        "created_by": [
+            "sanu002"
+        ],
+        "is_started": "Not Started",
+        "max_players": 4,
+        "is_active": true,
+        "is_starting": true,
+        "start_time": "2025-04-19T06:09:10.438Z",
+        "players": [
+            [
+                "sanu002"
+            ],
+            [
+                "test123"
+            ]
+        ]
+    }
+},
+{
+    "model": "games.gameroom",
+    "pk": 35,
+    "fields": {
+        "game": "7",
+        "room_code": "FD42AE19",
+        "is_private": true,
+        "created_by": [
+            "test123"
+        ],
+        "is_started": "Not Started",
+        "max_players": 4,
+        "is_active": true,
+        "is_starting": true,
+        "start_time": "2025-04-19T07:17:42.921Z",
+        "players": [
+            [
+                "sanu002"
+            ],
+            [
+                "test123"
+            ]
+        ]
+    }
+},
+{
+    "model": "games.gameroom",
+    "pk": 36,
+    "fields": {
+        "game": "7",
+        "room_code": "AE50A32E",
+        "is_private": true,
+        "created_by": [
+            "sanu002"
+        ],
+        "is_started": "Not Started",
+        "max_players": 4,
+        "is_active": true,
+        "is_starting": true,
+        "start_time": "2025-04-19T08:10:15.898Z",
+        "players": [
+            [
+                "sanu002"
+            ],
+            [
+                "test123"
+            ]
+        ]
+    }
+},
+{
+    "model": "games.gameroom",
+    "pk": 37,
+    "fields": {
+        "game": "1",
+        "room_code": "05DFEB07",
+        "is_private": false,
+        "created_by": [
+            "sanu002"
+        ],
+        "is_started": "True",
+        "max_players": 4,
+        "is_active": false,
+        "is_starting": true,
+        "start_time": "2025-04-19T08:12:13.890Z",
+        "players": [
+            [
+                "sanu002"
+            ],
+            [
+                "test123"
+            ]
+        ]
+    }
+},
+{
+    "model": "games.gameroom",
+    "pk": 38,
+    "fields": {
+        "game": "7",
+        "room_code": "96B27CCF",
+        "is_private": false,
+        "created_by": [
+            "sanu002"
+        ],
+        "is_started": "Not Started",
+        "max_players": 4,
+        "is_active": false,
+        "is_starting": true,
+        "start_time": "2025-04-19T08:28:03.843Z",
+        "players": [
+            [
+                "sanu002"
+            ],
+            [
+                "test123"
+            ]
+        ]
+    }
+},
+{
+    "model": "games.gameroom",
+    "pk": 39,
+    "fields": {
+        "game": "7",
+        "room_code": "20E5BAF5",
+        "is_private": false,
+        "created_by": [
+            "test123"
+        ],
+        "is_started": "Not Started",
+        "max_players": 4,
+        "is_active": false,
+        "is_starting": false,
+        "start_time": null,
+        "players": [
+            [
+                "test123"
+            ]
+        ]
+    }
+},
+{
+    "model": "games.gameroom",
+    "pk": 40,
+    "fields": {
+        "game": "7",
+        "room_code": "09821191",
+        "is_private": true,
+        "created_by": [
+            "sanu002"
+        ],
+        "is_started": "Not Started",
+        "max_players": 4,
+        "is_active": true,
+        "is_starting": true,
+        "start_time": "2025-04-21T06:13:35.442Z",
+        "players": [
+            [
+                "sanu002"
+            ],
+            [
+                "test123"
+            ]
+        ]
+    }
+},
+{
+    "model": "games.gameroom",
+    "pk": 41,
+    "fields": {
+        "game": "1",
+        "room_code": "F5B9061D",
+        "is_private": false,
+        "created_by": [
+            "test123"
+        ],
+        "is_started": "True",
+        "max_players": 4,
+        "is_active": false,
+        "is_starting": true,
+        "start_time": "2025-04-21T06:17:52.633Z",
+        "players": [
+            [
+                "sanu002"
+            ],
+            [
+                "test123"
+            ]
+        ]
+    }
+},
+{
+    "model": "games.gameroom",
+    "pk": 42,
+    "fields": {
+        "game": "7",
+        "room_code": "6E744790",
+        "is_private": true,
+        "created_by": [
+            "sanu002"
+        ],
+        "is_started": "Not Started",
+        "max_players": 4,
+        "is_active": true,
+        "is_starting": true,
+        "start_time": "2025-04-21T06:23:20.968Z",
+        "players": [
+            [
+                "sanu002"
+            ],
+            [
+                "test123"
+            ]
+        ]
+    }
+},
+{
+    "model": "games.gameroom",
+    "pk": 43,
+    "fields": {
+        "game": "7",
+        "room_code": "02B18A5B",
+        "is_private": true,
+        "created_by": [
+            "test123"
+        ],
+        "is_started": "Not Started",
+        "max_players": 4,
+        "is_active": true,
+        "is_starting": true,
+        "start_time": "2025-04-21T07:04:58.075Z",
+        "players": [
+            [
+                "sanu002"
+            ],
+            [
+                "test123"
+            ]
+        ]
+    }
+},
+{
+    "model": "games.gameroom",
+    "pk": 44,
+    "fields": {
+        "game": "7",
+        "room_code": "C586816A",
+        "is_private": true,
+        "created_by": [
+            "test123"
+        ],
+        "is_started": "False",
+        "max_players": 4,
+        "is_active": true,
+        "is_starting": true,
+        "start_time": "2025-04-21T07:27:47.519Z",
+        "players": [
+            [
+                "sanu002"
+            ],
+            [
+                "test123"
+            ]
+        ]
+    }
+},
+{
+    "model": "games.gameroom",
+    "pk": 45,
+    "fields": {
+        "game": "7",
+        "room_code": "AE8C192C",
+        "is_private": true,
+        "created_by": [
+            "test123"
+        ],
+        "is_started": "Not Started",
+        "max_players": 4,
+        "is_active": true,
+        "is_starting": false,
+        "start_time": null,
+        "players": [
+            [
+                "test123"
+            ]
+        ]
+    }
+},
+{
+    "model": "games.gameroom",
+    "pk": 46,
+    "fields": {
+        "game": "7",
+        "room_code": "3019BC5D",
+        "is_private": true,
+        "created_by": [
+            "test123"
+        ],
+        "is_started": "Not Started",
+        "max_players": 4,
+        "is_active": true,
+        "is_starting": false,
+        "start_time": null,
+        "players": [
+            [
+                "test123"
+            ]
+        ]
+    }
+},
+{
+    "model": "games.gameroom",
+    "pk": 47,
+    "fields": {
+        "game": "7",
+        "room_code": "C9A0209A",
+        "is_private": true,
+        "created_by": [
+            "test123"
+        ],
+        "is_started": "Not Started",
+        "max_players": 4,
+        "is_active": true,
+        "is_starting": true,
+        "start_time": "2025-04-21T11:00:17.326Z",
+        "players": [
+            [
+                "sanu002"
+            ],
+            [
+                "test123"
+            ]
+        ]
+    }
+},
+{
+    "model": "games.gameroom",
+    "pk": 48,
+    "fields": {
+        "game": "7",
+        "room_code": "3DDC23AE",
+        "is_private": true,
+        "created_by": [
+            "sanu002"
+        ],
+        "is_started": "Not Started",
+        "max_players": 4,
+        "is_active": true,
+        "is_starting": true,
+        "start_time": "2025-04-21T11:02:49.053Z",
+        "players": [
+            [
+                "sanu002"
+            ],
+            [
+                "test123"
+            ]
+        ]
+    }
+},
+{
+    "model": "games.gameroom",
+    "pk": 49,
+    "fields": {
+        "game": "7",
+        "room_code": "8B078BEE",
+        "is_private": true,
+        "created_by": [
+            "test123"
+        ],
+        "is_started": "Not Started",
+        "max_players": 4,
+        "is_active": true,
+        "is_starting": true,
+        "start_time": "2025-04-23T15:28:49.882Z",
+        "players": [
+            [
+                "sanu002"
+            ],
+            [
+                "test123"
+            ]
+        ]
+    }
+},
+{
+    "model": "games.gameroom",
+    "pk": 50,
+    "fields": {
+        "game": "7",
+        "room_code": "87009DC5",
+        "is_private": true,
+        "created_by": [
+            "sanu002"
+        ],
+        "is_started": "Not Started",
+        "max_players": 4,
+        "is_active": true,
+        "is_starting": true,
+        "start_time": "2025-04-24T06:37:05.222Z",
+        "players": [
+            [
+                "sanu002"
+            ],
+            [
+                "test123"
+            ]
+        ]
+    }
+},
+{
+    "model": "games.gameroom",
+    "pk": 51,
+    "fields": {
+        "game": "7",
+        "room_code": "02E976B8",
+        "is_private": true,
+        "created_by": [
+            "test123"
+        ],
+        "is_started": "Not Started",
+        "max_players": 4,
+        "is_active": true,
+        "is_starting": false,
+        "start_time": null,
+        "players": [
+            [
+                "test123"
+            ]
+        ]
+    }
+},
+{
+    "model": "games.gameroom",
+    "pk": 52,
+    "fields": {
+        "game": "8",
+        "room_code": "0080AB16",
+        "is_private": false,
+        "created_by": [
+            "test123"
+        ],
+        "is_started": "True",
+        "max_players": 4,
+        "is_active": false,
+        "is_starting": true,
+        "start_time": "2025-04-24T16:18:10.610Z",
+        "players": [
+            [
+                "sanu002"
+            ],
+            [
+                "test123"
+            ]
+        ]
+    }
+},
+{
+    "model": "games.gameroom",
+    "pk": 53,
+    "fields": {
+        "game": "7",
+        "room_code": "F81AFCE0",
+        "is_private": true,
+        "created_by": [
+            "sanu002"
+        ],
+        "is_started": "Not Started",
+        "max_players": 4,
+        "is_active": true,
+        "is_starting": true,
+        "start_time": "2025-04-24T16:31:14.192Z",
+        "players": [
+            [
+                "sanu002"
+            ],
+            [
+                "test123"
+            ]
+        ]
+    }
+},
+{
+    "model": "games.gameroom",
+    "pk": 54,
+    "fields": {
+        "game": "1",
+        "room_code": "EE310F40",
+        "is_private": false,
+        "created_by": [
+            "test123"
+        ],
+        "is_started": "True",
+        "max_players": 4,
+        "is_active": false,
+        "is_starting": true,
+        "start_time": "2025-04-25T06:32:26.841Z",
+        "players": [
+            [
+                "sanu002"
+            ],
+            [
+                "test123"
+            ]
+        ]
+    }
+},
+{
+    "model": "games.gameroom",
+    "pk": 55,
+    "fields": {
+        "game": "7",
+        "room_code": "BCB2EFE7",
+        "is_private": true,
+        "created_by": [
+            "sanu002"
+        ],
+        "is_started": "Not Started",
+        "max_players": 4,
+        "is_active": true,
+        "is_starting": true,
+        "start_time": "2025-04-25T06:36:03.175Z",
+        "players": [
+            [
+                "sanu002"
+            ],
+            [
+                "test123"
+            ]
+        ]
+    }
+},
+{
+    "model": "games.gameroom",
+    "pk": 56,
+    "fields": {
+        "game": "7",
+        "room_code": "2199B939",
+        "is_private": true,
+        "created_by": [
+            "sanu002"
+        ],
+        "is_started": "Not Started",
+        "max_players": 4,
+        "is_active": true,
+        "is_starting": true,
+        "start_time": "2025-04-25T15:02:12.746Z",
+        "players": [
+            [
+                "sanu002"
+            ],
+            [
+                "test123"
+            ]
+        ]
+    }
+},
+{
+    "model": "games.gameroom",
+    "pk": 57,
+    "fields": {
+        "game": "7",
+        "room_code": "91552CAE",
+        "is_private": true,
+        "created_by": [
+            "sanu002"
+        ],
+        "is_started": "Not Started",
+        "max_players": 4,
+        "is_active": true,
+        "is_starting": true,
+        "start_time": "2025-04-27T08:04:46.881Z",
+        "players": [
+            [
+                "sanu001"
+            ],
+            [
+                "sanu002"
+            ]
+        ]
+    }
+},
+{
+    "model": "games.gameroom",
+    "pk": 58,
+    "fields": {
+        "game": "1",
+        "room_code": "A93241DD",
+        "is_private": true,
+        "created_by": [
+            "sanu001"
+        ],
+        "is_started": "Not Started",
+        "max_players": 4,
+        "is_active": true,
+        "is_starting": true,
+        "start_time": "2025-04-27T08:18:42.591Z",
+        "players": [
+            [
+                "sanu001"
+            ],
+            [
+                "sanu002"
+            ]
+        ]
+    }
+},
+{
+    "model": "games.gameroom",
+    "pk": 59,
+    "fields": {
+        "game": "3",
+        "room_code": "E706F013",
+        "is_private": false,
+        "created_by": [
+            "sanu001"
+        ],
+        "is_started": "Not Started",
+        "max_players": 4,
+        "is_active": true,
+        "is_starting": true,
+        "start_time": "2025-04-27T08:20:29.171Z",
+        "players": [
+            [
+                "sanu001"
+            ],
+            [
+                "sanu002"
+            ]
+        ]
+    }
+},
+{
+    "model": "games.gameroom",
+    "pk": 60,
+    "fields": {
+        "game": "7",
+        "room_code": "11FFE512",
+        "is_private": true,
+        "created_by": [
+            "sanu001"
+        ],
+        "is_started": "Not Started",
+        "max_players": 4,
+        "is_active": true,
+        "is_starting": false,
+        "start_time": null,
+        "players": [
+            [
+                "sanu001"
+            ]
+        ]
+    }
+},
+{
+    "model": "games.gameroom",
+    "pk": 61,
+    "fields": {
+        "game": "7",
+        "room_code": "1C191250",
+        "is_private": true,
+        "created_by": [
+            "sanu001"
+        ],
+        "is_started": "Not Started",
+        "max_players": 4,
+        "is_active": true,
+        "is_starting": true,
+        "start_time": "2025-04-27T08:22:14.858Z",
+        "players": [
+            [
+                "sanu001"
+            ],
+            [
+                "sanu002"
+            ]
+        ]
+    }
+},
+{
+    "model": "games.gameroom",
+    "pk": 62,
+    "fields": {
+        "game": "7",
+        "room_code": "89346E77",
+        "is_private": true,
+        "created_by": [
+            "sanu002"
+        ],
+        "is_started": "Not Started",
+        "max_players": 4,
+        "is_active": true,
+        "is_starting": true,
+        "start_time": "2025-04-29T09:22:36.322Z",
+        "players": [
+            [
+                "sanu001"
+            ],
+            [
+                "sanu002"
+            ]
+        ]
+    }
+},
+{
+    "model": "games.gameroom",
+    "pk": 63,
+    "fields": {
+        "game": "7",
+        "room_code": "F6F02DF9",
+        "is_private": true,
+        "created_by": [
+            "sanu002"
+        ],
+        "is_started": "Not Started",
+        "max_players": 4,
+        "is_active": true,
+        "is_starting": true,
+        "start_time": "2025-04-29T09:38:06.514Z",
+        "players": [
+            [
+                "sanu001"
+            ],
+            [
+                "sanu002"
+            ]
+        ]
+    }
+},
+{
+    "model": "games.gameroom",
+    "pk": 64,
+    "fields": {
+        "game": "9",
+        "room_code": "4AE2DE1D",
+        "is_private": true,
+        "created_by": [
+            "sanu001"
+        ],
+        "is_started": "Not Started",
+        "max_players": 4,
+        "is_active": true,
+        "is_starting": false,
+        "start_time": null,
+        "players": [
+            [
+                "sanu001"
+            ]
+        ]
+    }
+},
+{
+    "model": "games.gameroom",
+    "pk": 65,
+    "fields": {
+        "game": "9",
+        "room_code": "260B2B81",
+        "is_private": true,
+        "created_by": [
+            "sanu001"
+        ],
+        "is_started": "Not Started",
+        "max_players": 4,
+        "is_active": true,
+        "is_starting": false,
+        "start_time": null,
+        "players": [
+            [
+                "sanu001"
+            ]
+        ]
+    }
+},
+{
+    "model": "games.gameroom",
+    "pk": 66,
+    "fields": {
+        "game": "9",
+        "room_code": "49ECE8F1",
+        "is_private": true,
+        "created_by": [
+            "sanu001"
+        ],
+        "is_started": "Not Started",
+        "max_players": 4,
+        "is_active": true,
+        "is_starting": false,
+        "start_time": null,
+        "players": [
+            [
+                "sanu001"
+            ]
+        ]
+    }
+},
+{
+    "model": "games.gameroom",
+    "pk": 67,
+    "fields": {
+        "game": "9",
+        "room_code": "00273F71",
+        "is_private": true,
+        "created_by": [
+            "sanu001"
+        ],
+        "is_started": "Not Started",
+        "max_players": 4,
+        "is_active": true,
+        "is_starting": false,
+        "start_time": null,
+        "players": [
+            [
+                "sanu001"
+            ]
+        ]
+    }
+},
+{
+    "model": "games.gameroom",
+    "pk": 68,
+    "fields": {
+        "game": "9",
+        "room_code": "E30CBBBC",
+        "is_private": true,
+        "created_by": [
+            "sanu001"
+        ],
+        "is_started": "Not Started",
+        "max_players": 4,
+        "is_active": true,
+        "is_starting": true,
+        "start_time": "2025-05-02T14:16:56.831Z",
+        "players": [
+            [
+                "sanu001"
+            ]
+        ]
+    }
+},
+{
+    "model": "games.gameroom",
+    "pk": 69,
+    "fields": {
+        "game": "7",
+        "room_code": "8B8EB3A9",
+        "is_private": true,
+        "created_by": [
+            "sanu002"
+        ],
+        "is_started": "Not Started",
+        "max_players": 4,
+        "is_active": true,
+        "is_starting": true,
+        "start_time": "2025-05-06T12:35:19.983Z",
+        "players": [
+            [
+                "sanu001"
+            ],
+            [
+                "sanu002"
+            ]
+        ]
+    }
+},
+{
+    "model": "games.gameroom",
+    "pk": 70,
+    "fields": {
+        "game": "3",
+        "room_code": "0CC55D5B",
+        "is_private": true,
+        "created_by": [
+            "sanu001"
+        ],
+        "is_started": "Not Started",
+        "max_players": 4,
+        "is_active": true,
+        "is_starting": true,
+        "start_time": "2025-05-06T13:27:04.236Z",
+        "players": [
+            [
+                "sanu001"
+            ],
+            [
+                "sanu002"
+            ]
+        ]
+    }
+},
+{
+    "model": "games.gameroom",
+    "pk": 71,
+    "fields": {
+        "game": "7",
+        "room_code": "9EC06BF2",
+        "is_private": true,
+        "created_by": [
+            "sanu002"
+        ],
+        "is_started": "Not Started",
+        "max_players": 4,
+        "is_active": true,
+        "is_starting": true,
+        "start_time": "2025-05-08T16:40:14.719Z",
+        "players": [
+            [
+                "sanu001"
+            ],
+            [
+                "sanu002"
+            ]
+        ]
+    }
+},
+{
+    "model": "games.gameroom",
+    "pk": 72,
+    "fields": {
+        "game": "7",
+        "room_code": "73C076AA",
+        "is_private": true,
+        "created_by": [
+            "sanu002"
+        ],
+        "is_started": "Not Started",
+        "max_players": 4,
+        "is_active": true,
+        "is_starting": true,
+        "start_time": "2025-05-10T09:26:19.118Z",
+        "players": [
+            [
+                "sanu001"
+            ],
+            [
+                "sanu002"
+            ]
+        ]
+    }
+},
+{
+    "model": "games.gameroom",
+    "pk": 73,
+    "fields": {
+        "game": "7",
+        "room_code": "4C163F21",
+        "is_private": true,
+        "created_by": [
+            "sanu002"
+        ],
+        "is_started": "Not Started",
+        "max_players": 4,
+        "is_active": true,
+        "is_starting": true,
+        "start_time": "2025-05-13T16:09:27.782Z",
+        "players": [
+            [
+                "sanu001"
+            ],
+            [
+                "sanu002"
+            ]
+        ]
+    }
+},
+{
+    "model": "games.gameroom",
+    "pk": 74,
+    "fields": {
+        "game": "1",
+        "room_code": "3381A273",
+        "is_private": true,
+        "created_by": [
+            "sanu001"
+        ],
+        "is_started": "Not Started",
+        "max_players": 4,
+        "is_active": true,
+        "is_starting": true,
+        "start_time": "2025-07-02T12:26:37.278Z",
+        "players": [
+            [
+                "sanu001"
+            ],
+            [
+                "sanu002"
+            ]
+        ]
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 1,
+    "fields": {
+        "user": [
+            "sanu001"
+        ],
+        "game_room": 9,
+        "score": 0,
+        "current_position": {},
+        "is_ready": false,
+        "color": null,
+        "last_active": "2025-04-14T12:31:05.701Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 2,
+    "fields": {
+        "user": [
+            "sanu002"
+        ],
+        "game_room": 9,
+        "score": 0,
+        "current_position": {},
+        "is_ready": false,
+        "color": null,
+        "last_active": "2025-04-14T12:31:45.429Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 3,
+    "fields": {
+        "user": [
+            "sanu002"
+        ],
+        "game_room": 10,
+        "score": 0,
+        "current_position": {},
+        "is_ready": false,
+        "color": null,
+        "last_active": "2025-04-17T10:40:57.566Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 4,
+    "fields": {
+        "user": [
+            "sanu002"
+        ],
+        "game_room": 11,
+        "score": 0,
+        "current_position": {},
+        "is_ready": false,
+        "color": null,
+        "last_active": "2025-04-17T10:43:38.067Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 5,
+    "fields": {
+        "user": [
+            "sanu001"
+        ],
+        "game_room": 11,
+        "score": 0,
+        "current_position": {},
+        "is_ready": false,
+        "color": null,
+        "last_active": "2025-04-17T10:43:43.517Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 6,
+    "fields": {
+        "user": [
+            "sanu001"
+        ],
+        "game_room": 12,
+        "score": 0,
+        "current_position": {},
+        "is_ready": false,
+        "color": null,
+        "last_active": "2025-04-17T11:01:27.110Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 7,
+    "fields": {
+        "user": [
+            "sanu001"
+        ],
+        "game_room": 13,
+        "score": 0,
+        "current_position": {},
+        "is_ready": false,
+        "color": null,
+        "last_active": "2025-04-17T11:02:31.413Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 8,
+    "fields": {
+        "user": [
+            "sanu002"
+        ],
+        "game_room": 13,
+        "score": 0,
+        "current_position": {},
+        "is_ready": false,
+        "color": null,
+        "last_active": "2025-04-17T11:02:46.747Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 9,
+    "fields": {
+        "user": [
+            "sanu002"
+        ],
+        "game_room": 14,
+        "score": 0,
+        "current_position": {
+            "symbol": "X"
+        },
+        "is_ready": false,
+        "color": null,
+        "last_active": "2025-04-17T11:04:29.889Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 10,
+    "fields": {
+        "user": [
+            "sanu001"
+        ],
+        "game_room": 14,
+        "score": 0,
+        "current_position": {
+            "symbol": "O"
+        },
+        "is_ready": false,
+        "color": null,
+        "last_active": "2025-04-17T11:10:33.852Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 11,
+    "fields": {
+        "user": [
+            "sanu002"
+        ],
+        "game_room": 15,
+        "score": 0,
+        "current_position": {
+            "symbol": "X"
+        },
+        "is_ready": false,
+        "color": null,
+        "last_active": "2025-04-17T11:10:54.901Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 12,
+    "fields": {
+        "user": [
+            "sanu001"
+        ],
+        "game_room": 15,
+        "score": 0,
+        "current_position": {
+            "symbol": "O"
+        },
+        "is_ready": false,
+        "color": null,
+        "last_active": "2025-04-17T11:10:53.995Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 13,
+    "fields": {
+        "user": [
+            "sanu002"
+        ],
+        "game_room": 16,
+        "score": 0,
+        "current_position": {
+            "symbol": "O"
+        },
+        "is_ready": false,
+        "color": null,
+        "last_active": "2025-04-17T12:35:17.505Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 14,
+    "fields": {
+        "user": [
+            "sanu001"
+        ],
+        "game_room": 16,
+        "score": 0,
+        "current_position": {
+            "symbol": "X"
+        },
+        "is_ready": false,
+        "color": null,
+        "last_active": "2025-04-17T11:38:04.201Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 15,
+    "fields": {
+        "user": [
+            "sanu001"
+        ],
+        "game_room": 17,
+        "score": 0,
+        "current_position": {},
+        "is_ready": false,
+        "color": null,
+        "last_active": "2025-04-17T12:38:24.657Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 16,
+    "fields": {
+        "user": [
+            "sanu002"
+        ],
+        "game_room": 17,
+        "score": 0,
+        "current_position": {},
+        "is_ready": false,
+        "color": null,
+        "last_active": "2025-04-17T13:31:03.801Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 17,
+    "fields": {
+        "user": [
+            "sanu002"
+        ],
+        "game_room": 18,
+        "score": 0,
+        "current_position": {
+            "symbol": "X"
+        },
+        "is_ready": false,
+        "color": null,
+        "last_active": "2025-04-18T06:34:21.769Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 18,
+    "fields": {
+        "user": [
+            "sanu002"
+        ],
+        "game_room": 19,
+        "score": 0,
+        "current_position": {},
+        "is_ready": false,
+        "color": null,
+        "last_active": "2025-04-18T06:44:38.221Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 19,
+    "fields": {
+        "user": [
+            "sanu001"
+        ],
+        "game_room": 19,
+        "score": 0,
+        "current_position": {},
+        "is_ready": false,
+        "color": null,
+        "last_active": "2025-04-18T06:44:40.700Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 20,
+    "fields": {
+        "user": [
+            "sanu002"
+        ],
+        "game_room": 20,
+        "score": 0,
+        "current_position": {},
+        "is_ready": false,
+        "color": null,
+        "last_active": "2025-04-18T06:48:38.947Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 21,
+    "fields": {
+        "user": [
+            "sanu001"
+        ],
+        "game_room": 20,
+        "score": 0,
+        "current_position": {},
+        "is_ready": false,
+        "color": null,
+        "last_active": "2025-04-18T06:48:40.431Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 22,
+    "fields": {
+        "user": [
+            "sanu002"
+        ],
+        "game_room": 21,
+        "score": 0,
+        "current_position": {},
+        "is_ready": false,
+        "color": null,
+        "last_active": "2025-04-18T06:49:36.470Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 23,
+    "fields": {
+        "user": [
+            "sanu001"
+        ],
+        "game_room": 21,
+        "score": 0,
+        "current_position": {},
+        "is_ready": false,
+        "color": null,
+        "last_active": "2025-04-18T06:49:38.233Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 24,
+    "fields": {
+        "user": [
+            "sanu001"
+        ],
+        "game_room": 23,
+        "score": 0,
+        "current_position": {},
+        "is_ready": false,
+        "color": "red",
+        "last_active": "2025-04-18T07:09:42.170Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 25,
+    "fields": {
+        "user": [
+            "sanu001"
+        ],
+        "game_room": 24,
+        "score": 0,
+        "current_position": {},
+        "is_ready": false,
+        "color": null,
+        "last_active": "2025-04-18T09:35:05.169Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 26,
+    "fields": {
+        "user": [
+            "sanu001"
+        ],
+        "game_room": 25,
+        "score": 0,
+        "current_position": {},
+        "is_ready": false,
+        "color": null,
+        "last_active": "2025-04-18T07:10:41.833Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 27,
+    "fields": {
+        "user": [
+            "sanu001"
+        ],
+        "game_room": 26,
+        "score": 0,
+        "current_position": {},
+        "is_ready": false,
+        "color": "blue",
+        "last_active": "2025-04-18T07:39:29.063Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 28,
+    "fields": {
+        "user": [
+            "sanu001"
+        ],
+        "game_room": 22,
+        "score": 0,
+        "current_position": {},
+        "is_ready": true,
+        "color": "blue",
+        "last_active": "2025-04-18T09:32:06.261Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 29,
+    "fields": {
+        "user": [
+            "sanu002"
+        ],
+        "game_room": 22,
+        "score": 0,
+        "current_position": {},
+        "is_ready": true,
+        "color": "yellow",
+        "last_active": "2025-04-25T06:35:35.963Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 30,
+    "fields": {
+        "user": [
+            "sanu001"
+        ],
+        "game_room": 27,
+        "score": 0,
+        "current_position": {},
+        "is_ready": true,
+        "color": "blue",
+        "last_active": "2025-04-18T09:31:47.221Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 31,
+    "fields": {
+        "user": [
+            "sanu002"
+        ],
+        "game_room": 27,
+        "score": 0,
+        "current_position": {},
+        "is_ready": true,
+        "color": "green",
+        "last_active": "2025-04-18T08:44:40.370Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 32,
+    "fields": {
+        "user": [
+            "sanu002"
+        ],
+        "game_room": 28,
+        "score": 0,
+        "current_position": {},
+        "is_ready": true,
+        "color": "blue",
+        "last_active": "2025-04-18T09:32:41.671Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 33,
+    "fields": {
+        "user": [
+            "sanu001"
+        ],
+        "game_room": 28,
+        "score": 0,
+        "current_position": {},
+        "is_ready": true,
+        "color": "red",
+        "last_active": "2025-04-18T09:32:35.899Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 34,
+    "fields": {
+        "user": [
+            "sanu002"
+        ],
+        "game_room": 24,
+        "score": 0,
+        "current_position": {},
+        "is_ready": false,
+        "color": null,
+        "last_active": "2025-04-18T09:35:06.806Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 35,
+    "fields": {
+        "user": [
+            "sanu002"
+        ],
+        "game_room": 29,
+        "score": 0,
+        "current_position": {},
+        "is_ready": true,
+        "color": "blue",
+        "last_active": "2025-04-18T16:30:10.153Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 36,
+    "fields": {
+        "user": [
+            "sanu001"
+        ],
+        "game_room": 29,
+        "score": 0,
+        "current_position": {},
+        "is_ready": true,
+        "color": "green",
+        "last_active": "2025-04-19T04:38:20.901Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 37,
+    "fields": {
+        "user": [
+            "sanu001"
+        ],
+        "game_room": 30,
+        "score": 0,
+        "current_position": {},
+        "is_ready": true,
+        "color": "blue",
+        "last_active": "2025-04-18T16:43:52.993Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 38,
+    "fields": {
+        "user": [
+            "sanu002"
+        ],
+        "game_room": 30,
+        "score": 0,
+        "current_position": {},
+        "is_ready": true,
+        "color": "green",
+        "last_active": "2025-04-19T04:35:41.170Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 39,
+    "fields": {
+        "user": [
+            "test123"
+        ],
+        "game_room": 22,
+        "score": 0,
+        "current_position": {},
+        "is_ready": true,
+        "color": "green",
+        "last_active": "2025-04-19T05:41:15.612Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 40,
+    "fields": {
+        "user": [
+            "sanu002"
+        ],
+        "game_room": 31,
+        "score": 0,
+        "current_position": {},
+        "is_ready": true,
+        "color": "blue",
+        "last_active": "2025-04-19T05:42:38.211Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 41,
+    "fields": {
+        "user": [
+            "test123"
+        ],
+        "game_room": 31,
+        "score": 0,
+        "current_position": {},
+        "is_ready": true,
+        "color": "red",
+        "last_active": "2025-04-19T05:42:36.838Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 42,
+    "fields": {
+        "user": [
+            "sanu002"
+        ],
+        "game_room": 32,
+        "score": 0,
+        "current_position": {
+            "symbol": "X"
+        },
+        "is_ready": false,
+        "color": null,
+        "last_active": "2025-04-19T05:45:46.245Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 43,
+    "fields": {
+        "user": [
+            "test123"
+        ],
+        "game_room": 32,
+        "score": 0,
+        "current_position": {
+            "symbol": "O"
+        },
+        "is_ready": false,
+        "color": null,
+        "last_active": "2025-04-19T05:45:46.171Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 44,
+    "fields": {
+        "user": [
+            "test123"
+        ],
+        "game_room": 33,
+        "score": 0,
+        "current_position": {},
+        "is_ready": true,
+        "color": "green",
+        "last_active": "2025-04-19T06:02:48.734Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 45,
+    "fields": {
+        "user": [
+            "sanu002"
+        ],
+        "game_room": 33,
+        "score": 0,
+        "current_position": {},
+        "is_ready": true,
+        "color": "red",
+        "last_active": "2025-04-19T06:02:41.005Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 46,
+    "fields": {
+        "user": [
+            "sanu002"
+        ],
+        "game_room": 34,
+        "score": 0,
+        "current_position": {},
+        "is_ready": true,
+        "color": "red",
+        "last_active": "2025-04-21T06:17:33.539Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 47,
+    "fields": {
+        "user": [
+            "test123"
+        ],
+        "game_room": 34,
+        "score": 0,
+        "current_position": {},
+        "is_ready": true,
+        "color": "blue",
+        "last_active": "2025-04-19T06:26:51.422Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 48,
+    "fields": {
+        "user": [
+            "test123"
+        ],
+        "game_room": 35,
+        "score": 0,
+        "current_position": {
+            "piece1": -1,
+            "piece2": -1,
+            "piece3": -1,
+            "piece4": 5
+        },
+        "is_ready": true,
+        "color": "blue",
+        "last_active": "2025-04-19T08:05:09.783Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 49,
+    "fields": {
+        "user": [
+            "sanu002"
+        ],
+        "game_room": 35,
+        "score": 0,
+        "current_position": {},
+        "is_ready": true,
+        "color": "yellow",
+        "last_active": "2025-04-19T08:05:06.767Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 50,
+    "fields": {
+        "user": [
+            "sanu002"
+        ],
+        "game_room": 36,
+        "score": 0,
+        "current_position": {},
+        "is_ready": false,
+        "color": null,
+        "last_active": "2025-04-19T08:10:09.742Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 51,
+    "fields": {
+        "user": [
+            "test123"
+        ],
+        "game_room": 36,
+        "score": 0,
+        "current_position": {},
+        "is_ready": false,
+        "color": null,
+        "last_active": "2025-04-19T08:10:06.793Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 52,
+    "fields": {
+        "user": [
+            "sanu002"
+        ],
+        "game_room": 37,
+        "score": 0,
+        "current_position": {},
+        "is_ready": false,
+        "color": null,
+        "last_active": "2025-04-19T08:12:05.231Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 53,
+    "fields": {
+        "user": [
+            "test123"
+        ],
+        "game_room": 37,
+        "score": 0,
+        "current_position": {},
+        "is_ready": false,
+        "color": null,
+        "last_active": "2025-04-19T08:12:07.607Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 55,
+    "fields": {
+        "user": [
+            "test123"
+        ],
+        "game_room": 39,
+        "score": 0,
+        "current_position": {},
+        "is_ready": false,
+        "color": null,
+        "last_active": "2025-04-19T08:27:46.283Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 56,
+    "fields": {
+        "user": [
+            "test123"
+        ],
+        "game_room": 38,
+        "score": 0,
+        "current_position": {},
+        "is_ready": true,
+        "color": "blue",
+        "last_active": "2025-04-19T08:42:31.045Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 57,
+    "fields": {
+        "user": [
+            "sanu002"
+        ],
+        "game_room": 40,
+        "score": 0,
+        "current_position": {},
+        "is_ready": true,
+        "color": "blue",
+        "last_active": "2025-04-21T06:13:37.271Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 58,
+    "fields": {
+        "user": [
+            "test123"
+        ],
+        "game_room": 40,
+        "score": 0,
+        "current_position": {},
+        "is_ready": true,
+        "color": "red",
+        "last_active": "2025-04-21T06:13:36.183Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 59,
+    "fields": {
+        "user": [
+            "test123"
+        ],
+        "game_room": 41,
+        "score": 0,
+        "current_position": {},
+        "is_ready": false,
+        "color": null,
+        "last_active": "2025-04-21T06:17:44.835Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 60,
+    "fields": {
+        "user": [
+            "sanu002"
+        ],
+        "game_room": 41,
+        "score": 0,
+        "current_position": {},
+        "is_ready": false,
+        "color": null,
+        "last_active": "2025-04-21T06:17:46.682Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 69,
+    "fields": {
+        "user": [
+            "sanu002"
+        ],
+        "game_room": 42,
+        "score": 0,
+        "current_position": {
+            "piece1": -1,
+            "piece2": -1,
+            "piece3": -1,
+            "piece4": -1
+        },
+        "is_ready": false,
+        "color": null,
+        "last_active": "2025-04-21T07:04:41.059Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 72,
+    "fields": {
+        "user": [
+            "test123"
+        ],
+        "game_room": 43,
+        "score": 0,
+        "current_position": {
+            "piece1": -1,
+            "piece2": -1,
+            "piece3": -1,
+            "piece4": -1
+        },
+        "is_ready": false,
+        "color": "red",
+        "last_active": "2025-04-21T07:11:39.362Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 73,
+    "fields": {
+        "user": [
+            "sanu002"
+        ],
+        "game_room": 43,
+        "score": 0,
+        "current_position": {
+            "piece1": -1,
+            "piece2": -1,
+            "piece3": -1,
+            "piece4": -1
+        },
+        "is_ready": false,
+        "color": "blue",
+        "last_active": "2025-04-21T07:11:44.007Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 76,
+    "fields": {
+        "user": [
+            "test123"
+        ],
+        "game_room": 45,
+        "score": 0,
+        "current_position": {},
+        "is_ready": false,
+        "color": null,
+        "last_active": "2025-04-21T08:13:57.582Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 77,
+    "fields": {
+        "user": [
+            "test123"
+        ],
+        "game_room": 46,
+        "score": 0,
+        "current_position": {},
+        "is_ready": false,
+        "color": null,
+        "last_active": "2025-04-21T08:14:00.182Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 80,
+    "fields": {
+        "user": [
+            "test123"
+        ],
+        "game_room": 44,
+        "score": 0,
+        "current_position": {
+            "piece1": -1,
+            "piece2": -1,
+            "piece3": -1,
+            "piece4": -1
+        },
+        "is_ready": false,
+        "color": "red",
+        "last_active": "2025-04-21T08:31:54.869Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 81,
+    "fields": {
+        "user": [
+            "sanu002"
+        ],
+        "game_room": 44,
+        "score": 0,
+        "current_position": {
+            "piece1": -1,
+            "piece2": -1,
+            "piece3": -1,
+            "piece4": -1
+        },
+        "is_ready": false,
+        "color": "blue",
+        "last_active": "2025-04-21T08:32:05.132Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 83,
+    "fields": {
+        "user": [
+            "sanu002"
+        ],
+        "game_room": 47,
+        "score": 0,
+        "current_position": {},
+        "is_ready": false,
+        "color": null,
+        "last_active": "2025-04-21T11:00:10.938Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 84,
+    "fields": {
+        "user": [
+            "sanu002"
+        ],
+        "game_room": 48,
+        "score": 0,
+        "current_position": {},
+        "is_ready": false,
+        "color": "red",
+        "last_active": "2025-04-21T11:02:48.209Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 85,
+    "fields": {
+        "user": [
+            "test123"
+        ],
+        "game_room": 48,
+        "score": 0,
+        "current_position": {},
+        "is_ready": false,
+        "color": "blue",
+        "last_active": "2025-04-21T11:02:51.686Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 88,
+    "fields": {
+        "user": [
+            "test123"
+        ],
+        "game_room": 49,
+        "score": 0,
+        "current_position": {
+            "piece1": -1,
+            "piece2": -1,
+            "piece3": -1,
+            "piece4": -1
+        },
+        "is_ready": false,
+        "color": null,
+        "last_active": "2025-04-24T06:33:02.600Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 91,
+    "fields": {
+        "user": [
+            "test123"
+        ],
+        "game_room": 51,
+        "score": 0,
+        "current_position": {},
+        "is_ready": false,
+        "color": null,
+        "last_active": "2025-04-24T06:36:54.131Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 138,
+    "fields": {
+        "user": [
+            "test123"
+        ],
+        "game_room": 52,
+        "score": 0,
+        "current_position": {
+            "symbol": "O"
+        },
+        "is_ready": false,
+        "color": null,
+        "last_active": "2025-04-24T16:19:24.922Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 139,
+    "fields": {
+        "user": [
+            "sanu002"
+        ],
+        "game_room": 52,
+        "score": 0,
+        "current_position": {
+            "symbol": "X"
+        },
+        "is_ready": false,
+        "color": null,
+        "last_active": "2025-04-24T16:19:28.653Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 157,
+    "fields": {
+        "user": [
+            "test123"
+        ],
+        "game_room": 53,
+        "score": 0,
+        "current_position": {
+            "piece1": -1,
+            "piece2": -1,
+            "piece3": -1,
+            "piece4": -1
+        },
+        "is_ready": false,
+        "color": "red",
+        "last_active": "2025-04-24T16:44:14.299Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 160,
+    "fields": {
+        "user": [
+            "sanu002"
+        ],
+        "game_room": 53,
+        "score": 0,
+        "current_position": {
+            "piece1": -1,
+            "piece2": -1,
+            "piece3": -1,
+            "piece4": -1
+        },
+        "is_ready": false,
+        "color": "blue",
+        "last_active": "2025-04-24T16:46:13.171Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 161,
+    "fields": {
+        "user": [
+            "test123"
+        ],
+        "game_room": 54,
+        "score": 0,
+        "current_position": {},
+        "is_ready": false,
+        "color": null,
+        "last_active": "2025-04-25T06:32:17.284Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 162,
+    "fields": {
+        "user": [
+            "sanu002"
+        ],
+        "game_room": 54,
+        "score": 0,
+        "current_position": {},
+        "is_ready": false,
+        "color": null,
+        "last_active": "2025-04-25T06:32:19.044Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 172,
+    "fields": {
+        "user": [
+            "test123"
+        ],
+        "game_room": 55,
+        "score": 0,
+        "current_position": {
+            "piece1": -1,
+            "piece2": -1,
+            "piece3": -1,
+            "piece4": -1
+        },
+        "is_ready": false,
+        "color": "blue",
+        "last_active": "2025-04-25T06:44:41.535Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 173,
+    "fields": {
+        "user": [
+            "sanu002"
+        ],
+        "game_room": 55,
+        "score": 0,
+        "current_position": {
+            "piece1": -1,
+            "piece2": -1,
+            "piece3": -1,
+            "piece4": -1
+        },
+        "is_ready": false,
+        "color": "red",
+        "last_active": "2025-04-25T06:44:45.269Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 180,
+    "fields": {
+        "user": [
+            "sanu001"
+        ],
+        "game_room": 58,
+        "score": 0,
+        "current_position": {},
+        "is_ready": false,
+        "color": null,
+        "last_active": "2025-04-27T08:18:26.396Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 181,
+    "fields": {
+        "user": [
+            "sanu002"
+        ],
+        "game_room": 58,
+        "score": 0,
+        "current_position": {},
+        "is_ready": false,
+        "color": null,
+        "last_active": "2025-04-27T08:18:35.192Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 182,
+    "fields": {
+        "user": [
+            "sanu001"
+        ],
+        "game_room": 59,
+        "score": 0,
+        "current_position": {},
+        "is_ready": false,
+        "color": null,
+        "last_active": "2025-04-27T08:20:12.541Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 183,
+    "fields": {
+        "user": [
+            "sanu002"
+        ],
+        "game_room": 59,
+        "score": 0,
+        "current_position": {},
+        "is_ready": false,
+        "color": null,
+        "last_active": "2025-04-27T08:20:18.734Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 184,
+    "fields": {
+        "user": [
+            "sanu001"
+        ],
+        "game_room": 60,
+        "score": 0,
+        "current_position": {},
+        "is_ready": false,
+        "color": null,
+        "last_active": "2025-04-27T08:21:58.052Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 190,
+    "fields": {
+        "user": [
+            "sanu002"
+        ],
+        "game_room": 63,
+        "score": 0,
+        "current_position": {},
+        "is_ready": false,
+        "color": "red",
+        "last_active": "2025-04-29T09:38:05.762Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 191,
+    "fields": {
+        "user": [
+            "sanu001"
+        ],
+        "game_room": 63,
+        "score": 0,
+        "current_position": {},
+        "is_ready": false,
+        "color": "blue",
+        "last_active": "2025-04-29T09:38:06.427Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 192,
+    "fields": {
+        "user": [
+            "sanu001"
+        ],
+        "game_room": 64,
+        "score": 0,
+        "current_position": {},
+        "is_ready": false,
+        "color": null,
+        "last_active": "2025-05-02T14:16:36.139Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 193,
+    "fields": {
+        "user": [
+            "sanu001"
+        ],
+        "game_room": 65,
+        "score": 0,
+        "current_position": {},
+        "is_ready": false,
+        "color": null,
+        "last_active": "2025-05-02T14:16:37.202Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 194,
+    "fields": {
+        "user": [
+            "sanu001"
+        ],
+        "game_room": 66,
+        "score": 0,
+        "current_position": {},
+        "is_ready": false,
+        "color": null,
+        "last_active": "2025-05-02T14:16:40.677Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 195,
+    "fields": {
+        "user": [
+            "sanu001"
+        ],
+        "game_room": 67,
+        "score": 0,
+        "current_position": {},
+        "is_ready": false,
+        "color": null,
+        "last_active": "2025-05-02T14:16:40.884Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 196,
+    "fields": {
+        "user": [
+            "sanu001"
+        ],
+        "game_room": 68,
+        "score": 0,
+        "current_position": {},
+        "is_ready": false,
+        "color": null,
+        "last_active": "2025-05-02T14:16:47.219Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 199,
+    "fields": {
+        "user": [
+            "sanu002"
+        ],
+        "game_room": 69,
+        "score": 0,
+        "current_position": {
+            "piece1": -1,
+            "piece2": -1,
+            "piece3": -1,
+            "piece4": -1
+        },
+        "is_ready": false,
+        "color": "blue",
+        "last_active": "2025-05-06T12:37:54.545Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 200,
+    "fields": {
+        "user": [
+            "sanu001"
+        ],
+        "game_room": 69,
+        "score": 0,
+        "current_position": {
+            "piece1": -1,
+            "piece2": -1,
+            "piece3": -1,
+            "piece4": -1
+        },
+        "is_ready": false,
+        "color": "red",
+        "last_active": "2025-05-06T12:38:01.405Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 201,
+    "fields": {
+        "user": [
+            "sanu001"
+        ],
+        "game_room": 70,
+        "score": 0,
+        "current_position": {},
+        "is_ready": false,
+        "color": null,
+        "last_active": "2025-05-06T13:26:58.140Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 202,
+    "fields": {
+        "user": [
+            "sanu002"
+        ],
+        "game_room": 70,
+        "score": 0,
+        "current_position": {},
+        "is_ready": false,
+        "color": null,
+        "last_active": "2025-05-06T13:26:56.160Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 203,
+    "fields": {
+        "user": [
+            "sanu002"
+        ],
+        "game_room": 71,
+        "score": 0,
+        "current_position": {},
+        "is_ready": false,
+        "color": "blue",
+        "last_active": "2025-05-08T16:40:15.281Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 204,
+    "fields": {
+        "user": [
+            "sanu001"
+        ],
+        "game_room": 71,
+        "score": 0,
+        "current_position": {},
+        "is_ready": false,
+        "color": "red",
+        "last_active": "2025-05-08T16:40:14.421Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 209,
+    "fields": {
+        "user": [
+            "sanu002"
+        ],
+        "game_room": 72,
+        "score": 0,
+        "current_position": {
+            "piece1": -1,
+            "piece2": -1,
+            "piece3": -1,
+            "piece4": -1
+        },
+        "is_ready": false,
+        "color": "blue",
+        "last_active": "2025-05-10T09:42:41.464Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 210,
+    "fields": {
+        "user": [
+            "sanu001"
+        ],
+        "game_room": 72,
+        "score": 0,
+        "current_position": {
+            "piece1": -1,
+            "piece2": -1,
+            "piece3": -1,
+            "piece4": -1
+        },
+        "is_ready": false,
+        "color": "red",
+        "last_active": "2025-05-10T09:42:46.453Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 216,
+    "fields": {
+        "user": [
+            "sanu002"
+        ],
+        "game_room": 73,
+        "score": 0,
+        "current_position": {
+            "piece1": -1,
+            "piece2": -1,
+            "piece3": -1,
+            "piece4": -1
+        },
+        "is_ready": false,
+        "color": "blue",
+        "last_active": "2025-05-13T16:28:07.666Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 218,
+    "fields": {
+        "user": [
+            "sanu001"
+        ],
+        "game_room": 74,
+        "score": 0,
+        "current_position": {},
+        "is_ready": false,
+        "color": null,
+        "last_active": "2025-07-02T12:26:20.950Z"
+    }
+},
+{
+    "model": "games.playerstatus",
+    "pk": 219,
+    "fields": {
+        "user": [
+            "sanu002"
+        ],
+        "game_room": 74,
+        "score": 0,
+        "current_position": {},
+        "is_ready": false,
+        "color": null,
+        "last_active": "2025-07-02T12:26:30.111Z"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 1,
+    "fields": {
+        "action_time": "2025-04-13T09:38:15.611Z",
+        "user": [
+            "sanu001"
+        ],
+        "content_type": [
+            "games",
+            "game"
+        ],
+        "object_id": "1",
+        "object_repr": "Chess",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 2,
+    "fields": {
+        "action_time": "2025-04-13T09:39:59.609Z",
+        "user": [
+            "sanu001"
+        ],
+        "content_type": [
+            "games",
+            "game"
+        ],
+        "object_id": "3",
+        "object_repr": "Snake",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 3,
+    "fields": {
+        "action_time": "2025-04-13T09:40:04.985Z",
+        "user": [
+            "sanu001"
+        ],
+        "content_type": [
+            "games",
+            "game"
+        ],
+        "object_id": "1",
+        "object_repr": "Chess",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Max players\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 4,
+    "fields": {
+        "action_time": "2025-04-13T09:40:38.969Z",
+        "user": [
+            "sanu001"
+        ],
+        "content_type": [
+            "games",
+            "game"
+        ],
+        "object_id": "4",
+        "object_repr": "Football",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 5,
+    "fields": {
+        "action_time": "2025-04-13T09:43:05.365Z",
+        "user": [
+            "sanu001"
+        ],
+        "content_type": [
+            "games",
+            "game"
+        ],
+        "object_id": "5",
+        "object_repr": "Scribble",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 6,
+    "fields": {
+        "action_time": "2025-04-13T09:44:32.232Z",
+        "user": [
+            "sanu001"
+        ],
+        "content_type": [
+            "games",
+            "game"
+        ],
+        "object_id": "6",
+        "object_repr": "Smash Cars",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 7,
+    "fields": {
+        "action_time": "2025-04-13T10:13:03.556Z",
+        "user": [
+            "sanu001"
+        ],
+        "content_type": [
+            "games",
+            "game"
+        ],
+        "object_id": "7",
+        "object_repr": "Ludo",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 8,
+    "fields": {
+        "action_time": "2025-04-17T10:59:35.822Z",
+        "user": [
+            "sanu001"
+        ],
+        "content_type": [
+            "games",
+            "game"
+        ],
+        "object_id": "8",
+        "object_repr": "Tic Tac Toe",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 9,
+    "fields": {
+        "action_time": "2025-05-02T14:15:19.723Z",
+        "user": [
+            "sanu001"
+        ],
+        "content_type": [
+            "games",
+            "game"
+        ],
+        "object_id": "9",
+        "object_repr": "ZombsRoyale",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+}
+]
